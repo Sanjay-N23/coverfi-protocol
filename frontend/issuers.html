@@ -123,15 +123,14 @@ code, pre { font-family: var(--font-mono); }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--gold); }
 
-.nav-links { display: flex; align-items: center; gap: 0.25rem; }
-.nav-link {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  padding: 0.45rem 0.9rem; border-radius: var(--radius-pill);
-  font-size: 0.8125rem; font-weight: 600; color: var(--text-muted);
-  text-decoration: none; transition: all 0.2s;
+.dash-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+.dash-nav-link {
+  padding: 0.4rem 0.75rem; border-radius: var(--radius-sm, 6px);
+  font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary, #6b7280);
+  text-decoration: none; transition: color 0.2s, background 0.2s;
 }
-.nav-link:hover { color: var(--text-primary); background: rgba(240,185,11,0.08); }
-.nav-link.active { color: var(--gold); background: var(--gold-dim); }
+.dash-nav-link:hover { color: var(--text-primary); background: rgba(240,185,11,0.08); }
+.dash-nav-link.active { color: var(--gold, #F0B90B); background: rgba(240,185,11,0.1); }
 
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
 .badge-testnet {
@@ -583,12 +582,15 @@ code, pre { font-family: var(--font-mono); }
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
 }
 [data-theme="dark"] .status-observing { background: rgba(240,185,11,0.15); color: #FFD443; }
+[data-theme="dark"] .dash-nav-link { color: rgba(255,255,255,0.5); }
+[data-theme="dark"] .dash-nav-link:hover { color: #ffffff; background: rgba(240,185,11,0.1); }
+[data-theme="dark"] .dash-nav-link.active { color: var(--gold); background: rgba(240,185,11,0.12); }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .metrics-bar { grid-template-columns: repeat(2, 1fr); }
   .issuer-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
+  .dash-nav-links { display: none; }
 }
 @media (max-width: 600px) {
   .metrics-bar { grid-template-columns: 1fr; }
@@ -632,15 +634,11 @@ code, pre { font-family: var(--font-mono); }
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
 
-    <div class="nav-links">
-      <a href="dashboard.html" class="nav-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Dashboard
-      </a>
-      <a href="issuers.html" class="nav-link active">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        Browse Issuers
-      </a>
+    <div class="dash-nav-links">
+      <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+      <a href="issuers.html" class="dash-nav-link active">Issuers</a>
+      <a href="pool.html" class="dash-nav-link">Pool</a>
+      <a href="coverage.html" class="dash-nav-link">Coverage</a>
     </div>
 
     <div class="nav-actions">
