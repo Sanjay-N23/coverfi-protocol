@@ -126,6 +126,15 @@ code, pre { font-family: var(--font-mono); }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--gold); }
 
+.dash-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+.dash-nav-link {
+  padding: 0.4rem 0.75rem; border-radius: var(--radius-sm, 6px);
+  font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary, #6b7280);
+  text-decoration: none; transition: color 0.2s, background 0.2s;
+}
+.dash-nav-link:hover { color: var(--text-primary); background: rgba(240,185,11,0.08); }
+.dash-nav-link.active { color: var(--gold, #F0B90B); background: rgba(240,185,11,0.1); }
+
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
 .badge-testnet {
   display: inline-flex; align-items: center; gap: 0.35rem;
@@ -793,6 +802,7 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 
 /* --- Small tablet (max-width: 768px) --- */
 @media (max-width: 768px) {
+  .dash-nav-links { display: none; }
   .dash-container { padding: 1rem; gap: 1rem; }
   .metrics-bar, .dash-row-metrics { grid-template-columns: 1fr 1fr; gap: 0.625rem; }
   .metric-card-hero { grid-column: 1 / -1; }
@@ -1138,6 +1148,9 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 /* Nav */
 [data-theme="dark"] .dash-nav { background: rgba(15,17,24,0.95); border-bottom-color: rgba(255,255,255,0.06); }
 [data-theme="dark"] .dash-nav .nav-logo-text { color: #ffffff; }
+[data-theme="dark"] .dash-nav-link { color: rgba(255,255,255,0.5); }
+[data-theme="dark"] .dash-nav-link:hover { color: #ffffff; background: rgba(240,185,11,0.1); }
+[data-theme="dark"] .dash-nav-link.active { color: var(--gold); background: rgba(240,185,11,0.12); }
 
 /* Banner */
 [data-theme="dark"] .connect-banner { background: rgba(240,185,11,0.1); border-color: rgba(240,185,11,0.2); }
@@ -1687,6 +1700,44 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* ---------- SPACING: remove inline margin-top on tx history row ---------- */
 .dash-row + .section-divider { margin-top: 0; }
 
+/* ---------- ROLE BADGES ---------- */
+.role-badges { display: flex; gap: 0.375rem; align-items: center; flex-wrap: wrap; }
+.role-badge {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
+  font-size: 0.675rem; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: uppercase; white-space: nowrap;
+  transition: transform 0.2s var(--spring), opacity 0.2s;
+  animation: badge-pop 0.35s var(--spring) both;
+}
+@keyframes badge-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.role-badge:hover { transform: scale(1.08); }
+.role-badge-issuer   { background: rgba(232,118,10,0.12); color: #E8760A; }
+.role-badge-attestor  { background: rgba(108,92,231,0.12); color: #6C5CE7; }
+.role-badge-investor  { background: rgba(0,184,148,0.12); color: #00B894; }
+.role-badge-underwriter { background: rgba(59,139,255,0.12); color: #3B8BFF; }
+.role-badge-new       { background: rgba(0,0,0,0.06); color: #5C676B; }
+
+/* Role-based section hints */
+.role-section-hint {
+  display: none; padding: 0.75rem 1rem; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 500; margin-bottom: 0.75rem;
+  animation: badge-pop 0.35s var(--spring) both;
+}
+.role-section-hint.visible { display: flex; align-items: center; gap: 0.5rem; }
+.role-section-hint svg { flex-shrink: 0; }
+.role-hint-attestor  { background: rgba(108,92,231,0.08); color: #6C5CE7; border: 1px solid rgba(108,92,231,0.15); }
+.role-hint-issuer    { background: rgba(232,118,10,0.08); color: #E8760A; border: 1px solid rgba(232,118,10,0.15); }
+.role-hint-investor  { background: rgba(0,184,148,0.08); color: #00B894; border: 1px solid rgba(0,184,148,0.15); }
+.role-hint-underwriter { background: rgba(59,139,255,0.08); color: #3B8BFF; border: 1px solid rgba(59,139,255,0.15); }
+
+/* Dim sections not relevant to user role */
+.dash-card.role-dimmed { opacity: 0.45; transition: opacity 0.3s; }
+.dash-card.role-dimmed:hover { opacity: 0.85; }
+
 /* ---------- DARK MODE COMPREHENSIVE FIXES ---------- */
 
 /* CSS custom property overrides for dark mode (single source of truth) */
@@ -1710,6 +1761,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   --color-danger-dim: rgba(239,68,68,0.15);
   --color-warning-dim: rgba(240,185,11,0.15);
 }
+
+/* Dark mode role badges */
+[data-theme="dark"] .role-badge-issuer   { background: rgba(232,118,10,0.2); color: #FF9533; }
+[data-theme="dark"] .role-badge-attestor  { background: rgba(108,92,231,0.2); color: #A78BFA; }
+[data-theme="dark"] .role-badge-investor  { background: rgba(0,184,148,0.2); color: #34D4A4; }
+[data-theme="dark"] .role-badge-underwriter { background: rgba(59,139,255,0.2); color: #6BA6FF; }
+[data-theme="dark"] .role-badge-new       { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+[data-theme="dark"] .role-hint-attestor  { background: rgba(108,92,231,0.12); color: #A78BFA; border-color: rgba(108,92,231,0.2); }
+[data-theme="dark"] .role-hint-issuer    { background: rgba(232,118,10,0.12); color: #FF9533; border-color: rgba(232,118,10,0.2); }
+[data-theme="dark"] .role-hint-investor  { background: rgba(0,184,148,0.12); color: #34D4A4; border-color: rgba(0,184,148,0.2); }
+[data-theme="dark"] .role-hint-underwriter { background: rgba(59,139,255,0.12); color: #6BA6FF; border-color: rgba(59,139,255,0.2); }
+[data-theme="dark"] .dash-card.role-dimmed { opacity: 0.35; }
+[data-theme="dark"] .dash-card.role-dimmed:hover { opacity: 0.75; }
 
 /* Dark mode card borders */
 [data-theme="dark"] .dash-card,
@@ -1867,6 +1931,143 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .dash-card, .metric-card, .metric-card-hero, .tx-history-card { overflow: hidden; }
 .metric-value, .pool-stat-value, .position-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* ---------- EWS ALERT BANNER ---------- */
+.ews-alert {
+  position: fixed; top: var(--nav-height); left: 0; right: 0; z-index: 99;
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border-bottom: 1px solid rgba(232,118,10,0.15);
+  border-left: 4px solid #E8760A;
+  animation: ews-slide-down 0.4s var(--spring), ews-pulse-border 2s ease-in-out infinite;
+  box-shadow: 0 4px 16px rgba(232,118,10,0.12);
+}
+@keyframes ews-slide-down {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes ews-pulse-border {
+  0%, 100% { border-left-color: #E8760A; }
+  50% { border-left-color: #FF9800; }
+}
+.ews-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.ews-content { flex: 1; min-width: 0; }
+.ews-content strong {
+  display: block; font-family: var(--font-heading); font-size: 0.8125rem;
+  font-weight: 800; color: #BF360C; letter-spacing: -0.02em; margin-bottom: 0.15rem;
+}
+.ews-content p {
+  font-size: 0.75rem; color: #5D4037; line-height: 1.4; margin: 0;
+}
+.ews-dismiss {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(191,54,12,0.2); background: rgba(191,54,12,0.06);
+  color: #BF360C; font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.ews-dismiss:hover { background: rgba(191,54,12,0.15); transform: scale(1.1); }
+
+/* EWS spacer pushes content down when alert is visible */
+.ews-spacer { height: 0; transition: height 0.3s var(--spring); }
+.ews-spacer.active { height: 58px; }
+
+/* Dark mode EWS */
+[data-theme="dark"] .ews-alert {
+  background: linear-gradient(135deg, rgba(232,118,10,0.15) 0%, rgba(255,152,0,0.1) 100%);
+  border-bottom-color: rgba(232,118,10,0.2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .ews-content strong { color: #FFB74D; }
+[data-theme="dark"] .ews-content p { color: rgba(255,255,255,0.7); }
+[data-theme="dark"] .ews-dismiss {
+  border-color: rgba(255,183,77,0.2); background: rgba(255,183,77,0.08); color: #FFB74D;
+}
+[data-theme="dark"] .ews-dismiss:hover { background: rgba(255,183,77,0.18); }
+
+/* ---------- PREMIUM PAYMENT SECTION ---------- */
+.premium-section {
+  margin-top: 1.25rem; padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+.premium-section-title {
+  font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); margin-bottom: 0.75rem;
+}
+.premium-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.premium-stat {
+  padding: 0.6rem 0.75rem; border-radius: var(--radius-sm);
+  background: var(--form-bg);
+  box-shadow: var(--shadow-clay-inset);
+}
+.premium-stat-label {
+  font-size: 0.6875rem; color: var(--text-muted); margin-bottom: 0.2rem;
+}
+.premium-stat-value {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600;
+  color: var(--text-primary);
+}
+.premium-history {
+  margin-bottom: 0.75rem;
+}
+.premium-history-title {
+  font-size: 0.6875rem; font-weight: 600; color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.premium-history-list {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  max-height: 120px; overflow-y: auto;
+}
+.premium-history-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.35rem 0.5rem; border-radius: 8px;
+  background: var(--form-bg); font-size: 0.6875rem;
+}
+.premium-history-date { color: var(--text-muted); }
+.premium-history-amount { font-family: var(--font-mono); font-weight: 600; color: var(--color-success); }
+.premium-history-status {
+  font-size: 0.625rem; padding: 0.1rem 0.4rem; border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+.premium-history-status.paid { background: var(--color-success-dim); color: var(--color-success); }
+.premium-history-status.pending { background: var(--color-warning-dim); color: #8a6800; }
+
+.btn-pay-premium {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%; padding: 0.65rem 1rem; border-radius: var(--radius-sm);
+  border: none; cursor: pointer;
+  background: linear-gradient(135deg, #E8760A 0%, #FF9533 100%);
+  color: #fff; font-family: var(--font-main); font-size: 0.8125rem; font-weight: 700;
+  box-shadow: 4px 4px 12px rgba(232,118,10,0.25), -2px -2px 8px rgba(255,255,255,0.4);
+  transition: all 0.25s var(--spring);
+}
+.btn-pay-premium:hover { transform: translateY(-1px) scale(1.02); box-shadow: 6px 6px 18px rgba(232,118,10,0.35), -3px -3px 10px rgba(255,255,255,0.5); }
+.btn-pay-premium:disabled {
+  opacity: 0.5; cursor: not-allowed; transform: none;
+  box-shadow: var(--shadow-clay-sm);
+}
+.btn-pay-premium svg { flex-shrink: 0; }
+
+/* Dark mode premium section */
+[data-theme="dark"] .premium-section { border-top-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .premium-section-title { color: rgba(255,255,255,0.4); }
+[data-theme="dark"] .premium-stat {
+  background: rgba(255,255,255,0.04);
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2), inset -2px -2px 5px rgba(255,255,255,0.03);
+}
+[data-theme="dark"] .premium-stat-label { color: rgba(255,255,255,0.4); }
+[data-theme="dark"] .premium-stat-value { color: #ffffff; }
+[data-theme="dark"] .premium-history-item { background: rgba(255,255,255,0.04); }
+[data-theme="dark"] .premium-history-date { color: rgba(255,255,255,0.4); }
+[data-theme="dark"] .premium-history-amount { color: #55efc4; }
+[data-theme="dark"] .btn-pay-premium {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
   </style>
 </head>
 <body>
@@ -1932,8 +2133,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
 
+    <div class="dash-nav-links">
+      <a href="dashboard.html" class="dash-nav-link active">Dashboard</a>
+      <a href="issuers.html" class="dash-nav-link">Issuers</a>
+      <a href="pool.html" class="dash-nav-link">Pool</a>
+      <a href="coverage.html" class="dash-nav-link">Coverage</a>
+    </div>
+
     <div class="nav-actions">
       <div class="badge-testnet"><span class="dot"></span> BSC Testnet</div>
+      <div class="role-badges" id="roleBadges" style="display:none;"></div>
       <div class="notif-wrapper">
         <button class="notif-bell" onclick="toggleNotifications()" aria-label="Notifications">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1990,7 +2199,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
      DASHBOARD MAIN
      ============================================================ -->
 <main class="dash-main" id="main-content" role="main">
+
+<!-- EWS Alert Banner -->
+<div class="ews-alert" id="ewsAlert" style="display:none;">
+  <div class="ews-icon">&#9888;&#65039;</div>
+  <div class="ews-content">
+    <strong>Early Warning: IRS Score Drop Detected</strong>
+    <p id="ewsDetails">TradeFlow Finance IRS dropped 65 points (645 &rarr; 580). Monitor closely.</p>
+  </div>
+  <button class="ews-dismiss" onclick="dismissEWS()" aria-label="Dismiss alert">&times;</button>
+</div>
+
 <div class="network-warning-spacer" id="networkWarningSpacer"></div>
+<div class="ews-spacer" id="ewsSpacer"></div>
 <div class="dash-container">
 
 <!-- ---- LIVE DATA BANNER ---- -->
@@ -2360,6 +2581,41 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           <svg id="premiumCurveSvg" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg"></svg>
           <div class="curve-tooltip" id="curveTooltip"></div>
         </div>
+      </div>
+
+      <!-- Premium Payment Section -->
+      <div class="premium-section" id="premiumPaymentSection">
+        <div class="premium-section-title">Premium Payment</div>
+        <div class="premium-stats">
+          <div class="premium-stat">
+            <div class="premium-stat-label">Current Rate</div>
+            <div class="premium-stat-value" id="premiumRateDisplay">-- bps</div>
+          </div>
+          <div class="premium-stat">
+            <div class="premium-stat-label">Annual Cost</div>
+            <div class="premium-stat-value" id="premiumAnnualCost">--</div>
+          </div>
+          <div class="premium-stat">
+            <div class="premium-stat-label">Next Due</div>
+            <div class="premium-stat-value" id="premiumNextDue">--</div>
+          </div>
+          <div class="premium-stat">
+            <div class="premium-stat-label">Status</div>
+            <div class="premium-stat-value" id="premiumStatus" style="color:var(--color-success)">Current</div>
+          </div>
+        </div>
+        <div class="premium-history">
+          <div class="premium-history-title">Payment History</div>
+          <div class="premium-history-list" id="premiumHistoryList">
+            <div class="premium-history-item">
+              <span class="premium-history-date">No payments yet</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-pay-premium" id="btnPayPremium" onclick="handlePayPremium()" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          Pay Premium
+        </button>
       </div>
 
     </div></div>
@@ -2740,6 +2996,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   </div>
 </div>
 
+<!-- Premium Payment Modal -->
+<div id="premiumModal" class="confirm-overlay" role="dialog" aria-modal="true" onclick="if(event.target===this)closePremiumModal()">
+  <div class="confirm-modal">
+    <h3>Confirm Premium Payment</h3>
+    <div class="confirm-body" id="premiumModalBody">
+      <div class="confirm-detail-row"><span class="confirm-detail-label">Issuer Token</span><span class="confirm-detail-value" id="pmIssuer">--</span></div>
+      <div class="confirm-detail-row"><span class="confirm-detail-label">Premium Rate</span><span class="confirm-detail-value" id="pmRate">-- bps</span></div>
+      <div class="confirm-detail-row"><span class="confirm-detail-label">Coverage Amount</span><span class="confirm-detail-value" id="pmCoverage">--</span></div>
+      <div class="confirm-detail-row"><span class="confirm-detail-label">Payment Amount</span><span class="confirm-detail-value" id="pmAmount" style="font-weight:700;color:var(--color-coverage)">--</span></div>
+      <div class="confirm-detail-row"><span class="confirm-detail-label">Period</span><span class="confirm-detail-value" id="pmPeriod">Monthly</span></div>
+    </div>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" onclick="closePremiumModal()">Cancel</button>
+      <button class="confirm-proceed" id="premiumConfirmBtn" style="background:linear-gradient(135deg,#E8760A,#FF9533)">Pay Now</button>
+    </div>
+  </div>
+</div>
+
 <!-- ============================================================
      JAVASCRIPT
      ============================================================ -->
@@ -2938,6 +3212,7 @@ let walletConnected = false;
 let walletAddress = '';
 let ethersProvider = null;
 let isLiveData = false;
+let detectedRoles = []; // Populated by detectUserRole()
 let eventListeners = [];
 let lastUpdatedTime = null;
 let lastUpdatedInterval = null;
@@ -3145,6 +3420,9 @@ async function connectWallet() {
 
         // Load real on-chain data
         await loadContractData();
+
+        // Detect user role and update UI
+        await runRoleDetection();
       }
     } catch (err) {
       console.error('Wallet connection error:', err);
@@ -3286,6 +3564,9 @@ function disconnectWallet() {
   isLiveData = false;
   removeEventListeners();
 
+  // Clear role badges
+  clearRoleBadges();
+
   // Hide user position if visible
   var posEl = document.getElementById('userPosition');
   if (posEl) posEl.style.display = 'none';
@@ -3359,7 +3640,10 @@ if (typeof window.ethereum !== 'undefined') {
       // Switched account
       walletAddress = accounts[0];
       updateWalletUI();
-      loadContractData();
+      clearRoleBadges();
+      loadContractData().then(function() {
+        runRoleDetection();
+      });
     }
   });
 }
@@ -3832,6 +4116,173 @@ async function loadContractData() {
 // Keep backward compat alias
 async function loadOnChainData() { return loadContractData(); }
 
+// ---- Role Detection ----
+async function detectUserRole(address) {
+  var roles = [];
+  try {
+    var provider = ethersProvider;
+    if (!provider) { roles.push('new'); return roles; }
+
+    // Check if attestor - look up in TIR
+    try {
+      var tir = new ethers.Contract(CONTRACTS.TIR, COVERFI_ABIS.TIR, provider);
+      var attestorData = await tir.attestors(address);
+      if (attestorData && attestorData.status && Number(attestorData.status) > 0) {
+        roles.push('attestor');
+      }
+    } catch(e) { /* not an attestor or contract call failed */ }
+
+    // Check srCVR/jrCVR balance (underwriter / LP)
+    try {
+      var srCvr = new ethers.Contract(CONTRACTS.srCVR, COVERFI_ABIS.srCVR, provider);
+      var jrCvr = new ethers.Contract(CONTRACTS.jrCVR, COVERFI_ABIS.jrCVR, provider);
+      var srBal = await srCvr.balanceOf(address);
+      var jrBal = await jrCvr.balanceOf(address);
+      if (srBal > 0n || jrBal > 0n) roles.push('underwriter');
+    } catch(e) { /* not an underwriter or contract call failed */ }
+
+    // Check ProtectionCert NFT balance (investor)
+    try {
+      var cert = new ethers.Contract(CONTRACTS.ProtectionCert, COVERFI_ABIS.ProtectionCert, provider);
+      var certBal = await cert.balanceOf(address);
+      if (certBal > 0n) roles.push('investor');
+    } catch(e) { /* not an investor or contract call failed */ }
+
+    // Check if issuer - try to see if the deployer/issuer registered tokens
+    // The IssuerRegistry maps tokenAddress => issuer data, not wallet => issuer
+    // For demo purposes we check if address is the contract owner (deployer who registered issuers)
+    try {
+      var registry = new ethers.Contract(CONTRACTS.IssuerRegistry, COVERFI_ABIS.IssuerRegistry, provider);
+      // Check if address matches the registry owner (deployer acts as issuer in demo)
+      if (typeof registry.owner === 'function') {
+        var owner = await registry.owner();
+        if (owner.toLowerCase() === address.toLowerCase()) {
+          roles.push('issuer');
+        }
+      }
+    } catch(e) { /* not an issuer or contract call failed */ }
+
+    if (roles.length === 0) roles.push('new');
+  } catch(e) {
+    console.warn('Role detection error:', e);
+    roles.push('new');
+  }
+  return roles;
+}
+
+function renderRoleBadges(roles) {
+  var container = document.getElementById('roleBadges');
+  if (!container) return;
+
+  var badgeConfig = {
+    issuer:      { label: 'Issuer', cls: 'role-badge-issuer' },
+    attestor:    { label: 'Attestor', cls: 'role-badge-attestor' },
+    investor:    { label: 'Investor', cls: 'role-badge-investor' },
+    underwriter: { label: 'LP', cls: 'role-badge-underwriter' },
+    'new':       { label: 'New User', cls: 'role-badge-new' }
+  };
+
+  container.innerHTML = '';
+  roles.forEach(function(role, i) {
+    var cfg = badgeConfig[role];
+    if (!cfg) return;
+    var span = document.createElement('span');
+    span.className = 'role-badge ' + cfg.cls;
+    span.textContent = cfg.label;
+    span.style.animationDelay = (i * 0.08) + 's';
+    container.appendChild(span);
+  });
+  container.style.display = roles.length > 0 ? 'flex' : 'none';
+}
+
+function clearRoleBadges() {
+  detectedRoles = [];
+  var container = document.getElementById('roleBadges');
+  if (container) { container.innerHTML = ''; container.style.display = 'none'; }
+  // Remove all role-dimmed classes
+  document.querySelectorAll('.role-dimmed').forEach(function(el) { el.classList.remove('role-dimmed'); });
+  // Hide all role hints
+  document.querySelectorAll('.role-section-hint').forEach(function(el) { el.classList.remove('visible'); });
+}
+
+function applyRoleVisibility(roles) {
+  // Section relevance mapping:
+  // issuers row (id="issuers") - relevant to: issuer, attestor, everyone (general info)
+  // IRS card (id="irs") - relevant to: issuer, attestor
+  // Pool card (id="pool") - relevant to: underwriter
+  // Purchase card (id="purchase") - relevant to: investor, new
+  // cert section - relevant to: investor
+
+  // If user has specific roles, dim less relevant sections (but keep them accessible)
+  var hasSpecificRole = roles.some(function(r) { return r !== 'new'; });
+  if (!hasSpecificRole) return; // New users see everything equally
+
+  var sectionRelevance = {
+    'irs':      ['issuer', 'attestor'],
+    'pool':     ['underwriter', 'investor'],
+    'purchase': ['investor', 'new']
+  };
+
+  Object.keys(sectionRelevance).forEach(function(sectionId) {
+    var el = document.getElementById(sectionId);
+    if (!el) return;
+    var relevant = sectionRelevance[sectionId];
+    var isRelevant = roles.some(function(r) { return relevant.indexOf(r) !== -1; });
+    if (!isRelevant) {
+      el.classList.add('role-dimmed');
+    } else {
+      el.classList.remove('role-dimmed');
+    }
+  });
+
+  // Show role-specific hints
+  if (roles.indexOf('attestor') !== -1) {
+    showRoleHint('irs', 'attestor', 'You are a registered attestor. Submit attestations for active issuers from the IRS Oracle.');
+  }
+  if (roles.indexOf('issuer') !== -1) {
+    showRoleHint('issuers', 'issuer', 'Your registered issuer data and IRS details are shown here.');
+  }
+  if (roles.indexOf('investor') !== -1) {
+    showRoleHint('purchase', 'investor', 'You hold active coverage. Check your ProtectionCert below.');
+  }
+  if (roles.indexOf('underwriter') !== -1) {
+    showRoleHint('pool', 'underwriter', 'Your LP position and yield info are shown in the pool card.');
+  }
+}
+
+function showRoleHint(sectionId, roleType, message) {
+  var section = document.getElementById(sectionId);
+  if (!section) return;
+  // Check if hint already exists
+  var existing = section.querySelector('.role-section-hint');
+  if (existing) { existing.classList.add('visible'); return; }
+  // Create hint
+  var hint = document.createElement('div');
+  hint.className = 'role-section-hint role-hint-' + roleType + ' visible';
+  hint.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>' + message;
+  // Insert at top of card-body if inside a card, or prepend to section
+  var cardBody = section.querySelector('.card-body');
+  if (cardBody) {
+    cardBody.insertBefore(hint, cardBody.firstChild);
+  } else {
+    section.insertBefore(hint, section.firstChild);
+  }
+}
+
+async function runRoleDetection() {
+  if (!walletConnected || !walletAddress || !ethersProvider) return;
+  try {
+    detectedRoles = await detectUserRole(walletAddress);
+    renderRoleBadges(detectedRoles);
+    applyRoleVisibility(detectedRoles);
+    console.log('Detected roles for ' + walletAddress.slice(0,6) + '...:', detectedRoles.join(', '));
+  } catch(e) {
+    console.warn('Role detection failed:', e);
+    detectedRoles = ['new'];
+    renderRoleBadges(detectedRoles);
+  }
+}
+
 // ---- Update Dashboard with data (live or mock) ----
 function updateDashboard(data) {
   // Metrics bar
@@ -4001,7 +4452,14 @@ async function listenForEvents() {
     eventListeners.push(function() { irsOracle.off('ScoreUpdated', onScoreUpdated); });
 
     var onEWSFired = function(tokenAddress, newScore, dropAmount, blockNumber, event) {
-      addLiveEvent('orange', '<strong>Early Warning!</strong> &mdash; ' + shortAddr(tokenAddress) + ' score dropped by ' + Number(dropAmount) + ' to ' + Number(newScore));
+      var drop = Number(dropAmount);
+      var nScore = Number(newScore);
+      var oScore = nScore + drop;
+      var issuerName = (tokenAddress.toLowerCase() === CONTRACTS.MockERC3643Token.toLowerCase())
+        ? 'AsiaReit' : shortAddr(tokenAddress);
+      addLiveEvent('orange', '<strong>Early Warning!</strong> &mdash; ' + issuerName + ' score dropped by ' + drop + ' to ' + nScore);
+      addNotification('EWS: ' + issuerName + ' IRS dropped ' + drop + ' points', 'warning');
+      showEWSAlert(issuerName, drop, oScore, nScore);
     };
     irsOracle.on('EarlyWarningFired', onEWSFired);
     eventListeners.push(function() { irsOracle.off('EarlyWarningFired', onEWSFired); });
@@ -4733,6 +5191,7 @@ setTimeout(function() {
         updateWalletDropdown();
         await loadContractData();
         await loadPastEvents();
+        await runRoleDetection();
       } else if (accounts.length > 0 && currentChainId !== BSC_TESTNET_CHAIN_ID) {
         // Connected but wrong network
         walletAddress = accounts[0];
@@ -4944,6 +5403,253 @@ const animObserver = new IntersectionObserver((entries) => {
   });
 });
 document.querySelectorAll('[style*="animation"], .bg-blob, .dot').forEach(el => animObserver.observe(el));
+
+// ============================================================
+// EWS ALERT SYSTEM
+// ============================================================
+
+function showEWSAlert(issuerName, dropAmount, oldScore, newScore) {
+  var alert = document.getElementById('ewsAlert');
+  var spacer = document.getElementById('ewsSpacer');
+  if (!alert || sessionStorage.getItem('ews-dismissed')) return;
+
+  document.getElementById('ewsDetails').textContent =
+    issuerName + ' IRS dropped ' + dropAmount + ' points (' + oldScore + ' \u2192 ' + newScore + '). Monitor closely.';
+
+  alert.style.display = 'flex';
+  spacer.classList.add('active');
+}
+
+function dismissEWS() {
+  var alert = document.getElementById('ewsAlert');
+  var spacer = document.getElementById('ewsSpacer');
+  if (alert) {
+    alert.style.animation = 'ews-slide-down 0.3s var(--spring) reverse forwards';
+    setTimeout(function() {
+      alert.style.display = 'none';
+      spacer.classList.remove('active');
+    }, 300);
+  }
+  sessionStorage.setItem('ews-dismissed', 'true');
+}
+
+async function checkEWSEvents() {
+  if (!ethersProvider) return;
+  try {
+    var provider = ethersProvider;
+    var irsOracle = new ethers.Contract(CONTRACTS.IRSOracle, COVERFI_ABIS.IRSOracle, provider);
+    var currentBlock = await provider.getBlockNumber();
+    // ~24 hours on BSC (~3s blocks = 28800 blocks)
+    var fromBlock = Math.max(0, currentBlock - 28800);
+
+    var ewsEvents = await irsOracle.queryFilter('EarlyWarningFired', fromBlock, currentBlock);
+    if (ewsEvents.length > 0 && !sessionStorage.getItem('ews-dismissed')) {
+      var latest = ewsEvents[ewsEvents.length - 1];
+      var newScore = Number(latest.args[1]);
+      var dropAmount = Number(latest.args[2]);
+      var oldScore = newScore + dropAmount;
+      // Determine issuer name from known addresses or use short address
+      var tokenAddr = latest.args[0];
+      var issuerName = (tokenAddr.toLowerCase() === CONTRACTS.MockERC3643Token.toLowerCase())
+        ? 'AsiaReit' : shortAddr(tokenAddr);
+      showEWSAlert(issuerName, dropAmount, oldScore, newScore);
+    }
+
+    // Also check ScoreUpdated for 50+ drops even without explicit EWS event
+    var scoreEvents = await irsOracle.queryFilter('ScoreUpdated', fromBlock, currentBlock);
+    for (var i = 0; i < scoreEvents.length; i++) {
+      var ev = scoreEvents[i];
+      var old = Number(ev.args[1]);
+      var nw = Number(ev.args[2]);
+      if (old - nw >= 50 && !sessionStorage.getItem('ews-dismissed')) {
+        var addr = ev.args[0];
+        var name = (addr.toLowerCase() === CONTRACTS.MockERC3643Token.toLowerCase())
+          ? 'AsiaReit' : shortAddr(addr);
+        showEWSAlert(name, old - nw, old, nw);
+        break;
+      }
+    }
+  } catch (err) {
+    console.error('Error checking EWS events:', err);
+  }
+}
+
+// ============================================================
+// PREMIUM PAYMENT SYSTEM
+// ============================================================
+
+var _lastPremiumBPS = null;
+var _lastCoverageAmount = null;
+
+function updatePremiumSection(data) {
+  // Premium rate display
+  var rateBPS = data.premiumBPS;
+  _lastPremiumBPS = rateBPS;
+
+  if (rateBPS !== null && rateBPS !== undefined) {
+    var ratePercent = (rateBPS / 100).toFixed(2);
+    document.getElementById('premiumRateDisplay').textContent = rateBPS + ' bps (' + ratePercent + '%)';
+
+    // Calculate annual cost if coverage is known
+    if (data.totalInsured !== undefined && data.totalInsured > 0n) {
+      _lastCoverageAmount = data.totalInsured;
+      var insuredNum = Number(data.totalInsured) / 1e6; // USDT 6 decimals
+      var annualCost = (insuredNum * rateBPS) / 10000;
+      document.getElementById('premiumAnnualCost').textContent = '$' + annualCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    } else {
+      document.getElementById('premiumAnnualCost').textContent = '--';
+    }
+  } else {
+    document.getElementById('premiumRateDisplay').textContent = '-- bps';
+    document.getElementById('premiumAnnualCost').textContent = '--';
+  }
+
+  // Next due date (30 days from now as monthly cycle)
+  var nextDue = new Date();
+  nextDue.setDate(nextDue.getDate() + 30);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('premiumNextDue').textContent =
+    months[nextDue.getMonth()] + ' ' + nextDue.getDate() + ', ' + nextDue.getFullYear();
+
+  // Enable pay button if wallet connected and we have data
+  var btn = document.getElementById('btnPayPremium');
+  if (btn && walletAddress && rateBPS) {
+    btn.disabled = false;
+  }
+
+  // Load premium payment history from past PremiumPaid events
+  loadPremiumHistory();
+}
+
+async function loadPremiumHistory() {
+  if (!ethersProvider) return;
+  try {
+    var provider = ethersProvider;
+    var pool = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, provider);
+    var currentBlock = await provider.getBlockNumber();
+    var fromBlock = Math.max(0, currentBlock - 50000);
+
+    var premiumEvents = await pool.queryFilter('PremiumPaid', fromBlock, currentBlock);
+    var list = document.getElementById('premiumHistoryList');
+    if (!list) return;
+
+    if (premiumEvents.length === 0) {
+      list.innerHTML = '<div class="premium-history-item"><span class="premium-history-date">No payments yet</span></div>';
+      return;
+    }
+
+    var _months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var html = '';
+    // Show last 5 events, most recent first
+    var recent = premiumEvents.slice(-5).reverse();
+    for (var i = 0; i < recent.length; i++) {
+      var ev = recent[i];
+      var amount = Number(ev.args[1]) / 1e6;
+      var block = await provider.getBlock(ev.blockNumber);
+      var date = block ? new Date(block.timestamp * 1000) : new Date();
+      var dateStr = _months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+      html +=
+        '<div class="premium-history-item">' +
+          '<span class="premium-history-date">' + dateStr + '</span>' +
+          '<span class="premium-history-amount">$' + amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span>' +
+          '<span class="premium-history-status paid">Paid</span>' +
+        '</div>';
+    }
+    list.innerHTML = html;
+    // Update status to current
+    document.getElementById('premiumStatus').textContent = 'Current';
+    document.getElementById('premiumStatus').style.color = 'var(--color-success)';
+  } catch (err) {
+    console.error('Error loading premium history:', err);
+  }
+}
+
+function handlePayPremium() {
+  if (!walletAddress) {
+    showToast('Connect your wallet first', 'warning');
+    return;
+  }
+  if (!_lastPremiumBPS) {
+    showToast('Premium rate not available', 'warning');
+    return;
+  }
+
+  // Calculate monthly premium amount
+  var coverageAmount = _lastCoverageAmount ? Number(_lastCoverageAmount) / 1e6 : 10000;
+  var monthlyPremium = (coverageAmount * _lastPremiumBPS) / (10000 * 12);
+
+  // Fill modal
+  document.getElementById('pmIssuer').textContent = shortAddr(CONTRACTS.MockERC3643Token);
+  document.getElementById('pmRate').textContent = _lastPremiumBPS + ' bps';
+  document.getElementById('pmCoverage').textContent = '$' + coverageAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  document.getElementById('pmAmount').textContent = '$' + monthlyPremium.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' USDT';
+  document.getElementById('pmPeriod').textContent = 'Monthly';
+
+  // Set confirm handler
+  document.getElementById('premiumConfirmBtn').onclick = function() {
+    closePremiumModal();
+    executePremiumPayment(monthlyPremium);
+  };
+
+  // Show modal
+  document.getElementById('premiumModal').classList.add('active');
+}
+
+function closePremiumModal() {
+  document.getElementById('premiumModal').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  var modal = document.getElementById('premiumModal');
+  if (!modal || !modal.classList.contains('active')) return;
+  if (e.key === 'Escape') { closePremiumModal(); }
+});
+
+async function executePremiumPayment(amountUSDT) {
+  try {
+    showToast('Approving USDT...', 'info');
+    var provider = new ethers.BrowserProvider(window.ethereum);
+    var signer = await provider.getSigner();
+
+    var amountWei = ethers.parseUnits(amountUSDT.toFixed(6), 6);
+
+    // Step 1: Approve MockUSDT
+    var usdt = new ethers.Contract(CONTRACTS.MockUSDT, ['function approve(address,uint256) returns (bool)'], signer);
+    var approveTx = await usdt.approve(CONTRACTS.InsurancePool, amountWei);
+    await approveTx.wait();
+    showToast('USDT approved. Paying premium...', 'info');
+
+    // Step 2: Call payPremium on InsurancePool
+    var pool = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, signer);
+    var tx = await pool.payPremium(CONTRACTS.MockERC3643Token, amountWei);
+    await tx.wait();
+
+    showToast('Premium paid successfully!', 'success');
+    addNotification('Premium payment of $' + amountUSDT.toFixed(2) + ' completed', 'success');
+    addLiveEvent('orange', '<strong>Premium Paid</strong> &mdash; $' + amountUSDT.toFixed(2) + ' premium paid');
+
+    // Record in tx history
+    if (typeof addTx === 'function') {
+      addTx('Premium Payment', amountUSDT.toFixed(2) + ' USDT', tx.hash);
+    }
+
+    // Refresh data
+    loadPremiumHistory();
+    loadContractData();
+
+  } catch (err) {
+    console.error('Premium payment error:', err);
+    var msg = parseContractError ? parseContractError(err) : err.message;
+    showToast('Premium payment failed: ' + msg, 'error');
+  }
+}
+
+// Hook into loadContractData completion: patch updateDashboard to also update premium section
+var _origUpdateDashboard = updateDashboard;
+updateDashboard = function(data) {
+  _origUpdateDashboard(data);
+  updatePremiumSection(data);
+  checkEWSEvents();
+};
 
 </script>
 </body>
