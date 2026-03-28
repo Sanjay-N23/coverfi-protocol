@@ -229,10 +229,10 @@ code, pre { font-family: var(--font-mono); }
   width: 48px; height: 48px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.metric-icon-blue { background: rgba(124,77,255,0.2); color: #B388FF; }
-.metric-icon-purple { background: rgba(179,136,255,0.2); color: #B388FF; }
-.metric-icon-orange { background: rgba(94,53,177,0.2); color: #A78BFA; }
-.metric-icon-green { background: rgba(0,184,148,0.2); color: #34D4A4; }
+.metric-icon-blue { background: rgba(124,77,255,0.2); color: #3C1F8C; }
+.metric-icon-purple { background: rgba(179,136,255,0.2); color: #3C1F8C; }
+.metric-icon-orange { background: rgba(94,53,177,0.2); color: #3C1F8C; }
+.metric-icon-green { background: rgba(0,184,148,0.2); color: #006B4F; }
 .metric-label { font-size: 0.75rem; color: #636E72; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.25rem; }
 .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: #2D3436; }
 
@@ -309,7 +309,7 @@ code, pre { font-family: var(--font-mono); }
   text-align: center; border: none;
 }
 .btn-action-primary {
-  background: linear-gradient(135deg, #7C4DFF, #9C7CFF);
+  background: linear-gradient(135deg, #7C4DFF, #6A3DE0);
   color: #fff; font-weight: 700; border-radius: 12px; padding: 0.75rem 1.5rem;
   box-shadow: 4px 4px 12px rgba(124,77,255,0.3), -2px -2px 8px rgba(255,255,255,0.6);
 }
@@ -328,7 +328,7 @@ code, pre { font-family: var(--font-mono); }
 .ratio-label-senior { color: #7C4DFF; font-weight: 700; }
 .ratio-label-junior { color: #B388FF; font-weight: 700; }
 .ratio-bar { height: 12px; border-radius: 8px; overflow: hidden; display: flex; background: rgba(0,0,0,0.06); gap: 2px; }
-.ratio-bar-senior { background: linear-gradient(90deg, #7C4DFF, #9C7CFF); border-radius: 8px; transition: width 1s var(--ease-smooth); }
+.ratio-bar-senior { background: linear-gradient(90deg, #7C4DFF, #6A3DE0); border-radius: 8px; transition: width 1s var(--ease-smooth); }
 .ratio-bar-junior { background: linear-gradient(90deg, #B388FF, #D1C4E9); border-radius: 8px; transition: width 1s var(--ease-smooth); }
 
 /* Pool stats */
@@ -407,7 +407,7 @@ code, pre { font-family: var(--font-mono); }
   cursor: pointer; transition: all 0.25s var(--spring); text-align: center;
 }
 .btn-gold {
-  background: linear-gradient(135deg, #7C4DFF 0%, #9C7CFF 50%, #7C4DFF 100%);
+  background: linear-gradient(135deg, #7C4DFF 0%, #6A3DE0 50%, #7C4DFF 100%);
   background-size: 200% 100%; color: #ffffff;
   box-shadow: 6px 6px 16px rgba(124,77,255,0.3), -3px -3px 10px rgba(255,255,255,0.6);
   animation: btn-gradient 3s ease infinite;
@@ -466,7 +466,7 @@ code, pre { font-family: var(--font-mono); }
   display: flex; align-items: center; padding: 0 12px;
   width: 100% !important;
 }
-.waterfall-bar-text { font-size: 0.75rem; font-weight: 700; color: #fff; white-space: nowrap; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.waterfall-bar-text { font-size: 0.75rem; font-weight: 700; color: #1a1d24; white-space: nowrap; text-shadow: 0 1px 2px rgba(255,255,255,0.2); }
 .waterfall-arrow { text-align: center; color: var(--text-muted); font-size: 1.25rem; margin: 6px 0; padding-left: 110px; display: flex; justify-content: center; padding-left: calc(110px + 0.5rem); }
 .waterfall-protected { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 12px; padding: 8px 0; }
 .waterfall-protected-icon { color: var(--color-success); font-size: 1.25rem; }
@@ -481,7 +481,7 @@ code, pre { font-family: var(--font-mono); }
 .waterfall-step-num {
   width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.6875rem; font-weight: 700; color: #fff;
+  font-size: 0.6875rem; font-weight: 700; color: #1a1d24;
 }
 .waterfall-step-text { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -1130,7 +1130,7 @@ code, pre { font-family: var(--font-mono); }
                 <div class="waterfall-layer-sub">2nd Loss</div>
               </div>
               <div class="waterfall-bar-wrap">
-                <div class="waterfall-bar" id="waterfallJunior" style="background: linear-gradient(90deg, #7C4DFF, #9C7CFF);">
+                <div class="waterfall-bar" id="waterfallJunior" style="background: linear-gradient(90deg, #7C4DFF, #6A3DE0);">
                   <span class="waterfall-bar-text">Higher Yield &mdash; Higher Risk</span>
                 </div>
               </div>
