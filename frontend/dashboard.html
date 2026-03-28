@@ -2222,7 +2222,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <!-- ---- LIVE DATA BANNER ---- -->
 <div class="live-data-banner" id="liveDataBanner">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
-  <span id="bannerText">Connect wallet to see live BSC Testnet data</span>
+  <span id="bannerText">Live BSC Testnet — Connect wallet to transact</span>
   <button class="banner-btn" id="bannerBtn" onclick="connectWallet()">Connect Wallet</button>
 </div>
 
@@ -2256,7 +2256,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     </div>
     <div>
       <div class="metric-label">Total Value Locked</div>
-      <div class="metric-value" id="metricTVL" aria-live="polite">$124,500</div>
+      <div class="metric-value" id="metricTVL" aria-live="polite">--</div>
     </div>
   </div>
   <div class="metric-card reveal">
@@ -3185,6 +3185,130 @@ const BSC_TESTNET_CONFIG = {
 // Demo issuer token address (MockERC3643Token deployed in demo)
 const DEMO_ISSUER_TOKEN = CONTRACTS.MockERC3643Token;
 
+// ---- Read-Only Provider (no wallet needed) ----
+var BSC_TESTNET_RPC = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+var readProvider = new ethers.JsonRpcProvider(BSC_TESTNET_RPC);
+
+// Read-only contract instances for data loading
+var readPool = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, readProvider);
+var readIRS = new ethers.Contract(CONTRACTS.IRSOracle, COVERFI_ABIS.IRSOracle, readProvider);
+var readRegistry = new ethers.Contract(CONTRACTS.IssuerRegistry, COVERFI_ABIS.IssuerRegistry, readProvider);
+
+// ---- Load Live Data (no wallet needed) ----
+var isLoadingLive = false;
+async function loadLiveData() {
+  if (isLoadingLive) return;
+  isLoadingLive = true;
+  try {
+    var results = await Promise.allSettled([
+      readPool.pools(DEMO_ISSUER_TOKEN),           // 0: pool data
+      readIRS.getScore(DEMO_ISSUER_TOKEN),          // 1: IRS score
+      readIRS.getComponents(DEMO_ISSUER_TOKEN),     // 2: IRS components
+      readRegistry.issuers(DEMO_ISSUER_TOKEN),      // 3: issuer data
+      readPool.getPoolState(DEMO_ISSUER_TOKEN),     // 4: pool state
+      readIRS.getPremiumRateBPS(DEMO_ISSUER_TOKEN)  // 5: premium BPS
+    ]);
+
+    // Pool data
+    if (results[0].status === 'fulfilled' && results[0].value) {
+      var poolData = results[0].value;
+      var totalDeposits = Number(poolData.totalDeposits || poolData[0] || 0);
+      var seniorBal = Number(poolData.seniorBalance || poolData[1] || 0);
+      var juniorBal = Number(poolData.juniorBalance || poolData[2] || 0);
+      var tvlRaw = totalDeposits / 1e6; // USDT has 6 decimals
+      if (tvlRaw > 0) {
+        document.getElementById('metricTVL').textContent = '$' + tvlRaw.toLocaleString();
+        document.getElementById('poolTVL').textContent = '$' + tvlRaw.toLocaleString();
+        var seniorRaw = seniorBal / 1e6;
+        var juniorRaw = juniorBal / 1e6;
+        var availableRaw = tvlRaw; // simplified
+        document.getElementById('poolAvailable').textContent = '$' + availableRaw.toLocaleString();
+        var seniorPct = tvlRaw > 0 ? Math.round((seniorRaw / tvlRaw) * 100) : 70;
+        var juniorPct = 100 - seniorPct;
+        document.getElementById('poolSeniorLabel').textContent = 'Senior ' + seniorPct + '%';
+        document.getElementById('poolJuniorLabel').textContent = 'Junior ' + juniorPct + '%';
+        var seniorBar = document.getElementById('poolSeniorBar');
+        var juniorBar = document.getElementById('poolJuniorBar');
+        if (seniorBar) seniorBar.style.width = seniorPct + '%';
+        if (juniorBar) juniorBar.style.width = juniorPct + '%';
+        // Utilization
+        var util = tvlRaw > 0 ? Math.round(((tvlRaw - availableRaw) / tvlRaw) * 100) : 0;
+        document.getElementById('metricUtilization').textContent = util + '%';
+      }
+    }
+
+    // IRS Score
+    if (results[1].status === 'fulfilled') {
+      var score = Number(results[1].value);
+      if (score > 0) {
+        document.getElementById('irsScoreValue').textContent = score;
+        document.getElementById('irsScoreSub').textContent = 'of 1,000 \u00B7 ' + getRiskLabel(score);
+        updateIRSGauge(score);
+      }
+    }
+
+    // IRS Components
+    if (results[2].status === 'fulfilled' && results[2].value) {
+      var comp = results[2].value;
+      var dims = {
+        nav: Number(comp[0] || comp.navDeviation || 0),
+        attestation: Number(comp[1] || comp.attestation || 0),
+        repayment: Number(comp[2] || comp.repayment || 0),
+        collateral: Number(comp[3] || comp.collateral || 0),
+        activity: Number(comp[4] || comp.activity || 0)
+      };
+      updateIRSDimensions(dims);
+    }
+
+    // Issuer data
+    if (results[3].status === 'fulfilled' && results[3].value) {
+      var issuer = results[3].value;
+      var statusNum = Number(issuer.status || issuer[3] || 0);
+      document.getElementById('metricIssuers').textContent = statusNum > 0 ? '3' : '0';
+    }
+
+    // Pool state (coverage ratio)
+    if (results[4].status === 'fulfilled' && results[4].value) {
+      var poolState = results[4].value;
+      var coverageRatio = Number(poolState.coverageRatio || poolState[3] || 0);
+      var coverageAmt = Number(poolState.totalCoverage || poolState[2] || 0) / 1e6;
+      if (coverageAmt > 0) {
+        document.getElementById('metricCoverage').textContent = '$' + coverageAmt.toLocaleString();
+      }
+    }
+
+    // Premium BPS
+    if (results[5].status === 'fulfilled') {
+      var premBPS = Number(results[5].value);
+      if (premBPS > 0) {
+        // Update premium calculator display
+        var amount = parseFloat(document.getElementById('coverageAmount').value) || 15000;
+        var annualRate = premBPS / 10000;
+        var days = parseInt(document.getElementById('coverageDuration') ? document.getElementById('coverageDuration').value : 180) || 180;
+        var prem = amount * annualRate * (days / 365);
+        document.getElementById('premiumValue').textContent = '$' + prem.toFixed(2);
+        document.getElementById('premiumBps').textContent = premBPS + ' bps annualized';
+      }
+    }
+
+    // APY (hardcoded as contracts don't expose this directly)
+    document.getElementById('metricAPY').textContent = '4.2%';
+    document.getElementById('poolSeniorAPY').textContent = '4.2%';
+    document.getElementById('poolJuniorAPY').textContent = '14.6%';
+
+    isLiveData = true;
+    updateLastUpdated();
+    setLoadingState(false);
+  } catch (err) {
+    console.warn('loadLiveData error:', err.message);
+    // On failure, show mock data as fallback
+    showMockData();
+    setLoadingState(false);
+    updateLastUpdated();
+  }
+  isLoadingLive = false;
+}
+
 const ISSUER_STATUS_LABELS = ['OBSERVATION', 'ACTIVE', 'MONITORING', 'DEFAULTED', 'WIND_DOWN', 'CLOSED'];
 
 // ---- Mock/Fallback Data ----
@@ -3324,7 +3448,7 @@ function retryLoad() {
   hideErrorState();
   if (walletConnected && ethersProvider) {
     setLoadingState(true);
-    loadContractData();
+    loadLiveData();
   } else {
     setLoadingState(true);
     setTimeout(function() {
@@ -3345,7 +3469,7 @@ function updateBanner() {
   if (walletConnected && isLiveData) {
     bannerText.innerHTML = '<span class="live-data-badge"><span class="dot dot-green"></span> LIVE</span> Connected to BSC Testnet';
     bannerBtn.textContent = 'Refresh';
-    bannerBtn.setAttribute('onclick', 'loadContractData()');
+    bannerBtn.setAttribute('onclick', 'loadLiveData()');
     banner.style.background = 'var(--color-success-dim)';
     banner.style.borderColor = 'rgba(0,184,148,0.2)';
     banner.style.color = 'var(--color-success)';
@@ -3353,7 +3477,7 @@ function updateBanner() {
     bannerText.textContent = 'Loading on-chain data...';
     bannerBtn.style.display = 'none';
   } else {
-    bannerText.textContent = 'Connect wallet to see live BSC Testnet data';
+    bannerText.textContent = 'Live BSC Testnet \u2014 Connect wallet to transact';
     bannerBtn.textContent = 'Connect';
     bannerBtn.setAttribute('onclick', 'connectWallet()');
     bannerBtn.style.display = '';
@@ -3421,7 +3545,7 @@ async function connectWallet() {
         addNotification('Wallet connected: ' + walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4), 'success');
 
         // Load real on-chain data
-        await loadContractData();
+        await loadLiveData();
 
         // Detect user role and update UI
         await runRoleDetection();
@@ -3626,7 +3750,7 @@ if (typeof window.ethereum !== 'undefined') {
       hideNetworkWarning();
       if (walletConnected) {
         ethersProvider = new ethers.BrowserProvider(window.ethereum);
-        loadContractData();
+        loadLiveData();
       }
     }
   });
@@ -3647,7 +3771,7 @@ if (typeof window.ethereum !== 'undefined') {
       walletAddress = accounts[0];
       updateWalletUI();
       clearRoleBadges();
-      loadContractData().then(function() {
+      loadLiveData().then(function() {
         runRoleDetection();
       });
     }
@@ -4452,7 +4576,7 @@ async function listenForEvents() {
       addLiveEvent('gold', '<strong>IRS Updated</strong> &mdash; ' + shortAddr(tokenAddress) + ' score: ' + Number(oldScore) + ' &rarr; ' + Number(newScore) + ' (' + dimension + ')');
       addNotification('IRS score updated: ' + Number(oldScore) + ' \u2192 ' + Number(newScore), 'warning');
       // Refresh dashboard data on score update
-      loadContractData();
+      loadLiveData();
     };
     irsOracle.on('ScoreUpdated', onScoreUpdated);
     eventListeners.push(function() { irsOracle.off('ScoreUpdated', onScoreUpdated); });
@@ -4966,7 +5090,7 @@ async function executePurchase() {
     var premiumBps = document.getElementById('premiumBps').textContent;
     addTransaction('purchase', 'Get Coverage', issuerName + ' \u00b7 ' + amount + ' USDT \u00b7 ' + premiumBps, receipt.hash, 'confirmed');
     addNotification('Coverage purchased successfully!', 'success');
-    await loadContractData();
+    await loadLiveData();
   } catch (err) {
     console.error('Purchase error:', err);
     showToast(parseContractError(err), 'error');
@@ -5025,7 +5149,7 @@ async function executeSeniorDeposit(btn, amount) {
     // Track transaction
     addTransaction('deposit', 'Deposit Senior Tranche', amount + ' USDT \u00b7 Senior (srCVR)', receipt.hash, 'confirmed');
     addNotification('Deposited to senior tranche', 'success');
-    await loadContractData();
+    await loadLiveData();
   } catch (err) {
     console.error('Senior deposit error:', err);
     showToast(parseContractError(err), 'error');
@@ -5082,7 +5206,7 @@ async function executeJuniorDeposit(btn, amount) {
     // Track transaction
     addTransaction('deposit', 'Deposit Junior Tranche', amount + ' USDT \u00b7 Junior (jrCVR)', receipt.hash, 'confirmed');
     addNotification('Deposited to junior tranche', 'success');
-    await loadContractData();
+    await loadLiveData();
   } catch (err) {
     console.error('Junior deposit error:', err);
     showToast(parseContractError(err), 'error');
@@ -5170,9 +5294,7 @@ window.addEventListener('offline', function() {
 window.addEventListener('online', function() {
   showToast('Back online!', 'success');
   document.body.classList.remove('is-offline');
-  if (walletConnected && ethersProvider) {
-    loadContractData();
-  }
+  loadLiveData();
 });
 
 // ---- Initialize ----
@@ -5194,16 +5316,8 @@ if (window.location.protocol === 'file:') {
   }
 }
 
-// Show skeletons briefly then load mock data
-setTimeout(function() {
-  try {
-    showMockData();
-  } catch (e) {
-    console.error('showMockData error:', e);
-  }
-  setLoadingState(false);
-  updateLastUpdated();
-}, MIN_LOADING_MS);
+// Load real data from chain (no wallet needed)
+loadLiveData();
 
 // Auto-connect if already connected
 (async function() {
@@ -5219,7 +5333,7 @@ setTimeout(function() {
         setLoadingState(true);
         updateWalletUI();
         updateWalletDropdown();
-        await loadContractData();
+        await loadLiveData();
         await loadPastEvents();
         await runRoleDetection();
       } else if (accounts.length > 0 && currentChainId !== BSC_TESTNET_CHAIN_ID) {
@@ -5241,6 +5355,11 @@ setTimeout(function() {
     // No ethereum provider — just show mock data (already handled by setTimeout above)
   }
 })();
+
+// ---- Polling: refresh data every 30 seconds ----
+setInterval(function() {
+  loadLiveData();
+}, 30000);
 
 // ---- Transaction History ----
 var txHistory = [];
@@ -5669,7 +5788,7 @@ async function executePremiumPayment(amountUSDT) {
 
     // Refresh data
     loadPremiumHistory();
-    loadContractData();
+    loadLiveData();
 
   } catch (err) {
     console.error('Premium payment error:', err);
