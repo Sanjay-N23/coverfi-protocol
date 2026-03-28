@@ -49,7 +49,7 @@
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
-  --radius-xl: 24px;
+  --radius-xl: 16px;
   --radius-card: var(--radius-xl);
   --radius-pill: 999px;
   --spring: cubic-bezier(0.22, 1.2, 0.36, 1);
@@ -247,7 +247,7 @@ code, pre { font-family: var(--font-mono); }
 .reg-card {
   background: #ffffff;
   color: #2D3436;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   overflow: hidden;
@@ -259,7 +259,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.125rem 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 0.875rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 .card-header h3 {
   font-size: 1.0625rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;
@@ -270,7 +270,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   background: var(--gold-dim); color: #8a6800;
 }
-.card-body { padding: 1.5rem; }
+.card-body { padding: 1rem 1.25rem; }
 
 /* ---------- FORM ELEMENTS ---------- */
 .form-group { margin-bottom: 1.25rem; }
@@ -686,7 +686,7 @@ code, pre { font-family: var(--font-mono); }
 }
 @media (max-width: 600px) {
   .reg-container { padding: 0 1rem; }
-  .card-body { padding: 1.25rem; }
+  .card-body { padding: 1rem 1.25rem; }
   .calc-grid { grid-template-columns: 1fr; }
   .step-line { width: 20px; }
   .step-circle { width: 30px; height: 30px; font-size: 0.6875rem; }

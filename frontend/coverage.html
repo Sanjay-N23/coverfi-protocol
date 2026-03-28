@@ -177,10 +177,10 @@ code, pre { font-family: var(--font-mono); }
 }
 .dash-container {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
 }
 
 /* ---------- METRICS BAR ---------- */
@@ -193,7 +193,7 @@ code, pre { font-family: var(--font-mono); }
 
 .metric-card {
   background: #ffffff; color: #2D3436;
-  border-radius: 20px; padding: 1.25rem 1.25rem 1rem;
+  border-radius: 14px; padding: 1.25rem 1.25rem 1rem;
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
@@ -225,18 +225,18 @@ code, pre { font-family: var(--font-mono); }
 
 /* ---------- DASHBOARD GRID ---------- */
 .dash-row {
-  display: grid; gap: 1.5rem; align-items: start;
+  display: grid; gap: 1rem; align-items: start;
 }
 .dash-row-2col {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: start;
 }
 .dash-row-equal {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: start;
 }
 .dash-row-full {
@@ -248,7 +248,7 @@ code, pre { font-family: var(--font-mono); }
 .dash-card {
   color: #2D3436;
   background: var(--bg-card);
-  border-radius: var(--radius-card);
+  border-radius: 16px;
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: var(--shadow-clay);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
@@ -262,7 +262,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.125rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 0.875rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 .card-header h3 {
   font-size: 1.0625rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;
@@ -277,7 +277,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   display: flex; align-items: center; gap: 0.35rem;
 }
-.card-body { padding: 1.25rem; }
+.card-body { padding: 1rem 1.25rem; }
 
 /* ---------- TABLE ---------- */
 .table-wrap { overflow-x: auto; }
@@ -536,18 +536,6 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
 .btn-empty-cta:hover { transform: scale(1.04) translateY(-2px); box-shadow: 6px 6px 18px rgba(0,200,83,0.4); color: #1a1d24; }
 
 /* ---------- SECTION DIVIDER ---------- */
-.section-divider {
-  display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-  margin: 0.25rem 0; padding: 0;
-}
-.section-divider-dots { display: flex; gap: 6px; }
-.section-divider-dots span { width: 4px; height: 4px; border-radius: 50%; background: rgba(0,200,83,0.3); }
-.section-divider-dots span:nth-child(2) { width: 6px; height: 6px; background: rgba(0,200,83,0.45); }
-.section-divider-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,200,83,0.15), transparent);
-}
-
 /* ---------- SCROLL REVEAL ---------- */
 .reveal {
   opacity: 0; transform: translateY(calc(var(--motion) * 30px));
@@ -930,12 +918,6 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
   </div>
 </div>
 
-<!-- ---- SECTION DIVIDER ---- -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- MY ACTIVE COVERAGE ---- -->
 <div class="dash-card reveal" id="activeCoverageCard">
@@ -984,12 +966,6 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
   </div>
 </div>
 
-<!-- ---- SECTION DIVIDER ---- -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- COVERAGE HISTORY ---- -->
 <div class="dash-card reveal" id="coverageHistoryCard">
@@ -1026,12 +1002,6 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
   </div>
 </div>
 
-<!-- ---- SECTION DIVIDER ---- -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- BUY MORE COVERAGE CTA ---- -->
 <div class="cta-section reveal">
