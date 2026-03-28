@@ -178,7 +178,7 @@ code, pre { font-family: var(--font-mono); }
 
 /* ---------- MAIN LAYOUT ---------- */
 .dash-main { padding-top: var(--nav-height); min-height: 100vh; position: relative; z-index: 1; }
-.dash-container { display: grid; gap: 1.25rem; max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+.dash-container { display: grid; gap: 1rem; max-width: 1200px; margin: 0 auto; padding: 1.25rem 1.5rem; }
 
 /* ---------- PAGE HEADER ---------- */
 .page-header {
@@ -217,7 +217,7 @@ code, pre { font-family: var(--font-mono); }
 .metric-card-hero .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); color: #2D3436; }
 
 .metric-card {
-  background: #ffffff; color: #2D3436; border-radius: 20px; padding: 1.25rem;
+  background: #ffffff; color: #2D3436; border-radius: 14px; padding: 1.25rem;
   border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
   display: flex; align-items: flex-start; gap: 1rem;
@@ -236,15 +236,15 @@ code, pre { font-family: var(--font-mono); }
 .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: #2D3436; }
 
 /* ---------- GRID ROWS ---------- */
-.dash-row { display: grid; gap: 1.5rem; align-items: start; }
-.dash-row-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; align-items: start; }
-.dash-row-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+.dash-row { display: grid; gap: 1rem; align-items: start; }
+.dash-row-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: start; }
+.dash-row-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
 .dash-row-full { display: grid; grid-template-columns: 1fr; }
 
 /* ---------- CARD ---------- */
 .dash-card {
   color: #2D3436;
-  background: var(--bg-card); border-radius: var(--radius-card); border: 1px solid rgba(0,0,0,0.08);
+  background: var(--bg-card); border-radius: 16px; border: 1px solid rgba(0,0,0,0.08);
   box-shadow: var(--shadow-clay);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
   overflow: hidden; position: relative;
@@ -252,7 +252,7 @@ code, pre { font-family: var(--font-mono); }
 .dash-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-clay-hover); }
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.125rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 0.875rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 .card-header h3 {
   font-size: 1.0625rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;
@@ -267,7 +267,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   display: flex; align-items: center; gap: 0.35rem;
 }
-.card-body { padding: 1.25rem; }
+.card-body { padding: 1rem 1.25rem; }
 
 /* ---------- YOUR POSITION ---------- */
 #positionSection { padding: 0.75rem 1.25rem; }
@@ -523,12 +523,6 @@ code, pre { font-family: var(--font-mono); }
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ---------- SECTION DIVIDER ---------- */
-.section-divider { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0; margin: 0.5rem 0; }
-.section-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(124,77,255,0.15), transparent); }
-.section-divider-dots { display: flex; gap: 6px; }
-.section-divider-dots span { width: 4px; height: 4px; border-radius: 50%; background: rgba(124,77,255,0.3); }
-.section-divider-dots span:nth-child(2) { width: 6px; height: 6px; background: rgba(124,77,255,0.45); }
 
 /* ---------- NETWORK WARNING ---------- */
 .network-warning {
@@ -659,8 +653,6 @@ code, pre { font-family: var(--font-mono); }
 [data-theme="dark"] ::-webkit-scrollbar-track { background: #0f1118; }
 [data-theme="dark"] .btn-action-secondary { border-color: rgba(255,255,255,0.15); color: #fff; }
 [data-theme="dark"] .btn-outline { border-color: rgba(255,255,255,0.15); color: #fff; }
-[data-theme="dark"] .section-divider-dots span { background: rgba(124,77,255,0.2); }
-[data-theme="dark"] .section-divider-dots span:nth-child(2) { background: rgba(124,77,255,0.35); }
 [data-theme="dark"] .gate-warning { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.25); }
 
   </style>
@@ -842,11 +834,6 @@ code, pre { font-family: var(--font-mono); }
       </div>
     </div>
 
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-dots"><span></span><span></span><span></span></div>
-      <div class="section-divider-line"></div>
-    </div>
 
     <!-- ==================== SECTION 2: YOUR POSITION ==================== -->
     <div class="dash-row-full reveal">
@@ -943,11 +930,6 @@ code, pre { font-family: var(--font-mono); }
       </div>
     </div>
 
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-dots"><span></span><span></span><span></span></div>
-      <div class="section-divider-line"></div>
-    </div>
 
     <!-- ==================== SECTION 3: DEPOSIT ==================== -->
     <div class="dash-row-full reveal" id="depositSection">
@@ -1006,11 +988,6 @@ code, pre { font-family: var(--font-mono); }
       </div>
     </div>
 
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-dots"><span></span><span></span><span></span></div>
-      <div class="section-divider-line"></div>
-    </div>
 
     <!-- ==================== SECTION 4: WITHDRAWAL ==================== -->
     <div class="dash-row-full reveal" id="withdrawSection">
@@ -1069,11 +1046,6 @@ code, pre { font-family: var(--font-mono); }
       </div>
     </div>
 
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-dots"><span></span><span></span><span></span></div>
-      <div class="section-divider-line"></div>
-    </div>
 
     <!-- ==================== SECTION 5: LOSS WATERFALL ==================== -->
     <div class="dash-row-full reveal">
@@ -1164,11 +1136,6 @@ code, pre { font-family: var(--font-mono); }
       </div>
     </div>
 
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-dots"><span></span><span></span><span></span></div>
-      <div class="section-divider-line"></div>
-    </div>
 
     <!-- ==================== SECTION 6: POOL EVENTS ==================== -->
     <div class="dash-row-full reveal">
