@@ -703,8 +703,7 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
 }
 [data-theme="dark"] .btn-cta-secondary:hover { background: rgba(255,255,255,0.15); border-color: #1a1d24; }
 
-[data-theme="dark"] .btn-cta { background: rgba(0,200,83,0.15); color: #00C853; border-color: rgba(0,200,83,0.3); }
-[data-theme="dark"] .btn-cta:hover { background: rgba(0,200,83,0.25); }
+/* btn-cta inside CTA section keeps white/dark text on green bg */
 
 [data-theme="dark"] .empty-state-title { color: #ffffff; }
 [data-theme="dark"] .empty-state-desc { color: rgba(255,255,255,0.6); }
@@ -737,8 +736,8 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
 [data-theme="dark"] .card-header h3,
 [data-theme="dark"] .empty-state h3,
 [data-theme="dark"] .empty-state p,
-[data-theme="dark"] p,
-[data-theme="dark"] label,
+[data-theme="dark"] .dash-card p,
+[data-theme="dark"] .dash-card label,
 [data-theme="dark"] td,
 [data-theme="dark"] th,
 [data-theme="dark"] .cert-row-label,
@@ -747,13 +746,18 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
   color: rgba(255,255,255,0.85) !important;
 }
 
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
+[data-theme="dark"] .page-header h1,
+[data-theme="dark"] .dash-card h3,
 [data-theme="dark"] .metric-value,
 [data-theme="dark"] .empty-state h3 {
   color: #ffffff !important;
 }
+
+/* CTA section must keep DARK text on green background */
+[data-theme="dark"] .cta-section h3 { color: #1a1d24 !important; }
+[data-theme="dark"] .cta-section p { color: #2D3436 !important; }
+[data-theme="dark"] .cta-section .btn-cta-primary { background: #ffffff; color: #1a1d24 !important; }
+[data-theme="dark"] .cta-section .btn-cta-secondary { color: #1a1d24 !important; border-color: rgba(0,0,0,0.3); }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
