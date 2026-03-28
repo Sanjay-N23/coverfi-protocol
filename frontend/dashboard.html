@@ -3225,10 +3225,10 @@ async function loadLiveData() {
       var juniorTVL = Number(poolData.juniorTVL || poolData[1] || 0);
       var totalInsured = Number(poolData.totalInsuredAmount || poolData[2] || 0);
       var totalTVL = seniorTVL + juniorTVL;
-      var tvlRaw = totalTVL / 1e6; // USDT has 6 decimals
-      var seniorRaw = seniorTVL / 1e6;
-      var juniorRaw = juniorTVL / 1e6;
-      var insuredRaw = totalInsured / 1e6;
+      var tvlRaw = totalTVL / 1e18; // MockUSDT uses 18 decimals
+      var seniorRaw = seniorTVL / 1e18;
+      var juniorRaw = juniorTVL / 1e18;
+      var insuredRaw = totalInsured / 1e18;
       document.getElementById('metricTVL').textContent = '$' + Math.round(tvlRaw).toLocaleString();
       document.getElementById('poolTVL').textContent = '$' + Math.round(tvlRaw).toLocaleString();
       var availableRaw = tvlRaw - insuredRaw;
@@ -3803,7 +3803,7 @@ if (typeof window.ethereum !== 'undefined') {
 
 // ---- Formatting Helpers ----
 function formatUSDT(bigIntValue) {
-  var formatted = ethers.formatUnits(bigIntValue, 6);
+  var formatted = ethers.formatUnits(bigIntValue, 18);
   var num = parseFloat(formatted);
   if (num >= 1000000) return '$' + (num / 1000000).toFixed(2) + 'M';
   if (num >= 1000) return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -4119,8 +4119,8 @@ async function loadUserPosition(data) {
     var srBal = results[0].status === 'fulfilled' ? results[0].value : 0n;
     var jrBal = results[1].status === 'fulfilled' ? results[1].value : 0n;
 
-    var srBalNum = parseFloat(ethers.formatUnits(srBal, 6));
-    var jrBalNum = parseFloat(ethers.formatUnits(jrBal, 6));
+    var srBalNum = parseFloat(ethers.formatUnits(srBal, 18));
+    var jrBalNum = parseFloat(ethers.formatUnits(jrBal, 18));
 
     // Only show if user has non-zero balance
     if (srBalNum === 0 && jrBalNum === 0) {
