@@ -248,10 +248,10 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.25rem 0.625rem; border-radius: var(--radius-pill);
   font-size: 0.6875rem; font-weight: 600;
 }
-.status-observation { background: rgba(59,139,255,0.1); color: var(--color-pool); }
-.status-active { background: rgba(0,184,148,0.1); color: var(--color-success); }
-.status-monitoring { background: rgba(240,185,11,0.1); color: #8a6800; }
-.status-defaulted { background: rgba(239,68,68,0.1); color: var(--color-danger); }
+.status-observation { background: #E3F2FD; color: #1565C0; }
+.status-active { background: #E8F5E9; color: #2E7D32; }
+.status-monitoring { background: #FFF8E1; color: #F57F17; }
+.status-defaulted { background: #FFEBEE; color: #C62828; }
 .status-wind-down { background: rgba(108,92,231,0.1); color: var(--accent-purple); }
 .status-closed { background: rgba(0,0,0,0.06); color: var(--text-muted); }
 
@@ -745,7 +745,6 @@ code, pre { font-family: var(--font-mono); }
       <a href="issuers.html" class="dash-nav-link">Issuers</a>
       <a href="pool.html" class="dash-nav-link">Pool</a>
       <a href="coverage.html" class="dash-nav-link">Coverage</a>
-      <a href="issuer-dashboard.html" class="dash-nav-link active">Issuer Panel</a>
     </div>
 
     <div class="nav-actions">
@@ -1505,10 +1504,10 @@ function updateIRSScore(score, components, premiumBPS) {
   fill.style.strokeDashoffset = offset.toString();
 
   // Color based on score
-  var color = '#EF4444'; // low
-  if (score >= 700) color = '#00B894';
-  else if (score >= 500) color = '#F0B90B';
-  else if (score >= 300) color = '#E8760A';
+  var color = '#D32F2F'; // low
+  if (score >= 700) color = '#00962A';
+  else if (score >= 500) color = '#B8860B';
+  else if (score >= 300) color = '#D32F2F';
   fill.setAttribute('stroke', color);
 
   // Premium badge and rate
@@ -1816,7 +1815,7 @@ if (typeof window.ethereum !== 'undefined') {
       document.getElementById('headerStatusBadge').style.display = 'none';
       var btn = document.getElementById('btnConnect');
       btn.classList.remove('connected');
-      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>Connect Wallet';
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg> Connect Wallet';
     } else {
       walletAddress = accounts[0];
       ethersProvider = new ethers.BrowserProvider(window.ethereum);
