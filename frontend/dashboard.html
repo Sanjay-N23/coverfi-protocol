@@ -3367,7 +3367,7 @@ function updateBanner() {
   if (!banner) return;
 
   if (walletConnected && isLiveData) {
-    bannerText.innerHTML = '<span class="live-data-badge"><span class="dot dot-green"></span> LIVE</span> Connected to BSC Testnet — showing real on-chain data';
+    bannerText.innerHTML = '<span class="live-data-badge"><span class="dot dot-green"></span> LIVE</span> Connected to BSC Testnet';
     bannerBtn.textContent = 'Refresh';
     bannerBtn.setAttribute('onclick', 'loadContractData()');
     banner.style.background = 'var(--color-success-dim)';
