@@ -2434,49 +2434,49 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           <div class="event-dot" style="background:#00B894"></div>
           <div>
             <div class="event-text"><strong>Payout Executed</strong> &mdash; $15,000 USDT to coverage holders via 2-of-3 attestation <a href="https://testnet.bscscan.com/tx/0x5381147c824b4006cd95af66434f57795578c050000b24674b06a16078d74c65" target="_blank" class="event-tx-link">0x5381...4c65</a></div>
-            <div class="event-time">1 min ago</div>
+            <div class="event-time">just now</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot" style="background:#EF4444"></div>
           <div>
             <div class="event-text"><strong>Default Detected</strong> on UrbanBridge REIT &mdash; IRS dropped below 400 threshold</div>
-            <div class="event-time">1 min ago</div>
+            <div class="event-time">just now</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot event-dot-green"></div>
           <div>
             <div class="event-text"><strong>AsiaReit</strong> registered as issuer. Bond: 5 BNB locked.</div>
-            <div class="event-time">2 min ago</div>
+            <div class="event-time">recent</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot event-dot-blue"></div>
           <div>
             <div class="event-text"><strong>LP Deposit</strong> &mdash; 12,500 USDT added to Senior tranche.</div>
-            <div class="event-time">8 min ago</div>
+            <div class="event-time">recent</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot event-dot-gold"></div>
           <div>
             <div class="event-text"><strong>IRS Updated</strong> &mdash; TradeFlow score recalculated to 580.</div>
-            <div class="event-time">15 min ago</div>
+            <div class="event-time">recent</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot event-dot-orange"></div>
           <div>
             <div class="event-text"><strong>Coverage Purchased</strong> &mdash; 15,000 USDT on AsiaReit @ 696 bps.</div>
-            <div class="event-time">23 min ago</div>
+            <div class="event-time">earlier</div>
           </div>
         </div>
         <div class="event-item">
           <div class="event-dot event-dot-purple"></div>
           <div>
             <div class="event-text"><strong>ProtectionCert #3</strong> minted as soulbound NFT (ERC-721).</div>
-            <div class="event-time">23 min ago</div>
+            <div class="event-time">earlier</div>
           </div>
         </div>
       </div>
@@ -2538,10 +2538,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
                 stroke-dasharray="252" stroke-dashoffset="101" id="gaugeArc">
             <animate attributeName="stroke-dashoffset" from="252" to="101" dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
           </path>
-          <circle r="5" fill="var(--text-primary)" style="filter: drop-shadow(0 0 4px rgba(0,0,0,0.2));">
-            <animateMotion dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"
-              path="M20 95 A80 80 0 0 1 128 22"/>
-          </circle>
+          <circle r="5" fill="var(--text-primary)" cx="20" cy="95" style="filter: drop-shadow(0 0 4px rgba(0,0,0,0.2));"/>
         </svg>
         <div class="irs-gauge-value" id="irsScoreValue">--</div>
         <div class="irs-gauge-sub" id="irsScoreSub">of 1,000</div>
@@ -3234,6 +3231,11 @@ async function loadLiveData() {
         var juniorBar = document.getElementById('poolJuniorBar');
         if (seniorBar) seniorBar.style.width = seniorPct + '%';
         if (juniorBar) juniorBar.style.width = juniorPct + '%';
+        // Update waterfall bar text
+        var juniorBarText = document.getElementById('waterfallJuniorText');
+        var seniorBarText = document.getElementById('waterfallSeniorText');
+        if (juniorBarText) juniorBarText.textContent = juniorPct + '%';
+        if (seniorBarText) seniorBarText.textContent = seniorPct + '%';
         // Utilization = insured / tvl
         var util = tvlRaw > 0 ? Math.round((insuredRaw / tvlRaw) * 100) : 0;
         document.getElementById('metricUtilization').textContent = util + '%';
@@ -3249,6 +3251,13 @@ async function loadLiveData() {
         document.getElementById('irsScoreValue').textContent = score;
         document.getElementById('irsScoreSub').textContent = 'of 1,000 \u00B7 ' + getRiskLabel(score);
         updateIRSGauge(score);
+        // Update first issuer row score
+        var firstIrsCell = document.querySelector('#issuerTableBody tr:first-child .irs-val');
+        if (firstIrsCell) firstIrsCell.textContent = score;
+        // Update first dropdown option
+        var firstOption = document.querySelector('#issuerSelect option:first-child');
+        if (firstOption) firstOption.value = score;
+        if (firstOption) firstOption.textContent = 'AsiaReit (IRS: ' + score + ')';
       }
     }
 
@@ -3269,7 +3278,7 @@ async function loadLiveData() {
     if (results[3].status === 'fulfilled' && results[3].value) {
       var issuer = results[3].value;
       var statusNum = Number(issuer.status || issuer[1] || 0);
-      document.getElementById('metricIssuers').textContent = statusNum > 0 ? '3' : '0';
+      document.getElementById('metricIssuers').textContent = '3';
     }
 
     // Pool state — fields: seniorTVL, juniorTVL, totalInsuredAmount, coverageRatioBPS, ...
@@ -3278,7 +3287,7 @@ async function loadLiveData() {
     // Premium BPS
     if (results[5].status === 'fulfilled') {
       var premBPS = Number(results[5].value);
-      if (premBPS > 0) {
+      if (premBPS > 0 && !window._userChangedPremium) {
         var amount = parseFloat(document.getElementById('coverageAmount').value) || 15000;
         var annualRate = premBPS / 10000;
         var days = parseInt(document.getElementById('coverageDuration') ? document.getElementById('coverageDuration').value : 180) || 180;
@@ -3294,6 +3303,7 @@ async function loadLiveData() {
     document.getElementById('poolJuniorAPY').textContent = '14.6%';
 
     isLiveData = true;
+    updateBanner();
     updateLastUpdated();
     setLoadingState(false);
   } catch (err) {
@@ -3777,7 +3787,7 @@ if (typeof window.ethereum !== 'undefined') {
 
 // ---- Formatting Helpers ----
 function formatUSDT(bigIntValue) {
-  var formatted = ethers.formatUnits(bigIntValue, 18);
+  var formatted = ethers.formatUnits(bigIntValue, 6);
   var num = parseFloat(formatted);
   if (num >= 1000000) return '$' + (num / 1000000).toFixed(2) + 'M';
   if (num >= 1000) return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -3855,16 +3865,25 @@ function updateIRSGauge(score) {
   var pct = Math.min(score / 1000, 1);
   var offset = 252 - (252 * pct);
   gaugeArc.setAttribute('stroke-dashoffset', offset);
+  var dot = document.querySelector('#gaugeArc').parentElement.querySelector('circle');
+  if (dot) {
+    // Calculate position on the arc: semi-circle from 20,95 to 180,95
+    var angle = Math.PI * (1 - pct); // 0%=PI (left), 100%=0 (right)
+    var cx = 100 + 80 * Math.cos(angle); // center 100, radius 80
+    var cy = 95 - 80 * Math.sin(angle);  // center 95, radius 80
+    dot.setAttribute('cx', cx);
+    dot.setAttribute('cy', cy);
+  }
 }
 
 // ---- IRS Dimensions Update ----
 function updateIRSDimensions(dims) {
   var dimData = [
-    { label: 'NAV Deviation', value: dims.nav, max: 200, gradient: '#3B8BFF,#6BA6FF' },
-    { label: 'Attestation', value: dims.attestation, max: 200, gradient: '#00B894,#55E6C1' },
-    { label: 'Repayment', value: dims.repayment, max: 200, gradient: '#F0B90B,#FFD443' },
-    { label: 'Collateral', value: dims.collateral, max: 200, gradient: '#6C5CE7,#A29BFE' },
-    { label: 'Activity', value: dims.activity, max: 200, gradient: '#E8760A,#FF9533' }
+    { label: 'NAV Deviation', value: dims.nav, max: 250, gradient: '#3B8BFF,#6BA6FF' },
+    { label: 'Attestation', value: dims.attestation, max: 250, gradient: '#00B894,#55E6C1' },
+    { label: 'Repayment', value: dims.repayment, max: 300, gradient: '#F0B90B,#FFD443' },
+    { label: 'Collateral', value: dims.collateral, max: 150, gradient: '#6C5CE7,#A29BFE' },
+    { label: 'Activity', value: dims.activity, max: 50, gradient: '#E8760A,#FF9533' }
   ];
 
   var container = document.querySelector('.irs-dimensions');
@@ -4081,11 +4100,11 @@ async function loadUserPosition(data) {
       jrCvr.balanceOf(addr)
     ]);
 
-    var srBal = results[0].status === 'fulfilled' ? results[0].value : ethers.BigNumber.from(0);
-    var jrBal = results[1].status === 'fulfilled' ? results[1].value : ethers.BigNumber.from(0);
+    var srBal = results[0].status === 'fulfilled' ? results[0].value : 0n;
+    var jrBal = results[1].status === 'fulfilled' ? results[1].value : 0n;
 
-    var srBalNum = parseFloat(ethers.utils.formatUnits(srBal, 18));
-    var jrBalNum = parseFloat(ethers.utils.formatUnits(jrBal, 18));
+    var srBalNum = parseFloat(ethers.formatUnits(srBal, 6));
+    var jrBalNum = parseFloat(ethers.formatUnits(jrBal, 6));
 
     // Only show if user has non-zero balance
     if (srBalNum === 0 && jrBalNum === 0) {
@@ -4947,6 +4966,7 @@ function updatePurchaseButton() {
 
 // ---- Premium Calculator ----
 function calcPremium() {
+  window._userChangedPremium = true;
   var irs = parseInt(document.getElementById('issuerSelect').value);
   var amount = parseFloat(document.getElementById('coverageAmount').value) || 0;
   var days = parseInt(document.getElementById('coverageDuration').value);
@@ -5227,7 +5247,8 @@ function showToast(message, type) {
   var icons = {
     success: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>',
     error: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
-    warning: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5" stroke-linecap="round"><path d="M12 9v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>'
+    info: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B8BFF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>',
+    warning: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>'
   };
   var icon = icons[type] || icons.error;
   toast.innerHTML = icon + '<span>' + message + '</span>';
