@@ -123,12 +123,13 @@ code, pre { font-family: var(--font-mono); }
 .dash-nav-inner {
   max-width: 1600px; width: 100%; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
+  position: relative;
 }
 .nav-logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--gold); }
 
-.dash-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+.dash-nav-links { display: flex; align-items: center; gap: 0.25rem; position: absolute; left: 50%; transform: translateX(-50%); }
 .dash-nav-link {
   padding: 0.5rem 1rem; border: none; background: none; border-radius: 0;
   font-size: 0.8125rem; font-weight: 600; color: #636E72;
