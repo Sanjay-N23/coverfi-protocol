@@ -189,7 +189,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .dash-container {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem;
@@ -266,7 +266,7 @@ code, pre { font-family: var(--font-mono); }
   margin-bottom: 1.25rem;
 }
 .card-header h3 {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -283,11 +283,11 @@ code, pre { font-family: var(--font-mono); }
 .claim-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
+  padding: 1.25rem;
   box-shadow: var(--shadow-clay-sm);
   border: 1px solid rgba(255,152,0,0.2);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
-  min-height: 300px;
+  min-height: 220px;
 }
 .claim-card:hover {
   transform: translateY(-3px);
@@ -413,7 +413,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .btn-claim-view {
   background: transparent;
-  color: #FFB74D;
+  color: #E67E22;
   border: 1px solid rgba(255,152,0,0.3);
 }
 .btn-claim-view:hover {
@@ -484,7 +484,7 @@ code, pre { font-family: var(--font-mono); }
 /* ---------- EMPTY STATE ---------- */
 .empty-state {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 1.5rem 1rem;
   color: var(--text-muted);
 }
 .empty-state svg {
@@ -591,7 +591,8 @@ code, pre { font-family: var(--font-mono); }
 [data-theme="dark"] .dash-card,
 [data-theme="dark"] .metric-card,
 [data-theme="dark"] .claim-card {
-  background: rgba(255,255,255,0.04);
+  background: #1e2329;
+  color: #e8e8e8;
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow: 8px 8px 16px rgba(0,0,0,0.3), -4px -4px 12px rgba(255,255,255,0.03), inset 0 1px 0 rgba(255,255,255,0.05);
 }
@@ -631,7 +632,7 @@ code, pre { font-family: var(--font-mono); }
 [data-theme="dark"] .btn-claim-view {
   background: transparent;
   border-color: rgba(255,152,0,0.3);
-  color: #FFB74D;
+  color: #E67E22;
 }
 [data-theme="dark"] .btn-claim-view:hover {
   background: rgba(255,152,0,0.12);
