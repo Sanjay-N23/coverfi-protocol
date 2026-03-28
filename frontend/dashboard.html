@@ -5182,11 +5182,12 @@ updateBanner();
 
 // Warn if opened via file:// (MetaMask won't inject)
 if (window.location.protocol === 'file:') {
-  var banner = document.getElementById('liveDataBanner');
-  if (banner) {
-    banner.querySelector('.banner-text').innerHTML = '⚠️ Opened via file:// — MetaMask cannot inject. Run <b>npx http-server frontend -p 8080</b> then open <b>localhost:8080</b>';
-    banner.querySelector('.banner-btn').textContent = 'Copy Command';
-    banner.querySelector('.banner-btn').onclick = function() {
+  var bannerText = document.getElementById('bannerText');
+  var bannerBtn = document.getElementById('bannerBtn');
+  if (bannerText) bannerText.innerHTML = '⚠️ Opened via file:// — Run <b>npx http-server frontend -p 8080</b> then open <b>localhost:8080</b>';
+  if (bannerBtn) {
+    bannerBtn.textContent = 'Copy Command';
+    bannerBtn.onclick = function() {
       navigator.clipboard.writeText('npx http-server frontend -p 8080 -c-1 --cors');
       this.textContent = 'Copied!';
     };
@@ -5195,7 +5196,11 @@ if (window.location.protocol === 'file:') {
 
 // Show skeletons briefly then load mock data
 setTimeout(function() {
-  showMockData();
+  try {
+    showMockData();
+  } catch (e) {
+    console.error('showMockData error:', e);
+  }
   setLoadingState(false);
   updateLastUpdated();
 }, MIN_LOADING_MS);
