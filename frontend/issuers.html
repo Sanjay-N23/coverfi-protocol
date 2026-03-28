@@ -288,7 +288,7 @@ code, pre { font-family: var(--font-mono); }
 .issuer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 1.25rem;
+  gap: 1.75rem;
 }
 
 .issuer-card {
@@ -300,7 +300,7 @@ code, pre { font-family: var(--font-mono); }
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
   overflow: hidden;
   position: relative;
-  min-height: 380px;
+  min-height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -333,10 +333,10 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.1rem 0.4rem; border-radius: 4px;
 }
 
-.issuer-card-body { padding: 1rem 1.75rem; flex: 1; }
+.issuer-card-body { padding: 2rem 1.75rem; flex: 1; }
 
 /* IRS Score Section */
-.irs-section { margin-bottom: 0.875rem; }
+.irs-section { margin: 1.25rem 0; }
 .irs-row {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 0.4rem;
@@ -360,11 +360,13 @@ code, pre { font-family: var(--font-mono); }
 
 /* Info rows */
 .info-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem;
-  margin-bottom: 0.875rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
 }
 .info-item {
   display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 .info-item-label {
   font-size: 0.75rem; color: var(--text-muted); font-weight: 500;
@@ -415,8 +417,8 @@ code, pre { font-family: var(--font-mono); }
 /* Premium */
 .premium-row {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0.6rem 0; border-top: 1px solid var(--border-color);
-  margin-bottom: 0.5rem;
+  padding: 1rem 0 0.5rem; border-top: 1px solid rgba(0,0,0,0.06);
+  margin-top: 1.25rem;
 }
 .premium-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
 .premium-value {
@@ -429,10 +431,11 @@ code, pre { font-family: var(--font-mono); }
 .issuer-card-footer {
   display: flex; gap: 0.5rem;
   padding: 0 1.75rem 1.75rem;
+  margin-top: 1.5rem;
 }
 .btn-coverage {
   flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
-  padding: 0.625rem 1.25rem; border-radius: 12px; border: none;
+  padding: 0.75rem 1.5rem; border-radius: 12px; border: none;
   background: linear-gradient(135deg, #00BCD4, #4DD0E1);
   color: #000; font-family: var(--font-main); font-size: 0.8125rem; font-weight: 700;
   cursor: pointer; transition: all 0.25s var(--spring);
@@ -442,7 +445,7 @@ code, pre { font-family: var(--font-mono); }
 
 .btn-details {
   flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
-  padding: 0.625rem 1.25rem; border-radius: 12px;
+  padding: 0.75rem 1.5rem; border-radius: 12px;
   border: 1px solid rgba(0,188,212,0.3);
   background: transparent; color: #4DD0E1;
   font-family: var(--font-main); font-size: 0.8125rem; font-weight: 600;
