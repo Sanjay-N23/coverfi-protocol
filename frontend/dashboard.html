@@ -2522,8 +2522,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         </svg>
         <div class="irs-gauge-label">Composite Score</div>
         <svg width="200" height="110" viewBox="0 0 200 110">
+          <defs>
+            <linearGradient id="gaugeGradInline" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#FF6B6B"/><stop offset="25%" stop-color="#FF9533"/>
+              <stop offset="45%" stop-color="#F0B90B"/><stop offset="65%" stop-color="#00B894"/>
+              <stop offset="85%" stop-color="#3B8BFF"/><stop offset="100%" stop-color="#6C5CE7"/>
+            </linearGradient>
+          </defs>
           <path d="M20 95 A80 80 0 0 1 180 95" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="12" stroke-linecap="round"/>
-          <path d="M20 95 A80 80 0 0 1 180 95" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round"
+          <path d="M20 95 A80 80 0 0 1 180 95" fill="none" stroke="url(#gaugeGradInline)" stroke-width="12" stroke-linecap="round"
                 stroke-dasharray="252" stroke-dashoffset="101" id="gaugeArc">
             <animate attributeName="stroke-dashoffset" from="252" to="101" dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
           </path>
@@ -2661,15 +2668,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         </div>
         <div class="pool-stat">
           <div class="pool-stat-label">Available</div>
-          <div class="pool-stat-value" id="poolAvailable" style="color:var(--color-payout)">--</div>
+          <div class="pool-stat-value" id="poolAvailable">--</div>
         </div>
         <div class="pool-stat">
           <div class="pool-stat-label">Senior APY</div>
-          <div class="pool-stat-value" id="poolSeniorAPY" style="color:var(--color-pool)">--</div>
+          <div class="pool-stat-value" id="poolSeniorAPY">--</div>
         </div>
         <div class="pool-stat">
           <div class="pool-stat-label">Junior APY</div>
-          <div class="pool-stat-value" id="poolJuniorAPY" style="color:var(--accent-purple)">--</div>
+          <div class="pool-stat-value" id="poolJuniorAPY">--</div>
         </div>
       </div>
 
@@ -5090,8 +5097,13 @@ async function executeJuniorDeposit(btn, amount) {
 }
 
 // ---- Toast System ----
+var _activeToasts = {};
 function showToast(message, type) {
   type = type || 'success';
+  // Deduplicate: skip if same message is already visible
+  var key = type + ':' + message;
+  if (_activeToasts[key]) return;
+  _activeToasts[key] = true;
   var container = document.getElementById('toastContainer');
   var toast = document.createElement('div');
   toast.className = 'toast toast-' + type;
@@ -5105,7 +5117,7 @@ function showToast(message, type) {
   container.appendChild(toast);
   setTimeout(function() {
     toast.style.animation = 'toast-out 0.3s ease forwards';
-    setTimeout(function() { toast.remove(); }, 300);
+    setTimeout(function() { toast.remove(); delete _activeToasts[key]; }, 300);
   }, 4000);
 }
 
