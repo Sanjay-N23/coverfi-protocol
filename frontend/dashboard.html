@@ -3209,21 +3209,24 @@ async function loadLiveData() {
       readIRS.getPremiumRateBPS(DEMO_ISSUER_TOKEN)  // 5: premium BPS
     ]);
 
-    // Pool data
+    // Pool data — fields: seniorTVL, juniorTVL, totalInsuredAmount, coverageRatioBPS, redemptionGateActive, isActive
     if (results[0].status === 'fulfilled' && results[0].value) {
       var poolData = results[0].value;
-      var totalDeposits = Number(poolData.totalDeposits || poolData[0] || 0);
-      var seniorBal = Number(poolData.seniorBalance || poolData[1] || 0);
-      var juniorBal = Number(poolData.juniorBalance || poolData[2] || 0);
-      var tvlRaw = totalDeposits / 1e6; // USDT has 6 decimals
+      var seniorTVL = Number(poolData.seniorTVL || poolData[0] || 0);
+      var juniorTVL = Number(poolData.juniorTVL || poolData[1] || 0);
+      var totalInsured = Number(poolData.totalInsuredAmount || poolData[2] || 0);
+      var totalTVL = seniorTVL + juniorTVL;
+      var tvlRaw = totalTVL / 1e6; // USDT has 6 decimals
+      var seniorRaw = seniorTVL / 1e6;
+      var juniorRaw = juniorTVL / 1e6;
+      var insuredRaw = totalInsured / 1e6;
       if (tvlRaw > 0) {
-        document.getElementById('metricTVL').textContent = '$' + tvlRaw.toLocaleString();
-        document.getElementById('poolTVL').textContent = '$' + tvlRaw.toLocaleString();
-        var seniorRaw = seniorBal / 1e6;
-        var juniorRaw = juniorBal / 1e6;
-        var availableRaw = tvlRaw; // simplified
-        document.getElementById('poolAvailable').textContent = '$' + availableRaw.toLocaleString();
-        var seniorPct = tvlRaw > 0 ? Math.round((seniorRaw / tvlRaw) * 100) : 70;
+        document.getElementById('metricTVL').textContent = '$' + Math.round(tvlRaw).toLocaleString();
+        document.getElementById('poolTVL').textContent = '$' + Math.round(tvlRaw).toLocaleString();
+        var availableRaw = tvlRaw - insuredRaw;
+        if (availableRaw < 0) availableRaw = 0;
+        document.getElementById('poolAvailable').textContent = '$' + Math.round(availableRaw).toLocaleString();
+        var seniorPct = Math.round((seniorRaw / tvlRaw) * 100);
         var juniorPct = 100 - seniorPct;
         document.getElementById('poolSeniorLabel').textContent = 'Senior ' + seniorPct + '%';
         document.getElementById('poolJuniorLabel').textContent = 'Junior ' + juniorPct + '%';
@@ -3231,9 +3234,11 @@ async function loadLiveData() {
         var juniorBar = document.getElementById('poolJuniorBar');
         if (seniorBar) seniorBar.style.width = seniorPct + '%';
         if (juniorBar) juniorBar.style.width = juniorPct + '%';
-        // Utilization
-        var util = tvlRaw > 0 ? Math.round(((tvlRaw - availableRaw) / tvlRaw) * 100) : 0;
+        // Utilization = insured / tvl
+        var util = tvlRaw > 0 ? Math.round((insuredRaw / tvlRaw) * 100) : 0;
         document.getElementById('metricUtilization').textContent = util + '%';
+        // Coverage written
+        document.getElementById('metricCoverage').textContent = '$' + Math.round(insuredRaw).toLocaleString();
       }
     }
 
@@ -3247,41 +3252,33 @@ async function loadLiveData() {
       }
     }
 
-    // IRS Components
+    // IRS Components — fields: navPunctuality, attestationAccuracy, repaymentHistory, collateralHealth, governanceActivity
     if (results[2].status === 'fulfilled' && results[2].value) {
       var comp = results[2].value;
       var dims = {
-        nav: Number(comp[0] || comp.navDeviation || 0),
-        attestation: Number(comp[1] || comp.attestation || 0),
-        repayment: Number(comp[2] || comp.repayment || 0),
-        collateral: Number(comp[3] || comp.collateral || 0),
-        activity: Number(comp[4] || comp.activity || 0)
+        nav: Number(comp.navPunctuality || comp[0] || 0),
+        attestation: Number(comp.attestationAccuracy || comp[1] || 0),
+        repayment: Number(comp.repaymentHistory || comp[2] || 0),
+        collateral: Number(comp.collateralHealth || comp[3] || 0),
+        activity: Number(comp.governanceActivity || comp[4] || 0)
       };
       updateIRSDimensions(dims);
     }
 
-    // Issuer data
+    // Issuer data — fields: tokenAddress, status, registrationBlock, ...
     if (results[3].status === 'fulfilled' && results[3].value) {
       var issuer = results[3].value;
-      var statusNum = Number(issuer.status || issuer[3] || 0);
+      var statusNum = Number(issuer.status || issuer[1] || 0);
       document.getElementById('metricIssuers').textContent = statusNum > 0 ? '3' : '0';
     }
 
-    // Pool state (coverage ratio)
-    if (results[4].status === 'fulfilled' && results[4].value) {
-      var poolState = results[4].value;
-      var coverageRatio = Number(poolState.coverageRatio || poolState[3] || 0);
-      var coverageAmt = Number(poolState.totalCoverage || poolState[2] || 0) / 1e6;
-      if (coverageAmt > 0) {
-        document.getElementById('metricCoverage').textContent = '$' + coverageAmt.toLocaleString();
-      }
-    }
+    // Pool state — fields: seniorTVL, juniorTVL, totalInsuredAmount, coverageRatioBPS, ...
+    // (already handled via pools() above, skip duplicate)
 
     // Premium BPS
     if (results[5].status === 'fulfilled') {
       var premBPS = Number(results[5].value);
       if (premBPS > 0) {
-        // Update premium calculator display
         var amount = parseFloat(document.getElementById('coverageAmount').value) || 15000;
         var annualRate = premBPS / 10000;
         var days = parseInt(document.getElementById('coverageDuration') ? document.getElementById('coverageDuration').value : 180) || 180;
@@ -3291,7 +3288,7 @@ async function loadLiveData() {
       }
     }
 
-    // APY (hardcoded as contracts don't expose this directly)
+    // APY (hardcoded — contracts don't expose yield calculations directly)
     document.getElementById('metricAPY').textContent = '4.2%';
     document.getElementById('poolSeniorAPY').textContent = '4.2%';
     document.getElementById('poolJuniorAPY').textContent = '14.6%';
