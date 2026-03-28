@@ -5149,14 +5149,15 @@ document.querySelectorAll('.reveal').forEach(function(el, i) {
 // ---- Global Error Handlers ----
 window.addEventListener('error', function(e) {
   console.error('CoverFi error:', e.message);
-  showToast('Something went wrong. Please refresh.', 'error');
+  // Don't show toast for every JS error — only log to console
 });
 window.addEventListener('unhandledrejection', function(e) {
   console.error('CoverFi promise error:', e.reason);
   if (e.reason && e.reason.code === 'ACTION_REJECTED') {
     showToast('Transaction cancelled by user', 'warning');
   } else {
-    showToast('Network error. Please try again.', 'error');
+    // Only log — don't spam user with network errors
+    console.warn('Unhandled promise:', e.reason);
   }
   e.preventDefault();
 });
@@ -5227,7 +5228,12 @@ setTimeout(function() {
       }
     } catch (e) {
       console.log('Auto-connect check:', e.message);
+      showMockData();
+      setLoadingState(false);
+      updateLastUpdated();
     }
+  } else {
+    // No ethereum provider — just show mock data (already handled by setTimeout above)
   }
 })();
 
