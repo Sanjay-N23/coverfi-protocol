@@ -1001,7 +1001,7 @@ document.getElementById('bondAmount').addEventListener('input', updateBondEquiv)
 // ---- Wallet connection ----
 async function connectWallet() {
   if (!window.ethereum) {
-    showToast('MetaMask not detected. Please install MetaMask.', 'error');
+    showToast(window.location.protocol === 'file:' ? 'MetaMask cannot connect on file:// pages. Use a local server.' : 'MetaMask not detected. Please install MetaMask.', 'error');
     return;
   }
   try {

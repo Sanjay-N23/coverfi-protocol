@@ -1277,7 +1277,7 @@ function isZeroAddr(addr) {
 async function connectWallet() {
   if (walletConnected) return;
   if (typeof window.ethereum === 'undefined') {
-    showToast('MetaMask not detected. Please install MetaMask.', 'error');
+    showToast(window.location.protocol === 'file:' ? 'MetaMask cannot connect on file:// pages. Use a local server.' : 'MetaMask not detected. Please install MetaMask.', 'error');
     return;
   }
   try {
