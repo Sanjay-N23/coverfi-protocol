@@ -731,6 +731,29 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
 
 [data-theme="dark"] .history-table .tx-hash { color: #00C853; }
 
+/* ---------- NUCLEAR DARK MODE TEXT FIX ---------- */
+[data-theme="dark"] .metric-label,
+[data-theme="dark"] .card-header h3,
+[data-theme="dark"] .empty-state h3,
+[data-theme="dark"] .empty-state p,
+[data-theme="dark"] p,
+[data-theme="dark"] label,
+[data-theme="dark"] td,
+[data-theme="dark"] th,
+[data-theme="dark"] .cert-row-label,
+[data-theme="dark"] .payout-row-label,
+[data-theme="dark"] .history-empty p {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] .metric-value,
+[data-theme="dark"] .empty-state h3 {
+  color: #ffffff !important;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
   .dash-container { padding: 1.25rem 1.25rem 2rem; }
