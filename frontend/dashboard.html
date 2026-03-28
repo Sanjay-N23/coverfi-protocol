@@ -5488,7 +5488,7 @@ function updatePremiumSection(data) {
     // Calculate annual cost if coverage is known
     if (data.totalInsured !== undefined && data.totalInsured > 0n) {
       _lastCoverageAmount = data.totalInsured;
-      var insuredNum = Number(data.totalInsured) / 1e6; // USDT 6 decimals
+      var insuredNum = Number(data.totalInsured) / 1e18; // 18 decimals
       var annualCost = (insuredNum * rateBPS) / 10000;
       document.getElementById('premiumAnnualCost').textContent = '$' + annualCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
     } else {
