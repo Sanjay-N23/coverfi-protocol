@@ -174,10 +174,10 @@ code, pre { font-family: var(--font-mono); }
 }
 .dash-container {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
 }
 
 /* ---------- METRICS BAR ---------- */
@@ -231,7 +231,7 @@ code, pre { font-family: var(--font-mono); }
 .metric-card {
   background: #ffffff;
   color: #2D3436;
-  border-radius: 20px; padding: 1.25rem 1.25rem 1rem;
+  border-radius: 14px; padding: 1.25rem 1.25rem 1rem;
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
@@ -334,7 +334,7 @@ code, pre { font-family: var(--font-mono); }
 .dash-card {
   background: #ffffff;
   color: #2D3436;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
@@ -348,7 +348,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.125rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 0.875rem 1.25rem; border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 .card-header h3 {
   font-size: 1.0625rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;
@@ -363,7 +363,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   display: flex; align-items: center; gap: 0.35rem;
 }
-.card-body { padding: 1.25rem; }
+.card-body { padding: 1rem 1.25rem; }
 
 /* ---------- TABLE ---------- */
 .table-wrap { overflow-x: auto; }
@@ -411,7 +411,7 @@ tbody tr:hover { background: rgba(240,185,11,0.06); }
 .event-list { display: flex; flex-direction: column; gap: 0; }
 .event-item {
   display: flex; align-items: flex-start; gap: 0.75rem;
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
   transition: background 0.2s;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
@@ -995,8 +995,8 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 .skeleton-input { height: 44px; width: 100%; margin-bottom: 1rem; }
 .skeleton-btn { height: 48px; width: 100%; }
 .skeleton-cert-row { display: flex; justify-content: space-between; padding: 0.15rem 0; margin-bottom: 0.5rem; }
-.skeleton-container { display: none; }
-.is-loading .skeleton-container { display: block; }
+.skeleton-container { display: none; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem 0; }
+.is-loading .skeleton-container { display: flex; }
 .is-loading .real-content { display: none; }
 .real-content.fade-in { animation: content-fade-in 0.5s ease forwards; }
 @keyframes content-fade-in {
@@ -2298,12 +2298,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 </section>
 </div>
 
-<!-- Section divider -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- ROW 2: ISSUERS / EVENTS ---- -->
 <div class="dash-row dash-row-2col" id="issuers">
@@ -2490,12 +2484,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   </div>
 </div><!-- /dash-row-2col: Issuers + Events -->
 
-<!-- Section divider -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- ROW 3: IRS ORACLE / POOL + WATERFALL ---- -->
 <div class="dash-row dash-row-equal">
@@ -2513,7 +2501,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     </div>
     <div class="card-body">
       <!-- Skeleton for IRS -->
-      <div class="skeleton-container" style="display:flex;flex-direction:column;align-items:center;gap:1rem;padding:1rem 0">
+      <div class="skeleton-container">
         <div class="skeleton" style="width:60%;height:12px"></div>
         <div class="skeleton skeleton-circle" style="width:160px;height:80px;border-radius:80px 80px 0 0"></div>
         <div class="skeleton" style="width:80px;height:36px"></div>
@@ -2785,12 +2773,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 </div><!-- /dash-row-equal: IRS + Pool -->
 
-<!-- Section divider -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- ROW 4: GET COVERED / PROTECTION CERTIFICATE ---- -->
 <div class="dash-row dash-row-equal">
@@ -2945,12 +2927,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 </div><!-- /dash-row-equal: Get Covered + Certificate -->
 
-<!-- Section divider -->
-<div class="section-divider">
-  <div class="section-divider-line"></div>
-  <div class="section-divider-dots"><span></span><span></span><span></span></div>
-  <div class="section-divider-line"></div>
-</div>
 
 <!-- ---- ROW 5: TRANSACTION HISTORY (full width) ---- -->
 <div class="dash-row dash-row-full">
