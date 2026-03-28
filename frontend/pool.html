@@ -270,6 +270,7 @@ code, pre { font-family: var(--font-mono); }
 .card-body { padding: 1.25rem; }
 
 /* ---------- YOUR POSITION ---------- */
+#positionSection { padding: 0.75rem 1.25rem; }
 .position-tranche {
   background: var(--form-bg); border-radius: var(--radius-md); padding: 1.25rem;
   box-shadow: var(--shadow-clay-inset); margin-bottom: 1rem;
@@ -330,7 +331,7 @@ code, pre { font-family: var(--font-mono); }
 .ratio-bar-junior { background: linear-gradient(90deg, #B388FF, #D1C4E9); border-radius: 8px; transition: width 1s var(--ease-smooth); }
 
 /* Pool stats */
-.pool-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.pool-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
 .pool-stat {
   padding: 0.875rem; background: rgba(255,255,255,0.04); border-radius: var(--radius-sm);
   box-shadow: var(--shadow-clay-inset); transition: background 0.2s;
@@ -481,13 +482,13 @@ code, pre { font-family: var(--font-mono); }
   display: flex; align-items: center; justify-content: center;
   font-size: 0.6875rem; font-weight: 700; color: #fff;
 }
-.waterfall-step-text { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; }
+.waterfall-step-text { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ---------- EVENTS ---------- */
 .event-list { display: flex; flex-direction: column; }
 .event-item {
   display: flex; align-items: flex-start; gap: 0.875rem;
-  padding: 0.75rem 0.5rem; transition: background 0.2s;
+  padding: 0.625rem 0; transition: background 0.2s;
 }
 .event-item:hover { background: rgba(124,77,255,0.03); }
 .event-item + .event-item { border-top: 1px solid rgba(0,0,0,0.04); }
@@ -523,7 +524,7 @@ code, pre { font-family: var(--font-mono); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ---------- SECTION DIVIDER ---------- */
-.section-divider { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.25rem 0; }
+.section-divider { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0; margin: 0.5rem 0; }
 .section-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(124,77,255,0.15), transparent); }
 .section-divider-dots { display: flex; gap: 6px; }
 .section-divider-dots span { width: 4px; height: 4px; border-radius: 50%; background: rgba(124,77,255,0.3); }
@@ -808,7 +809,7 @@ code, pre { font-family: var(--font-mono); }
             <span id="healthLabel">Healthy</span>
           </span>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding: 1rem 1.25rem;">
           <div class="pool-stats">
             <div class="pool-stat">
               <div class="pool-stat-label">Total Insured</div>
@@ -860,9 +861,9 @@ code, pre { font-family: var(--font-mono); }
         </div>
         <div class="card-body" id="positionSection">
           <!-- No wallet connected state -->
-          <div id="noWalletPosition" style="text-align: center; padding: 2rem;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" style="opacity: 0.4; margin-bottom: 0.75rem;"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
-            <p style="font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">Connect Wallet</p>
+          <div id="noWalletPosition" style="text-align: center; padding: 1.25rem;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" style="opacity: 0.4; margin-bottom: 0.5rem;"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
+            <p style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.15rem;">Connect Wallet</p>
             <p style="font-size: 0.8125rem; color: var(--text-muted);">Connect your wallet to view your pool positions</p>
           </div>
 
@@ -1184,7 +1185,7 @@ code, pre { font-family: var(--font-mono); }
             LIVE
           </span>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding: 1.25rem;">
           <div class="event-list" id="eventList">
             <div class="event-item">
               <div class="event-dot event-dot-blue"></div>
