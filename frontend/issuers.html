@@ -384,6 +384,7 @@ code, pre { font-family: var(--font-mono); }
 .status-active { background: #E8F5E9; color: #2E7D32; }
 .status-observing { background: #E3F2FD; color: #1565C0; }
 .status-suspended { background: #FFEBEE; color: #C62828; }
+.status-defaulted { background: #FFEBEE; color: #C62828; }
 .status-winding { background: rgba(108,92,231,0.1); color: var(--accent-purple); }
 
 .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
@@ -795,6 +796,7 @@ code, pre { font-family: var(--font-mono); }
           <option value="all">All</option>
           <option value="active">Active Only</option>
           <option value="observing">Observing</option>
+          <option value="defaulted">Defaulted</option>
         </select>
       </div>
       <div class="filter-group">
@@ -922,25 +924,25 @@ var MOCK_ISSUERS = [
     tokenAddress: '0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212',
     avatarColor: '#E8760A',
     avatarInitials: 'AR',
-    irsScore: 720,
+    irsScore: 0,
     maxScore: 1000,
-    status: 2, // Active
+    status: 3, // Defaulted
     bondAmount: '5.0',
     bondVerified: true,
     attestationCount: 3,
     requiredAttestations: 3,
     premiumBPS: 324,
-    coverageCap: 50000,
-    currentCoverage: 15000,
+    coverageCap: 0,
+    currentCoverage: 0,
     fastTrack: true,
     issuerEOA: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
     registrationBlock: 47123456,
     components: {
-      navPunctuality: 180,
-      attestationAccuracy: 160,
-      repaymentHistory: 150,
-      collateralHealth: 130,
-      governanceActivity: 100
+      navPunctuality: 0,
+      attestationAccuracy: 0,
+      repaymentHistory: 0,
+      collateralHealth: 0,
+      governanceActivity: 0
     }
   },
   {
@@ -957,8 +959,8 @@ var MOCK_ISSUERS = [
     attestationCount: 3,
     requiredAttestations: 3,
     premiumBPS: 412,
-    coverageCap: 35000,
-    currentCoverage: 22000,
+    coverageCap: 60,
+    currentCoverage: 0,
     fastTrack: false,
     issuerEOA: '0xdD870fA1b7C4700F2BD7f44238821C26f7392148',
     registrationBlock: 47089100,
@@ -984,7 +986,7 @@ var MOCK_ISSUERS = [
     attestationCount: 2,
     requiredAttestations: 3,
     premiumBPS: 510,
-    coverageCap: 25000,
+    coverageCap: 40,
     currentCoverage: 0,
     fastTrack: false,
     issuerEOA: '0x583031D1113aD414F02576BD6afaBfb302140225',
@@ -999,8 +1001,8 @@ var MOCK_ISSUERS = [
   }
 ];
 
-var STATUS_MAP = { 0: 'Registered', 1: 'Observing', 2: 'Active', 3: 'Suspended', 4: 'WindingDown' };
-var STATUS_CLASS = { 0: 'status-observing', 1: 'status-observing', 2: 'status-active', 3: 'status-suspended', 4: 'status-winding' };
+var STATUS_MAP = { 0: 'Registered', 1: 'Observing', 2: 'Active', 3: 'Defaulted', 4: 'WindingDown' };
+var STATUS_CLASS = { 0: 'status-observing', 1: 'status-observing', 2: 'status-active', 3: 'status-defaulted', 4: 'status-winding' };
 var STATUS_DOT = { 0: 'dot-gold', 1: 'dot-gold', 2: 'dot-green', 3: 'dot-red', 4: 'dot-gold' };
 
 // ---- State ----
@@ -1157,6 +1159,7 @@ function applyFilters() {
     if (searchVal && issuer.name.toLowerCase().indexOf(searchVal) === -1 && issuer.sector.toLowerCase().indexOf(searchVal) === -1) return false;
     if (statusVal === 'active' && issuer.status !== 2) return false;
     if (statusVal === 'observing' && issuer.status !== 1) return false;
+    if (statusVal === 'defaulted' && issuer.status !== 3) return false;
     if (sectorVal !== 'all' && issuer.sector !== sectorVal) return false;
     return true;
   });
@@ -1266,6 +1269,7 @@ function openDetail(filteredIndex) {
     if (searchVal && issuer.name.toLowerCase().indexOf(searchVal) === -1 && issuer.sector.toLowerCase().indexOf(searchVal) === -1) return false;
     if (statusVal === 'active' && issuer.status !== 2) return false;
     if (statusVal === 'observing' && issuer.status !== 1) return false;
+    if (statusVal === 'defaulted' && issuer.status !== 3) return false;
     if (sectorVal !== 'all' && issuer.sector !== sectorVal) return false;
     return true;
   });
