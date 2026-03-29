@@ -3577,6 +3577,7 @@ async function connectWallet() {
         walletAddress = accounts[0];
         walletConnected = true;
         ethersProvider = new ethers.BrowserProvider(window.ethereum);
+        localStorage.setItem('coverfi-wallet-connected', 'true');
         updateWalletUI();
         updateWalletDropdown();
         showToast('Wallet connected: ' + walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4), 'success');
@@ -3748,6 +3749,9 @@ function disconnectWallet() {
 
   // Hide network warning
   hideNetworkWarning();
+
+  // Clear wallet persistence
+  localStorage.removeItem('coverfi-wallet-connected');
 
   // Reset UI to mock data
   updatePurchaseButton();
@@ -5369,7 +5373,7 @@ loadLiveData();
 
 // Auto-connect if already connected
 (async function() {
-  if (typeof window.ethereum !== 'undefined') {
+  if (localStorage.getItem('coverfi-wallet-connected') === 'true' && typeof window.ethereum !== 'undefined') {
     try {
       var accounts = await window.ethereum.request({ method: 'eth_accounts' });
       var chainId = await window.ethereum.request({ method: 'eth_chainId' });

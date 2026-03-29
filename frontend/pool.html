@@ -1341,6 +1341,7 @@ async function setupProvider(account) {
   usdtContract = new ethers.Contract(CONTRACTS.MockUSDT, COVERFI_ABIS.MockUSDT, signer);
 
   // Update UI
+  localStorage.setItem('coverfi-wallet-connected', 'true');
   const btn = document.getElementById('btnConnect');
   const short = account.slice(0, 6) + '...' + account.slice(-4);
   btn.textContent = short;
@@ -1712,11 +1713,23 @@ if (window.ethereum) {
 }
 
 // ---------- INIT ----------
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initReveal();
   // Load demo pool data on page load
   updatePoolUI(75000, 25000, 80000, 12500, false, true);
   updateRedemptionPreview();
+
+  // Auto-connect if previously connected
+  if (localStorage.getItem('coverfi-wallet-connected') === 'true' && typeof window.ethereum !== 'undefined') {
+    try {
+      var accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        await setupProvider(accounts[0]);
+      }
+    } catch(e) {
+      console.log('Auto-reconnect failed:', e.message);
+    }
+  }
 });
 </script>
 </body>
