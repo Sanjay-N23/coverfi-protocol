@@ -215,9 +215,9 @@ code, pre { font-family: var(--font-mono); }
 .access-gate p { color: var(--text-secondary); max-width: 400px; line-height: 1.6; }
 
 /* ---------- GRID LAYOUTS ---------- */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: start; }
-.grid-2-1 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; align-items: start; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+.grid-2-1 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; align-items: stretch; }
 
 /* ---------- CARD (Claymorphic) ---------- */
 .dash-card {
@@ -225,6 +225,7 @@ code, pre { font-family: var(--font-mono); }
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 8px 32px rgba(0,0,0,0.12); transition: transform 0.3s var(--spring), box-shadow 0.3s;
   overflow: hidden; position: relative;
+  display: flex; flex-direction: column;
 }
 .dash-card:hover {
   transform: translateY(-2px); box-shadow: var(--shadow-clay-hover);
@@ -241,7 +242,7 @@ code, pre { font-family: var(--font-mono); }
   width: 30px; height: 30px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
 }
-.card-body { padding: 1rem 1.25rem; }
+.card-body { padding: 1rem 1.25rem; flex: 1; }
 
 /* ---------- STATUS BADGE ---------- */
 .status-badge {

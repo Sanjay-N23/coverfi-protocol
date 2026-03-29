@@ -249,6 +249,8 @@ code, pre { font-family: var(--font-mono); }
   overflow: hidden;
   position: relative;
   contain: content;
+  display: flex;
+  flex-direction: column;
 }
 .dash-card:hover {
   transform: translateY(-2px);
@@ -266,7 +268,7 @@ code, pre { font-family: var(--font-mono); }
   width: 30px; height: 30px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
 }
-.card-body { padding: 1rem 1.25rem; }
+.card-body { padding: 1rem 1.25rem; flex: 1; }
 
 /* ---------- METRIC CARDS ---------- */
 .metrics-row {
