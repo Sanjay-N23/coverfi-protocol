@@ -90,9 +90,10 @@ a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
 a:hover { color: #e0a800; }
 h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); }
 code, pre { font-family: var(--font-mono); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 /* ---------- ABSTRACT SVG BACKGROUND ---------- */
-.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; display: none; }
 .bg-blob { position: absolute; opacity: 0.08; }
 .bg-blob:nth-child(1) { top: -5%; right: -5%; animation: blob-float-1 18s ease-in-out infinite; }
 .bg-blob:nth-child(2) { bottom: -10%; left: -5%; animation: blob-float-2 22s ease-in-out infinite; }
@@ -445,7 +446,7 @@ tbody tr:hover { background: rgba(240,185,11,0.06); }
 .irs-gauge-label { font-size: 0.6875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 0.5rem; }
 .irs-gauge-value {
   font-size: 3.5rem; font-weight: 900; color: #F0B90B; margin-top: -0.5rem;
-  font-family: var(--font-mono); letter-spacing: -0.03em;
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.03em;
   text-shadow: 0 0 12px rgba(240,185,11,0.4), 0 0 24px rgba(240,185,11,0.2);
 }
 .irs-gauge-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
@@ -657,7 +658,8 @@ tbody tr:hover { background: rgba(240,185,11,0.06); }
 .cert-rows { display: flex; flex-direction: column; gap: 0.5rem; }
 .cert-row { display: flex; justify-content: space-between; align-items: center; padding: 0.15rem 0; }
 .cert-row-label { font-size: 0.75rem; color: var(--text-muted); }
-.cert-row-value { font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); }
+.cert-row-value { font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.cert-field-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .cert-row-value.highlight { color: #8a6800; }
 .cert-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 0.5rem 0; }
 
@@ -751,6 +753,7 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 .metrics-deco-svg .deco-shape {
   opacity: 0.1;
   animation: deco-float 12s ease-in-out infinite;
+  display: none;
 }
 .metrics-deco-svg .deco-shape:nth-child(2n) { animation-duration: 15s; animation-direction: reverse; }
 .metrics-deco-svg .deco-shape:nth-child(3n) { animation-duration: 18s; animation-delay: -4s; }
