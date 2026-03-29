@@ -1068,6 +1068,7 @@ async function handleWalletClick() {
     signer = await provider.getSigner();
     userAddress = await signer.getAddress();
 
+    localStorage.setItem('coverfi-wallet-connected', 'true');
     var btn = document.getElementById('btnConnect');
     var short = userAddress.slice(0, 6) + '...' + userAddress.slice(-4);
     btn.textContent = short;
@@ -1441,7 +1442,7 @@ function toggleExpand(trigger) {
 
 // ---- Auto-reconnect on load ----
 (async function() {
-  if (typeof window.ethereum !== 'undefined') {
+  if (localStorage.getItem('coverfi-wallet-connected') === 'true' && typeof window.ethereum !== 'undefined') {
     try {
       var accounts = await window.ethereum.request({ method: 'eth_accounts' });
       if (accounts && accounts.length > 0) {

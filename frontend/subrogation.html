@@ -956,6 +956,7 @@ async function connectWallet() {
     provider = new ethers.BrowserProvider(window.ethereum);
     signer = await provider.getSigner();
     var addr = await signer.getAddress();
+    localStorage.setItem('coverfi-wallet-connected', 'true');
     btn.textContent = addr.slice(0, 6) + '...' + addr.slice(-4);
     btn.classList.add('connected');
     subrogationContract = getSubrogationContract(signer);
@@ -1147,12 +1148,19 @@ function startRecovery(tokenId) {
 }
 
 // ---- Auto-load on page ready ----
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   loadClaims();
 
-  // Check for existing wallet connection
-  if (window.ethereum && window.ethereum.selectedAddress) {
-    connectWallet();
+  // Auto-connect if previously connected
+  if (localStorage.getItem('coverfi-wallet-connected') === 'true' && typeof window.ethereum !== 'undefined') {
+    try {
+      var accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        connectWallet();
+      }
+    } catch(e) {
+      console.log('Auto-reconnect failed:', e.message);
+    }
   }
 });
 </script>
