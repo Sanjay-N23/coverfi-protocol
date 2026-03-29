@@ -89,9 +89,10 @@ a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
 a:hover { color: #e0a800; }
 h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); }
 code, pre { font-family: var(--font-mono); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 /* ---------- ABSTRACT SVG BACKGROUND ---------- */
-.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; display: none; }
 .bg-blob { position: absolute; opacity: 0.08; }
 .bg-blob:nth-child(1) { top: -5%; right: -5%; animation: blob-float-1 18s ease-in-out infinite; }
 .bg-blob:nth-child(2) { bottom: -10%; left: -5%; animation: blob-float-2 22s ease-in-out infinite; }

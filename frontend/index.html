@@ -110,6 +110,7 @@ a { color: var(--gold); text-decoration: none; transition: color 0.25s; }
 a:hover { color: var(--gold-light); }
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); }
 code, pre { font-family: var(--font-mono); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
 
 /* ---------- BUTTONS ---------- */
@@ -467,7 +468,7 @@ code, pre { font-family: var(--font-mono); }
 .stat-change.up { color: var(--color-success); }
 .stat-change.down { color: var(--color-danger); }
 .stat-label { font-size: 0.75rem; color: #636E72; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.35rem; }
-.stat-value { font-size: 2rem; font-weight: 900; color: #2D3436; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat-value { font-size: 2rem; font-weight: 900; color: #2D3436; letter-spacing: -0.02em; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 @media (max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 540px) { .stats-grid { grid-template-columns: 1fr; } }

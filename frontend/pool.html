@@ -86,9 +86,10 @@ a { color: #7C4DFF; text-decoration: none; transition: color 0.2s; }
 a:hover { color: #5E35B1; }
 h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); }
 code, pre { font-family: var(--font-mono); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 /* ---------- BG BLOBS ---------- */
-.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; display: none; }
 .bg-blob { position: absolute; opacity: 0.08; }
 .bg-blob:nth-child(1) { top: -5%; right: -5%; animation: blob-float-1 18s ease-in-out infinite; }
 .bg-blob:nth-child(2) { bottom: -10%; left: -5%; animation: blob-float-2 22s ease-in-out infinite; }
@@ -215,7 +216,7 @@ code, pre { font-family: var(--font-mono); }
   background: rgba(255,255,255,0.25); color: rgba(0,0,0,0.5);
 }
 .metric-card-hero .metric-label { font-size: 0.75rem; color: rgba(0,0,0,0.7); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.25rem; }
-.metric-card-hero .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); color: #2D3436; }
+.metric-card-hero .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: #2D3436; }
 
 .metric-card {
   background: #ffffff; color: #2D3436; border-radius: 14px; padding: 1.25rem;
@@ -289,7 +290,7 @@ code, pre { font-family: var(--font-mono); }
 
 .tranche-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem; }
 .tranche-stat-label { font-size: 0.625rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 0.15rem; }
-.tranche-stat-value { font-size: 1.125rem; font-weight: 800; font-family: var(--font-mono); color: #2D3436; }
+.tranche-stat-value { font-size: 1.125rem; font-weight: 800; font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: #2D3436; }
 .tranche-stat-value.positive { color: var(--color-success); }
 .tranche-stat-value.gold { color: #5E35B1; }
 
@@ -300,7 +301,7 @@ code, pre { font-family: var(--font-mono); }
   box-shadow: var(--shadow-clay-inset);
 }
 .position-total-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.position-total-value { font-size: 1.5rem; font-weight: 900; font-family: var(--font-mono); color: #2D3436; }
+.position-total-value { font-size: 1.5rem; font-weight: 900; font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: #2D3436; }
 
 .position-actions { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
 .btn-action {
@@ -340,7 +341,7 @@ code, pre { font-family: var(--font-mono); }
 }
 .pool-stat:hover { background: rgba(0,0,0,0.04); }
 .pool-stat-label { font-size: 0.625rem; color: #636E72; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 0.2rem; }
-.pool-stat-value { font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: #2D3436; }
+.pool-stat-value { font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: #2D3436; }
 .pool-stat-value.healthy { color: var(--color-success); }
 .pool-stat-value.warning { color: var(--color-warning); }
 .pool-stat-value.danger { color: var(--color-danger); }
