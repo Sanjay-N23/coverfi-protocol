@@ -666,7 +666,9 @@ code, pre { font-family: var(--font-mono); }
 
 /* ---------- SECTION ILLUSTRATIONS ---------- */
 .section-illustration { display: flex; justify-content: center; margin-bottom: 2rem; }
+.section-illustration img { border-radius: 16px; }
 .section-illustration svg { animation: float-bob-slow calc(var(--motion) * 6s) ease-in-out infinite; }
+[data-theme="dark"] .section-illustration img { filter: drop-shadow(0 4px 20px rgba(240,185,11,0.15)); }
 
 /* ---------- FOOTER ---------- */
 .footer {
@@ -1157,6 +1159,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     <div class="section-header reveal">
       <h2>How CoverFi Works</h2>
       <p>Six steps from registration to payout. Fully on-chain, fully transparent.</p>
+    </div>
+
+    <div class="section-illustration reveal">
+      <img src="svg/undraw_certification_i2m0.svg" alt="Certification Process" loading="lazy" style="width: 240px; height: auto;" />
     </div>
 
     <div class="how-grid-wrap">
