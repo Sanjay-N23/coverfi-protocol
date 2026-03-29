@@ -283,6 +283,7 @@ code, pre { font-family: var(--font-mono); }
   box-shadow: var(--shadow-clay);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
   overflow: hidden; position: relative; contain: content;
+  display: flex; flex-direction: column;
 }
 .dash-card:hover {
   transform: translateY(-2px);
@@ -300,14 +301,14 @@ code, pre { font-family: var(--font-mono); }
   width: 30px; height: 30px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
 }
-.card-body { padding: 1rem 1.25rem; }
+.card-body { padding: 1rem 1.25rem; flex: 1; }
 
 /* ---------- GRID ROWS ---------- */
 .dash-row-2col {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: start;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: stretch;
 }
 .dash-row-equal {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: stretch;
 }
 .dash-row-full {
   display: grid; grid-template-columns: 1fr;

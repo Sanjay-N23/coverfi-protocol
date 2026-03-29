@@ -237,9 +237,9 @@ code, pre { font-family: var(--font-mono); }
 .metric-value { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: #2D3436; }
 
 /* ---------- GRID ROWS ---------- */
-.dash-row { display: grid; gap: 1rem; align-items: start; }
-.dash-row-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: start; }
-.dash-row-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.dash-row { display: grid; gap: 1rem; align-items: stretch; }
+.dash-row-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: stretch; }
+.dash-row-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: stretch; }
 .dash-row-full { display: grid; grid-template-columns: 1fr; }
 
 /* ---------- CARD ---------- */
@@ -249,6 +249,7 @@ code, pre { font-family: var(--font-mono); }
   box-shadow: var(--shadow-clay);
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
   overflow: hidden; position: relative;
+  display: flex; flex-direction: column;
 }
 .dash-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-clay-hover); }
 .card-header {
@@ -268,7 +269,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   display: flex; align-items: center; gap: 0.35rem;
 }
-.card-body { padding: 1rem 1.25rem; }
+.card-body { padding: 1rem 1.25rem; flex: 1; }
 
 /* ---------- YOUR POSITION ---------- */
 #positionSection { padding: 0.75rem 1.25rem; }

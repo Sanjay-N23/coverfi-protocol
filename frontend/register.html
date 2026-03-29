@@ -253,6 +253,8 @@ code, pre { font-family: var(--font-mono); }
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   overflow: hidden;
   transition: transform 0.3s var(--spring), box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 .reg-card:hover {
   transform: translateY(-2px);
@@ -271,7 +273,7 @@ code, pre { font-family: var(--font-mono); }
   padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
   background: var(--gold-dim); color: #8a6800;
 }
-.card-body { padding: 1rem 1.25rem; }
+.card-body { padding: 1rem 1.25rem; flex: 1; }
 
 /* ---------- FORM ELEMENTS ---------- */
 .form-group { margin-bottom: 1.25rem; }
