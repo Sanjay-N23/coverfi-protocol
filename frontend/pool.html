@@ -1323,8 +1323,8 @@ async function handleWalletClick() {
 }
 
 async function setupProvider(account) {
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  signer = provider.getSigner();
+  provider = new ethers.BrowserProvider(window.ethereum);
+  signer = await provider.getSigner();
   userAddress = account;
 
   // Check chain
@@ -1404,9 +1404,9 @@ async function loadPoolData() {
     }
 
     if (poolState) {
-      const seniorTVL = parseFloat(ethers.utils.formatUnits(poolState.seniorTVL, 18));
-      const juniorTVL = parseFloat(ethers.utils.formatUnits(poolState.juniorTVL, 18));
-      const totalInsured = parseFloat(ethers.utils.formatUnits(poolState.totalInsuredAmount, 18));
+      const seniorTVL = parseFloat(ethers.formatUnits(poolState.seniorTVL, 18));
+      const juniorTVL = parseFloat(ethers.formatUnits(poolState.juniorTVL, 18));
+      const totalInsured = parseFloat(ethers.formatUnits(poolState.totalInsuredAmount, 18));
       const coverageBPS = poolState.coverageRatioBPS.toNumber();
       const gateActive = poolState.redemptionGateActive;
       const isActive = poolState.isActive;
@@ -1483,8 +1483,8 @@ async function loadUserPosition() {
     const srBal = await srCVRContract.balanceOf(userAddress);
     const jrBal = await jrCVRContract.balanceOf(userAddress);
 
-    const srBalNum = parseFloat(ethers.utils.formatUnits(srBal, 18));
-    const jrBalNum = parseFloat(ethers.utils.formatUnits(jrBal, 18));
+    const srBalNum = parseFloat(ethers.formatUnits(srBal, 18));
+    const jrBalNum = parseFloat(ethers.formatUnits(jrBal, 18));
 
     const srValueNum = srBalNum * seniorExchangeRate;
     const jrValueNum = jrBalNum; // Junior is 1:1
@@ -1538,7 +1538,7 @@ async function depositSenior() {
   btn.textContent = 'Approving...';
 
   try {
-    const amount = ethers.utils.parseUnits(amt, 18);
+    const amount = ethers.parseUnits(amt, 18);
 
     // Check & approve USDT
     const allowance = await usdtContract.allowance(userAddress, CONTRACTS.InsurancePool);
@@ -1577,7 +1577,7 @@ async function depositJunior() {
   btn.textContent = 'Approving...';
 
   try {
-    const amount = ethers.utils.parseUnits(amt, 18);
+    const amount = ethers.parseUnits(amt, 18);
 
     const allowance = await usdtContract.allowance(userAddress, CONTRACTS.InsurancePool);
     if (allowance.lt(amount)) {
@@ -1634,7 +1634,7 @@ async function requestWithdrawal() {
   btn.textContent = 'Processing...';
 
   try {
-    const amount = ethers.utils.parseUnits(amt, 18);
+    const amount = ethers.parseUnits(amt, 18);
     const dummyIssuer = '0x0000000000000000000000000000000000000001';
     let tx;
 
