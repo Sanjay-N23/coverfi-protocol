@@ -29,8 +29,8 @@ contracts on BSC Testnet, and a complete default + payout lifecycle
 demonstrated in 25+ on-chain transactions.
 
 ### Live Demo
-- Frontend: [ADD VERCEL URL HERE]
-- GitHub: [ADD GITHUB URL HERE]
+- Frontend: https://coverfi-protocol.vercel.app
+- GitHub: https://github.com/Sanjay-N23/coverfi-protocol
 
 ### Smart Contract Addresses (BSC Testnet)
 - IssuerRegistry: 0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C
