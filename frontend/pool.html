@@ -1341,7 +1341,8 @@ async function setupProvider(account) {
   poolContract = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, signer);
   srCVRContract = new ethers.Contract(CONTRACTS.srCVR, COVERFI_ABIS.srCVR, signer);
   jrCVRContract = new ethers.Contract(CONTRACTS.jrCVR, COVERFI_ABIS.jrCVR, signer);
-  usdtContract = new ethers.Contract(CONTRACTS.MockUSDT, COVERFI_ABIS.MockUSDT, signer);
+  var ERC20_ABI = ['function approve(address,uint256) returns (bool)', 'function balanceOf(address) view returns (uint256)', 'function allowance(address,address) view returns (uint256)'];
+  usdtContract = new ethers.Contract(CONTRACTS.MockUSDT, ERC20_ABI, signer);
 
   // Update UI
   localStorage.setItem('coverfi-wallet-connected', 'true');
