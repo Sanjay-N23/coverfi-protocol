@@ -3,12 +3,12 @@ import * as fs from "fs";
 import * as path from "path";
 
 /**
- * BSC Testnet Demo Script
+ * HashKey Chain Testnet Demo Script
  *
  * Prerequisites:
- *   1. Deploy contracts: npm run deploy:testnet
- *   2. Fund the deployer wallet with tBNB + test USDT
- *   3. Run this: npx hardhat run scripts/demo-testnet.ts --network bscTestnet
+ *   1. Deploy contracts: npm run deploy:hashkey
+ *   2. Fund the deployer wallet with HSK + test USDT
+ *   3. Run this: npx hardhat run scripts/demo-testnet.ts --network hashkeyTestnet
  *
  * This script uses the deployer as all actors (issuer, custodian, legalRep, auditor,
  * underwriter, investor) since testnet only has one funded account.
@@ -16,14 +16,16 @@ import * as path from "path";
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("═══════════════════════════════════════════════════════════════");
-  console.log("  COVERFI — BSC TESTNET DEMO (3 Transactions)");
+  console.log("  COVERFI — HASHKEY CHAIN TESTNET DEMO (3 Transactions)");
   console.log(`  Deployer: ${deployer.address}`);
   console.log("═══════════════════════════════════════════════════════════════\n");
 
   // Load deployment
-  const deployFile = path.join(__dirname, "..", "deployments", "bscTestnet.json");
+  const network = await ethers.provider.getNetwork();
+  const deployFilename = Number(network.chainId) === 133 ? "hashkeyTestnet.json" : "bscTestnet.json";
+  const deployFile = path.join(__dirname, "..", "deployments", deployFilename);
   if (!fs.existsSync(deployFile)) {
-    console.error("No bscTestnet deployment found. Run: npm run deploy:testnet");
+    console.error("No deployment found. Run: npm run deploy:hashkey or npm run deploy:testnet");
     return;
   }
   const deployment = JSON.parse(fs.readFileSync(deployFile, "utf-8"));
@@ -45,7 +47,7 @@ async function main() {
 
   const tokenAddress = c.MockERC3643Token;
   const USDT = ethers.parseEther;
-  const explorerBase = "https://testnet.bscscan.com/tx/";
+  const explorerBase = Number(network.chainId) === 133 ? "https://testnet-explorer.hsk.xyz/tx/" : "https://testnet.bscscan.com/tx/";
 
   const txHashes: Record<string, string> = {};
 

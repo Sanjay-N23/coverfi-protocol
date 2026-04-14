@@ -4,7 +4,9 @@ import * as path from "path";
 
 async function main() {
   const network = process.env.HARDHAT_NETWORK || "bscTestnet";
-  const filename = network === "bscMainnet" ? "bscMainnet.json" : "bscTestnet.json";
+  const filename = network === "bscMainnet" ? "bscMainnet.json" :
+                   network === "hashkeyTestnet" ? "hashkeyTestnet.json" :
+                   "bscTestnet.json";
   const deployFile = path.join(__dirname, "..", "deployments", filename);
 
   if (!fs.existsSync(deployFile)) {

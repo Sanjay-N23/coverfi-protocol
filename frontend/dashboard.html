@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='16,2 28,9 28,23 16,30 4,23 4,9' fill='%23F0B90B'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='14' font-weight='bold'>C</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://data-seed-prebsc-1-s1.binance.org:8545">
+  <link rel="preconnect" href="https://testnet.hsk.xyz">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
 /* ============================================================
@@ -2112,7 +2112,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <!-- Network Warning Banner -->
 <div class="network-warning" id="networkWarning" style="display:none;" role="alert">
   <span class="warn-icon" aria-hidden="true">&#9888;&#65039;</span>
-  <span>Wrong network detected. Please switch to BSC Testnet to use CoverFi.</span>
+  <span>Wrong network detected. Please switch to HashKey Chain Testnet to use CoverFi.</span>
   <button class="btn-switch-network" onclick="switchToBSCTestnet()">Switch Network</button>
 </div>
 
@@ -2176,7 +2176,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     </div>
 
     <div class="nav-actions">
-      <div class="badge-testnet"><span class="dot"></span> BSC Testnet</div>
+      <div class="badge-testnet"><span class="dot"></span> HashKey Chain Testnet</div>
       <div class="role-badges" id="roleBadges" style="display:none;"></div>
       <div class="notif-wrapper">
         <button class="notif-bell" onclick="toggleNotifications()" aria-label="Notifications">
@@ -2217,7 +2217,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           </button>
           <a class="wallet-dropdown-item" id="bscscanLink" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            View on BscScan
+            View on Explorer
           </a>
           <div class="wallet-dropdown-divider"></div>
           <button class="wallet-dropdown-item danger" onclick="disconnectWallet()">
@@ -2252,7 +2252,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <!-- ---- LIVE DATA BANNER ---- -->
 <div class="live-data-banner" id="liveDataBanner">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
-  <span id="bannerText">Live BSC Testnet — Connect wallet to transact</span>
+  <span id="bannerText">Live HashKey Chain Testnet — Connect wallet to transact</span>
   <button class="banner-btn" id="bannerBtn" onclick="connectWallet()">Connect Wallet</button>
 </div>
 
@@ -2386,7 +2386,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
                 </div>
               </td>
               <td><span style="font-weight:700;color:var(--color-payout)">720</span></td>
-              <td><span style="font-family:var(--font-mono)">5.0 BNB</span></td>
+              <td><span style="font-family:var(--font-mono)">5% Bond</span></td>
               <td><span class="status-badge status-active"><span class="dot dot-green"></span> Active</span></td>
               <td><span style="font-family:var(--font-mono)">3/3</span></td>
             </tr>
@@ -2401,7 +2401,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
                 </div>
               </td>
               <td><span style="font-weight:700;color:#B8860B">580</span></td>
-              <td><span style="font-family:var(--font-mono)">5.0 BNB</span></td>
+              <td><span style="font-family:var(--font-mono)">5% Bond</span></td>
               <td><span class="status-badge status-monitoring"><span class="dot dot-gold"></span> Monitoring</span></td>
               <td><span style="font-family:var(--font-mono)">2/3</span></td>
             </tr>
@@ -2416,7 +2416,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
                 </div>
               </td>
               <td><span style="font-weight:700;color:#B8860B">650</span></td>
-              <td><span style="font-family:var(--font-mono)">5.0 BNB</span></td>
+              <td><span style="font-family:var(--font-mono)">5% Bond</span></td>
               <td><span class="status-badge status-active"><span class="dot dot-green"></span> Active</span></td>
               <td><span style="font-family:var(--font-mono)">3/3</span></td>
             </tr>
@@ -2463,7 +2463,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         <div class="event-item">
           <div class="event-dot" style="background:#00B894"></div>
           <div>
-            <div class="event-text"><strong>Payout Executed</strong> &mdash; $15,000 USDT to coverage holders via 2-of-3 attestation <a href="https://testnet.bscscan.com/tx/0x5381147c824b4006cd95af66434f57795578c050000b24674b06a16078d74c65" target="_blank" class="event-tx-link">0x5381...4c65</a></div>
+            <div class="event-text"><strong>Payout Executed</strong> &mdash; $15,000 USDT to coverage holders via 2-of-3 attestation <a href="https://testnet-explorer.hsk.xyz/tx/0x5381147c824b4006cd95af66434f57795578c050000b24674b06a16078d74c65" target="_blank" class="event-tx-link">0x5381...4c65</a></div>
             <div class="event-time">just now</div>
           </div>
         </div>
@@ -2477,7 +2477,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         <div class="event-item">
           <div class="event-dot event-dot-green"></div>
           <div>
-            <div class="event-text"><strong>AsiaReit</strong> registered as issuer. Bond: 5 BNB locked.</div>
+            <div class="event-text"><strong>AsiaReit</strong> registered as issuer. Bond: 5% locked.</div>
             <div class="event-time">recent</div>
           </div>
         </div>
@@ -2732,7 +2732,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           </div>
           <div class="waterfall-bar-wrap">
             <div class="waterfall-bar" id="waterfallBond" style="width:0%;background:linear-gradient(90deg,#FF6B6B,#FF8E8E)">
-              <span class="waterfall-bar-text" id="waterfallBondText">5 BNB</span>
+              <span class="waterfall-bar-text" id="waterfallBondText">5%</span>
             </div>
           </div>
         </div>
@@ -2965,7 +2965,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         </span>
         Your Transactions
       </h3>
-      <a href="https://testnet.bscscan.com/address/0xce220d9eD9527f9997c8045844210637F3A42fb3" target="_blank" class="view-all-link" id="txViewAllLink">View all on BNBScan &#x2197;</a>
+      <a href="https://testnet-explorer.hsk.xyz/address/0xce220d9eD9527f9997c8045844210637F3A42fb3" target="_blank" class="view-all-link" id="txViewAllLink">View all on HashKeyScan &#x2197;</a>
     </div>
     <div class="tx-list" id="txList">
       <!-- Populated by JS -->
@@ -3178,48 +3178,50 @@ document.addEventListener('keydown', function(e) {
 // ---- Reduced motion ----
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ---- BSC Testnet Contract Addresses (from deployments/bscTestnet.json) ----
+// ---- HashKey Chain Testnet Contract Addresses (from deployments/hashkeyTestnet.json) ----
 const CONTRACTS = {
-  MockUSDT:          '0x38907cC4E615D3C7BDCBC9910C050260bBC836E5',
-  MockIdentityRegistry: '0x7dD7C1adC65D9e6e7Bd5532b678f856C8Ea627fC',
-  MockERC3643Token:  '0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212',
-  MockBAS:           '0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3',
-  MockChainlink:     '0xa7C664459C66325Cd9dB15245DD901f1623c9655',
-  TIR:               '0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552',
-  IssuerBond:        '0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71',
-  IRSOracle:         '0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A',
-  DefaultOracle:     '0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D',
-  IssuerRegistry:    '0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C',
-  InsurancePool:     '0xBCF0012388045eA1183c96EEbe24754842a549eA',
-  srCVR:             '0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f',
-  jrCVR:             '0xa5d64A7770136B1EEade6B980404140D8D5F7C06',
-  ProtectionCert:    '0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD',
-  PayoutEngine:      '0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B',
-  SubrogationNFT:    '0x91062e509E75AAe31f1d6425b78D8815Ad941e73'
+  MockUSDT:          '0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212',
+  MockIdentityRegistry: '0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3',
+  MockERC3643Token:  '0xa7C664459C66325Cd9dB15245DD901f1623c9655',
+  MockBAS:           '0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552',
+  MockChainlink:     '0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71',
+  TIR:               '0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A',
+  IssuerBond:        '0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D',
+  IRSOracle:         '0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C',
+  DefaultOracle:     '0xBCF0012388045eA1183c96EEbe24754842a549eA',
+  IssuerRegistry:    '0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f',
+  InsurancePool:     '0xa5d64A7770136B1EEade6B980404140D8D5F7C06',
+  srCVR:             '0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD',
+  jrCVR:             '0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B',
+  ProtectionCert:    '0x91062e509E75AAe31f1d6425b78D8815Ad941e73',
+  PayoutEngine:      '0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5',
+  SubrogationNFT:    '0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2AB9'
 };
 // Keep backward compat alias
 const COVERFI_ADDRESSES = CONTRACTS;
 
-const BSC_TESTNET_CHAIN_ID = 97;
+const BSC_TESTNET_CHAIN_ID = 133;
 const BSC_TESTNET_CONFIG = {
-  chainId: '0x61',
-  chainName: 'BNB Smart Chain Testnet',
-  nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
-  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
-  blockExplorerUrls: ['https://testnet.bscscan.com/']
+  chainId: '0x85',
+  chainName: 'HashKey Chain Testnet',
+  nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
+  rpcUrls: ['https://testnet.hsk.xyz'],
+  blockExplorerUrls: ['https://testnet-explorer.hsk.xyz']
 };
 
 // Demo issuer token address (MockERC3643Token deployed in demo)
 const DEMO_ISSUER_TOKEN = CONTRACTS.MockERC3643Token;
 
 // ---- Read-Only Provider (no wallet needed) ----
-var BSC_TESTNET_RPC = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+var BSC_TESTNET_RPC = 'https://testnet.hsk.xyz';
 var readProvider = new ethers.JsonRpcProvider(BSC_TESTNET_RPC);
 
 // Read-only contract instances for data loading
 var readPool = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, readProvider);
 var readIRS = new ethers.Contract(CONTRACTS.IRSOracle, COVERFI_ABIS.IRSOracle, readProvider);
 var readRegistry = new ethers.Contract(CONTRACTS.IssuerRegistry, COVERFI_ABIS.IssuerRegistry, readProvider);
+var readSrCvr = new ethers.Contract(CONTRACTS.srCVR, COVERFI_ABIS.srCVR, readProvider);
+var readJrCvr = new ethers.Contract(CONTRACTS.jrCVR, COVERFI_ABIS.jrCVR, readProvider);
 
 // ---- Load Live Data (no wallet needed) ----
 var isLoadingLive = false;
@@ -3368,9 +3370,9 @@ const MOCK_DATA = {
   irsScore: 600,
   irsDimensions: { nav: 150, attestation: 120, repayment: 110, collateral: 120, activity: 35 },
   issuerRows: [
-    { name: 'AsiaReit', type: 'Real Estate', initials: 'AR', color: '#E8760A,#FF9533', irs: 720, bond: '5.0 BNB', status: 1, attestors: '3/3' },
-    { name: 'TradeFlow', type: 'Trade Finance', initials: 'TF', color: '#1E7BFF,#5DA3FF', irs: 580, bond: '5.0 BNB', status: 2, attestors: '2/3' },
-    { name: 'UrbanBridge', type: 'Infrastructure', initials: 'UB', color: '#8B5CF6,#A78BFA', irs: 650, bond: '5.0 BNB', status: 1, attestors: '3/3' }
+    { name: 'AsiaReit', type: 'Real Estate', initials: 'AR', color: '#E8760A,#FF9533', irs: 720, bond: '5% Bond', status: 1, attestors: '3/3' },
+    { name: 'TradeFlow', type: 'Trade Finance', initials: 'TF', color: '#1E7BFF,#5DA3FF', irs: 580, bond: '5% Bond', status: 2, attestors: '2/3' },
+    { name: 'UrbanBridge', type: 'Infrastructure', initials: 'UB', color: '#8B5CF6,#A78BFA', irs: 650, bond: '5% Bond', status: 1, attestors: '3/3' }
   ]
 };
 
@@ -3508,7 +3510,7 @@ function updateBanner() {
   if (!banner) return;
 
   if (walletConnected && isLiveData) {
-    bannerText.innerHTML = '<span class="live-data-badge"><span class="dot dot-green"></span> LIVE</span> Connected to BSC Testnet';
+    bannerText.innerHTML = '<span class="live-data-badge"><span class="dot dot-green"></span> LIVE</span> Connected to HashKey Chain Testnet';
     bannerBtn.textContent = 'Refresh';
     bannerBtn.setAttribute('onclick', 'loadLiveData()');
     banner.style.background = 'var(--color-success-dim)';
@@ -3518,7 +3520,7 @@ function updateBanner() {
     bannerText.textContent = 'Loading on-chain data...';
     bannerBtn.style.display = 'none';
   } else {
-    bannerText.textContent = 'Live BSC Testnet \u2014 Connect wallet to transact';
+    bannerText.textContent = 'Live HashKey Chain Testnet \u2014 Connect wallet to transact';
     bannerBtn.textContent = 'Connect';
     bannerBtn.setAttribute('onclick', 'connectWallet()');
     bannerBtn.style.display = '';
@@ -3550,11 +3552,11 @@ async function checkAndSwitchNetwork() {
           });
           return true;
         } catch (addError) {
-          showToast('Failed to add BSC Testnet. Please add it manually.', 'error');
+          showToast('Failed to add HashKey Chain Testnet. Please add it manually.', 'error');
           return false;
         }
       }
-      showToast('Please switch to BSC Testnet (Chain ID: 97)', 'error');
+      showToast('Please switch to HashKey Chain Testnet (Chain ID: 133)', 'error');
       return false;
     }
   }
@@ -3624,7 +3626,7 @@ async function switchToBSCTestnet() {
   try {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x61' }]
+      params: [{ chainId: '0x85' }]
     });
     hideNetworkWarning();
   } catch (e) {
@@ -3633,19 +3635,19 @@ async function switchToBSCTestnet() {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
-            chainId: '0x61',
-            chainName: 'BNB Smart Chain Testnet',
-            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-            nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
-            blockExplorerUrls: ['https://testnet.bscscan.com']
+            chainId: '0x85',
+            chainName: 'HashKey Chain Testnet',
+            rpcUrls: ['https://testnet.hsk.xyz'],
+            nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
+            blockExplorerUrls: ['https://testnet-explorer.hsk.xyz']
           }]
         });
         hideNetworkWarning();
       } catch (addErr) {
-        showToast('Failed to add BSC Testnet. Please add it manually.', 'error');
+        showToast('Failed to add HashKey Chain Testnet. Please add it manually.', 'error');
       }
     } else {
-      showToast('Please switch to BSC Testnet manually in your wallet.', 'error');
+      showToast('Please switch to HashKey Chain Testnet manually in your wallet.', 'error');
     }
   }
 }
@@ -3700,7 +3702,7 @@ function updateWalletDropdown() {
     addrEl.textContent = walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4);
   }
   if (linkEl && walletAddress) {
-    linkEl.href = 'https://testnet.bscscan.com/address/' + walletAddress;
+    linkEl.href = 'https://testnet-explorer.hsk.xyz/address/' + walletAddress;
   }
 }
 
@@ -3790,7 +3792,7 @@ if (typeof window.ethereum !== 'undefined') {
       showNetworkWarning();
       updateBanner();
       showMockData();
-      showToast('Wrong network. Please switch to BSC Testnet (Chain ID: 97)', 'error');
+      showToast('Wrong network. Please switch to HashKey Chain Testnet (Chain ID: 133)', 'error');
     } else {
       hideNetworkWarning();
       if (walletConnected) {
@@ -4135,7 +4137,10 @@ async function loadUserPosition(data) {
 
     var results = await Promise.allSettled([
       srCvr.balanceOf(addr),
-      jrCvr.balanceOf(addr)
+      jrCvr.balanceOf(addr),
+      readSrCvr.getCurrentExchangeRate(),
+      readJrCvr.getPoolUnderlying(DEMO_ISSUER_TOKEN),
+      readJrCvr.poolSupply(DEMO_ISSUER_TOKEN)
     ]);
 
     var srBal = results[0].status === 'fulfilled' ? results[0].value : 0n;
@@ -4153,12 +4158,32 @@ async function loadUserPosition(data) {
     document.getElementById('srCvrBalance').textContent = srBalNum.toFixed(2);
     document.getElementById('jrCvrBalance').textContent = jrBalNum.toFixed(2);
 
-    // Estimate value: srCVR and jrCVR are 1:1 with USDT at deposit time
-    var estValue = srBalNum + jrBalNum;
+    // Senior exchange rate from contract
+    var srExchangeRate = 1.0;
+    if (results[2].status === 'fulfilled') {
+      srExchangeRate = parseFloat(ethers.formatUnits(results[2].value, 18));
+      // No floor — show real rate even post-liquidation (< 1.0 means loss)
+    }
+
+    // Junior pro-rata rate from contract
+    var jrRate = 1.0;
+    if (results[3].status === 'fulfilled' && results[4].status === 'fulfilled') {
+      var jrUnderlying = results[3].value;
+      var jrSupply = results[4].value;
+      if (jrSupply > 0n) {
+        jrRate = parseFloat(ethers.formatUnits(jrUnderlying, 18)) /
+                 parseFloat(ethers.formatUnits(jrSupply, 18));
+      }
+    }
+
+    // Real estimated value using on-chain exchange rates
+    var estValue = (srBalNum * srExchangeRate) + (jrBalNum * jrRate);
     document.getElementById('positionValue').textContent = '$' + estValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    // Unrealized yield placeholder (would need share price from pool for real calc)
-    var yieldEst = estValue * 0.0; // No unrealized yield without share price data
+    // Unrealized yield from premium accrual
+    var srYield = srBalNum * (srExchangeRate - 1.0);
+    var jrYield = jrBalNum * (jrRate - 1.0);
+    var yieldEst = srYield + jrYield;
     var yieldEl = document.getElementById('unrealizedYield');
     if (yieldEst > 0) {
       yieldEl.textContent = '+$' + yieldEst.toFixed(2);
@@ -4280,8 +4305,8 @@ async function loadContractData() {
     clearTimeout(_loadingTimeout);
     setLoadingState(false);
     updateLastUpdated();
-    showToast('Live on-chain data loaded from BSC Testnet', 'success');
-    addNotification('Data refreshed from BSC Testnet', 'info');
+    showToast('Live on-chain data loaded from HashKey Chain Testnet', 'success');
+    addNotification('Data refreshed from HashKey Chain Testnet', 'info');
 
   } catch (err) {
     clearTimeout(_loadingTimeout);
@@ -4930,12 +4955,12 @@ async function ensureCorrectNetwork() {
     var chainId = await window.ethereum.request({ method: 'eth_chainId' });
     var currentChainId = parseInt(chainId, 16);
     if (currentChainId !== BSC_TESTNET_CHAIN_ID) {
-      showToast('Please switch to BSC Testnet', 'error');
+      showToast('Please switch to HashKey Chain Testnet', 'error');
       return false;
     }
     return true;
   } catch (e) {
-    showToast('Please switch to BSC Testnet', 'error');
+    showToast('Please switch to HashKey Chain Testnet', 'error');
     return false;
   }
 }
@@ -4955,6 +4980,27 @@ function parseContractError(err) {
   if (msg.includes('insufficient allowance')) {
     return 'USDT approval failed. Please try again';
   }
+  if (msg.includes('junior ratio too low') || msg.includes('junior ratio')) {
+    return 'Junior tranche ratio too low. Deposit to junior tranche first (25% minimum required)';
+  }
+  if (msg.includes('gate active') || msg.includes('redemption gate')) {
+    return 'Redemption gate is active — deposits and withdrawals are temporarily paused';
+  }
+  if (msg.includes('lock period active') || msg.includes('lock period')) {
+    return 'Withdrawal lock period not yet expired. Senior: 30 days, Junior: 14 days';
+  }
+  if (msg.includes('already executed')) {
+    return 'This withdrawal request has already been executed';
+  }
+  if (msg.includes('not your request')) {
+    return 'This withdrawal request belongs to a different wallet';
+  }
+  if (msg.includes('request frozen')) {
+    return 'This withdrawal request has been frozen due to a pending default event';
+  }
+  if (msg.includes('insufficient underlying') || msg.includes('insufficient pool underlying')) {
+    return 'Insufficient pool liquidity for this redemption. Try a smaller amount';
+  }
   if (msg.includes('pool not active') || msg.includes('pool is not active')) {
     return 'Insurance pool is not active for this issuer';
   }
@@ -4968,7 +5014,7 @@ function parseContractError(err) {
     return 'Network congested, retrying...';
   }
   if (msg.includes('insufficient funds') || msg.includes('insufficient balance for gas') || msg.includes('gas required exceeds allowance')) {
-    return 'Insufficient tBNB for gas';
+    return 'Insufficient HSK for gas';
   }
   if (msg.includes('execution reverted')) {
     var match = msg.match(/execution reverted:\s*(.+?)(?:"|$)/);
@@ -5464,7 +5510,7 @@ function renderTxList() {
   // Update "View all" link with wallet address
   var viewAllLink = document.getElementById('txViewAllLink');
   if (viewAllLink && walletAddress) {
-    viewAllLink.href = 'https://testnet.bscscan.com/address/' + walletAddress;
+    viewAllLink.href = 'https://testnet-explorer.hsk.xyz/address/' + walletAddress;
   }
 
   if (txHistory.length === 0) {
@@ -5486,7 +5532,7 @@ function renderTxList() {
     var statusClass = tx.status === 'confirmed' ? 'tx-confirmed' : 'tx-pending';
     var statusLabel = tx.status === 'confirmed' ? 'Confirmed' : 'Pending';
     var shortHash = tx.hash ? tx.hash.slice(0, 6) + '...' + tx.hash.slice(-3) : '';
-    var txUrl = 'https://testnet.bscscan.com/tx/' + (tx.hash || '');
+    var txUrl = 'https://testnet-explorer.hsk.xyz/tx/' + (tx.hash || '');
 
     html +=
       '<div class="tx-item">' +

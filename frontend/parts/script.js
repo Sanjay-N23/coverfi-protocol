@@ -7,13 +7,13 @@
 let walletAddress = null;
 let isConnected = false;
 
-// --------------- BSC Testnet Config --------------------------
+// --------------- HashKey Chain Testnet Config -----------------
 const BSC_TESTNET = {
-  chainId: '0x61',
-  chainName: 'BNB Smart Chain Testnet',
-  nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
-  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
-  blockExplorerUrls: ['https://testnet.bscscan.com/']
+  chainId: '0x85',
+  chainName: 'HashKey Chain Testnet',
+  nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
+  rpcUrls: ['https://testnet.hsk.xyz'],
+  blockExplorerUrls: ['https://testnet-explorer.hsk.xyz']
 };
 
 // =============================================================
@@ -47,7 +47,7 @@ async function connectWallet() {
             params: [BSC_TESTNET]
           });
         } else {
-          showToast('error', 'Failed to switch to BSC Testnet.');
+          showToast('error', 'Failed to switch to HashKey Chain Testnet.');
           return;
         }
       }

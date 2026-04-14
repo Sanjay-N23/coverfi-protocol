@@ -726,7 +726,7 @@ code, pre { font-family: var(--font-mono); }
     </div>
 
     <div class="nav-actions">
-      <div class="badge-testnet"><span class="dot"></span> BSC Testnet</div>
+      <div class="badge-testnet"><span class="dot"></span> HashKey Testnet</div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
         <svg class="icon-sun" width="18" aria-hidden="true" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" width="18" aria-hidden="true" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -916,12 +916,12 @@ function toggleTheme() { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); }
 (function() { setTheme(getTheme()); })();
 
 // ---- Constants ----
-var BSC_TESTNET_RPC = 'https://data-seed-prebsc-1-s1.binance.org:8545';
-var BSC_TESTNET_CHAIN_ID = 97;
-var BSCSCAN_URL = 'https://testnet.bscscan.com';
+var BSC_TESTNET_RPC = 'https://testnet.hsk.xyz';
+var BSC_TESTNET_CHAIN_ID = 133;
+var BSCSCAN_URL = 'https://testnet-explorer.hsk.xyz';
 
-var SUBROGATION_NFT_ADDR = '0x91062e509E75AAe31f1d6425b78D8815Ad941e73';
-var PAYOUT_ENGINE_ADDR = '0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B';
+var SUBROGATION_NFT_ADDR = '0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2AB9';
+var PAYOUT_ENGINE_ADDR = '0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5';
 
 var DEFAULT_TYPES = [
   'GENERAL_DEFAULT',
@@ -1129,7 +1129,7 @@ function renderClaims(claims) {
     html += '  <div class="claim-actions">';
     html += '    <a class="btn-claim btn-claim-view" href="' + BSCSCAN_URL + '/token/' + SUBROGATION_NFT_ADDR + '?a=' + c.tokenId + '" target="_blank" rel="noopener">';
     html += '      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-    html += '      View on BNBScan';
+    html += '      View on Explorer';
     html += '    </a>';
     html += '    <button class="btn-claim btn-claim-recover" onclick="startRecovery(' + c.tokenId + ')">';
     html += '      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';

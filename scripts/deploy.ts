@@ -209,6 +209,7 @@ async function main() {
 
   const filename = network.chainId === 97n ? "bscTestnet.json" :
                    network.chainId === 56n ? "bscMainnet.json" :
+                   network.chainId === 133n ? "hashkeyTestnet.json" :
                    "localhost.json";
 
   fs.writeFileSync(

@@ -11,13 +11,13 @@
 **What you need:**
 - Chrome browser (recommended) or any modern browser
 - MetaMask wallet extension installed
-- A small amount of tBNB (testnet BNB) for gas fees
+- A small amount of HSK (testnet HSK) for gas fees
 
 **URL:**
 - Live: `https://coverfi-protocol.vercel.app`
 - Local: `http://localhost:8085`
 
-**Network:** BSC Testnet (Chain ID 97). The app will show a yellow warning banner and prompt you to switch if you are on the wrong network.
+**Network:** HashKey Chain Testnet (Chain ID 133). The app will show a yellow warning banner and prompt you to switch if you are on the wrong network.
 
 **What is CoverFi?** CoverFi is a decentralized insurance protocol for Real World Asset (RWA) tokens. If a company that issued an RWA token goes bankrupt or defaults, CoverFi pays out insurance to the token holders who purchased coverage. Think of it as credit default protection, but on the blockchain.
 
@@ -66,7 +66,7 @@ The large banner area immediately below the navigation bar.
 **Shield illustration:** Below the buttons is an animated SVG shield in gold gradient. Small colored dots orbit around it. Two expanding rings pulse outward from the center. This represents protection.
 
 **Trust badges (three small items below the shield):**
-- **"Built on BNB Chain"** -- Shows the CoverFi hexagon logo. Tells you this runs on BNB Chain (Binance Smart Chain).
+- **"Built on HashKey Chain"** -- Shows the CoverFi hexagon logo. Tells you this runs on HashKey Chain (HashKey Chain).
 - **"ERC-3643 Compliant"** -- Shows a green shield with checkmark. ERC-3643 is the standard for regulated security tokens with built-in KYC/identity checks.
 - **"Soulbound Certs"** -- Shows a purple padlock icon. Protection certificates are soulbound NFTs (ERC-5192), meaning they cannot be transferred or sold -- they are permanently attached to the wallet that purchased them.
 
@@ -96,9 +96,9 @@ A centered section with four large animated counters:
 | **Smart Contracts** | 12 | The number of distinct smart contracts deployed on-chain. |
 | **Tests Passing** | 356 | Total passing test cases. "100% coverage" means every line of code is tested. |
 | **Risk Dimensions** | 5 | The IRS (Issuer Reputation Score) uses 5 behavioral dimensions to compute risk. |
-| **On-Chain Transactions** | 25 | The number of live transactions executed on BSC Testnet. |
+| **On-Chain Transactions** | 25 | The number of live transactions executed on HashKey Chain Testnet. |
 
-Below these counters is a gold star badge: "Built for the BNB Chain Hackathon 2026" -- this identifies CoverFi as a hackathon project.
+Below these counters is a gold star badge: "Built for the HashKey Chain Hackathon 2026" -- this identifies CoverFi as a hackathon project.
 
 ---
 
@@ -110,7 +110,7 @@ Six cards arranged in a grid, each with a step number, an icon, a title, and a d
 
 **Step 1: Issuer Registers**
 - Icon: Blue clipboard/document
-- What happens: An RWA token issuer posts a 5 BNB bond and gets attested by 3 independent verifiers (custodian, legal rep, auditor).
+- What happens: An RWA token issuer posts a 5% Bond bond and gets attested by 3 independent verifiers (custodian, legal rep, auditor).
 - Who does this: The TOKEN ISSUER (a company), not the investor.
 
 **Step 2: IRS Score Calculated**
@@ -180,14 +180,14 @@ A centered section with four security feature cards, each with an icon:
 
 Four columns at the bottom:
 
-- **CoverFi brand** -- Logo + "Decentralized credit protection for RWA token issuers on BNB Chain."
+- **CoverFi brand** -- Logo + "Decentralized credit protection for RWA token issuers on HashKey Chain."
 - **Protocol links** -- Dashboard, Issuers, Insurance Pool, Get Covered, Register Token, For Attestors
-- **Developer links** -- Smart Contracts (links to BscScan), Documentation, GitHub, BNBScan
+- **Developer links** -- Smart Contracts (links to HashKey Explorer), Documentation, GitHub, HashKey Explorer
 - **Resources** -- Whitepaper, Security Audits, Bug Bounty, Brand Kit
 
 Social icons: X (Twitter), GitHub, Discord
 
-Copyright: "2026 CoverFi -- BNB Chain Hackathon"
+Copyright: "2026 CoverFi -- HashKey Chain Hackathon"
 
 ---
 
@@ -207,25 +207,25 @@ The app pages (Dashboard, Issuers, Pool, Coverage) use a slightly different nav 
 **Center:** Four navigation links -- Dashboard, Issuers, Pool, Coverage. The current page is highlighted in gold.
 
 **Right (from left to right):**
-- **BSC Testnet badge** -- A small pill with a pulsing gold dot and the text "BSC Testnet". This confirms you are on the test network.
+- **HashKey Chain Testnet badge** -- A small pill with a pulsing gold dot and the text "HashKey Chain Testnet". This confirms you are on the test network.
 - **Role badges** -- Colored pills that appear after your wallet connects, showing your roles: LP (blue), ISSUER (orange), ATTESTOR (purple). Hidden until wallet is connected.
 - **Notification bell** -- A bell icon. When you have unread notifications, a number badge appears. Click to open a dropdown showing recent events (wallet connected, data refreshed, transactions completed, IRS score changes). Click "Clear all" to dismiss all notifications.
 - **Theme toggle** -- Sun/moon button, same as landing page.
-- **Connect Wallet button** -- Gold gradient button with a padlock icon. Before connecting it reads "Connect Wallet". After connecting it shows your shortened address (e.g., "0x742d...4E8c") and turns green. Click when connected to open a dropdown with: Copy Address, View on BscScan (opens block explorer), and Disconnect.
+- **Connect Wallet button** -- Gold gradient button with a padlock icon. Before connecting it reads "Connect Wallet". After connecting it shows your shortened address (e.g., "0x742d...4E8c") and turns green. Click when connected to open a dropdown with: Copy Address, View on HashKey Explorer (opens block explorer), and Disconnect.
 
 ---
 
 ### Live Data Banner
 
 A colored banner just below the nav bar:
-- **Before connecting:** "Live BSC Testnet -- Connect wallet to transact" with a "Connect Wallet" button.
-- **After connecting:** "Connected to BSC Testnet" with a green dot. Data is loading from the blockchain.
+- **Before connecting:** "Live HashKey Chain Testnet -- Connect wallet to transact" with a "Connect Wallet" button.
+- **After connecting:** "Connected to HashKey Chain Testnet" with a green dot. Data is loading from the blockchain.
 
 ---
 
 ### Network Warning
 
-If your MetaMask is set to the wrong network, a yellow/red warning bar appears at the very top: "You are connected to the wrong network" with a "Switch Network" button. Click it to automatically switch to BSC Testnet.
+If your MetaMask is set to the wrong network, a yellow/red warning bar appears at the very top: "You are connected to the wrong network" with a "Switch Network" button. Click it to automatically switch to HashKey Chain Testnet.
 
 ---
 
@@ -261,7 +261,7 @@ The table has 5 columns:
 |--------|---------------|
 | **ISSUER** | Company name + sector type + colored circle avatar with initials. Examples: AR (orange) = AsiaReit (Real Estate), TF (blue) = TradeFlow (Trade Finance), UB (purple) = UrbanBridge (Infrastructure) |
 | **IRS** | Issuer Reputation Score (0-1000). Displayed with a color-coded progress bar. Green = high/safe (>700), gold = medium (400-700), red = risky (<400) |
-| **BOND** | The collateral the issuer deposited, shown in BNB (e.g., "5.0 BNB") |
+| **BOND** | The collateral the issuer deposited, shown in USDT (e.g., "5% Bond") |
 | **STATUS** | Current state with a colored dot: green "Active", yellow "Monitoring", red "Defaulted" |
 | **ATTESTORS** | How many of the 3 required verifiers have confirmed, shown as a fraction (e.g., "3/3") with a green checkmark when complete |
 
@@ -284,13 +284,13 @@ This is a real-time feed of everything happening in the protocol. Each event has
 |-----------|-----------|---------|
 | Green | Payout Executed | "$15,000 USDT to coverage holders via 2-of-3 attestation" with a clickable transaction link |
 | Red | Default Detected | "on UrbanBridge REIT -- IRS dropped below 400 threshold" |
-| Green | Issuer Registered | "AsiaReit registered as issuer. Bond: 5 BNB locked." |
+| Green | Issuer Registered | "AsiaReit registered as issuer. Bond: 5% Bond locked." |
 | Blue | LP Deposit | "12,500 USDT added to Senior tranche." |
 | Gold | IRS Updated | "TradeFlow score recalculated to 580." |
 | Orange | Coverage Purchased | "15,000 USDT on AsiaReit @ 696 bps." |
 | Purple | NFT Minted | "ProtectionCert #3 minted as soulbound NFT (ERC-721)." |
 
-Transaction links (e.g., "0x5381...4c65") are clickable and open BscScan in a new tab.
+Transaction links (e.g., "0x5381...4c65") are clickable and open HashKey Explorer in a new tab.
 
 ---
 
@@ -341,7 +341,7 @@ Next to the IRS Oracle, a card titled "Insurance Pool" with a blue padlock icon 
 
 **Loss Waterfall Diagram:** A critical visual showing the 3-layer loss absorption mechanism:
 
-1. **Issuer Bond** (red bar, labeled "First Loss") -- "5 BNB". When a default occurs, the issuer's deposited bond is consumed first.
+1. **Issuer Bond** (red bar, labeled "First Loss") -- "5% Bond". When a default occurs, the issuer's deposited bond is consumed first.
 2. **Junior / jrCVR** (purple bar, labeled "Second Loss") -- "30%". After the bond is exhausted, junior tranche funds absorb remaining losses.
 3. **Senior / srCVR** (blue bar, labeled "Last Resort") -- "70%". Only after both bond and junior are depleted does the senior tranche take losses.
 
@@ -401,9 +401,9 @@ After purchasing, a styled certificate card appears with:
 
 ### Your Transactions
 
-A full-width card at the bottom titled "Your Transactions" with a "View all on BNBScan" link that opens the block explorer.
+A full-width card at the bottom titled "Your Transactions" with a "View all on HashKey Explorer" link that opens the block explorer.
 
-This shows a chronological list of your on-chain transactions (deposits, purchases, withdrawals). Each entry shows the transaction type, amount, and a link to the transaction on BscScan.
+This shows a chronological list of your on-chain transactions (deposits, purchases, withdrawals). Each entry shows the transaction type, amount, and a link to the transaction on HashKey Explorer.
 
 ---
 
@@ -477,7 +477,7 @@ Large cards in a responsive grid (auto-fill, minimum 360px wide). Each card cont
 **Card body:**
 - **IRS Score section:** Label "IRS SCORE", large score number in teal (e.g., "720"), a horizontal progress bar showing the score as a percentage of 1000, and a percentage label
 - **Info grid (2x2):**
-  - Bond Amount (e.g., "5.0 BNB")
+  - Bond Amount (e.g., "5% Bond")
   - Status (with colored dot: green Active, blue Observing, red Defaulted)
   - Attestors (e.g., "3/3" with checkmark)
   - Coverage (total coverage written against this issuer)
@@ -499,7 +499,7 @@ When you click "View Details", a slide-up modal appears with:
   - Bond Information (amount, deposit block, liquidation status)
   - Attestor Addresses (custodian, legal rep, auditor)
   - Coverage Statistics
-- **"View on BscScan"** button -- Opens the token contract on the block explorer
+- **"View on HashKey Explorer"** button -- Opens the token contract on the block explorer
 
 ---
 
@@ -695,7 +695,7 @@ Background: Warm peach/salmon (#FBE9E7) with coral/red accent.
 
 **Protocol Events:** A scrollable list of recent on-chain events.
 
-**Contract Addresses:** A table listing all 12 smart contract names and their deployed addresses on BSC Testnet.
+**Contract Addresses:** A table listing all 12 smart contract names and their deployed addresses on HashKey Chain Testnet.
 
 **Last Updated bar:** Timestamp + Refresh button.
 
@@ -729,7 +729,7 @@ A 5-step wizard with a step indicator at the top (numbered circles 1-5 connected
 
 **Step 4: BAS Attestation**
 - Card title: "Legal Entity Verification" (Step 4 of 5)
-- Input: BAS Attestation UID (from BNB Attestation Service)
+- Input: BAS Attestation UID (from Attestation Service)
 - Expandable guide: "How to get a BAS Attestation UID?" with 7 numbered steps
 
 **Step 5: Registration Summary**
@@ -749,7 +749,7 @@ Background: Light lavender/purple.
 
 **Before registration:** Shows a "Register as Attestor" card with:
 - Type selector (radio buttons): Custodian, Legal Rep, or Auditor (each with an icon and description)
-- Bond Deposit input (minimum 5 BNB)
+- Bond Deposit input (minimum 5% Bond)
 - "Register as Attestor" button
 - Note about Fast Track eligibility after 30 days
 
@@ -879,8 +879,8 @@ Background: Light warm tone with coral accents.
 | Crescent moon | Circle with shadow | Nav bar, right side (light mode) | Click to switch to dark mode |
 | Sun with rays | Circle with radiating lines | Nav bar, right side (dark mode) | Click to switch to light mode |
 | Bell | Bell outline | Dashboard nav bar | Notifications -- click to see alerts |
-| Pulsing green dot | Small circle with glow animation | BSC Testnet badge, status indicators | Connected / active / healthy |
-| Pulsing gold dot | Small circle with gold glow | BSC Testnet badge on some pages | Network connected indicator |
+| Pulsing green dot | Small circle with glow animation | HashKey Chain Testnet badge, status indicators | Connected / active / healthy |
+| Pulsing gold dot | Small circle with gold glow | HashKey Chain Testnet badge on some pages | Network connected indicator |
 | Green dot (static) | Solid green circle | Status badges | Active status |
 | Gold/yellow dot | Solid gold circle | Status badges | Monitoring/warning status |
 | Red dot | Solid red circle | Status badges, events | Defaulted / error / alert |
@@ -901,7 +901,7 @@ Background: Light warm tone with coral accents.
 | Plus in circle | Circle with + | Deposit actions, pool | Add / deposit |
 | Minus bar | Horizontal line | Withdrawal actions | Remove / withdraw |
 | Search magnifier | Circle with handle | Filter bar, lookup | Search functionality |
-| External link arrow | Arrow pointing up-right | BscScan links | Opens in new tab |
+| External link arrow | Arrow pointing up-right | HashKey Explorer links | Opens in new tab |
 | Copy squares | Overlapping rectangles | Wallet dropdown | Copy to clipboard |
 | Logout arrow | Arrow pointing right through door | Wallet dropdown | Disconnect wallet |
 | LIVE badge | Green pill with pulsing dot | Card headers | Real-time live data |
@@ -928,18 +928,18 @@ Background: Light warm tone with coral accents.
 | **Soulbound** | An NFT permanently attached to your wallet. You cannot sell, trade, or transfer it. | ERC-5192 token where locked() always returns true and transferFrom() is blocked |
 | **Waterfall** | The order in which losses are absorbed: bond first, then junior, then senior | The 3-layer loss absorption mechanism: IssuerBond -> jrCVR -> srCVR |
 | **Default** | When a company fails to meet its financial obligations | Status 3 in IssuerRegistry -- triggered by 2-of-3 TIR attestation via DefaultOracle |
-| **Attestor** | A professional who independently verifies information about token issuers | A custodian, legal rep, or auditor registered in the TIR with a minimum 5 BNB bond |
+| **Attestor** | A professional who independently verifies information about token issuers | A custodian, legal rep, or auditor registered in the TIR with a minimum 5% Bond bond |
 | **2-of-3** | Two out of three verifiers must agree for a decision to count | The confirmation threshold in TIR -- requires votes from 2 of the 3 attestor types |
 | **Premium** | The price you pay for insurance coverage, expressed as an annual rate | Annual rate in basis points, calculated by the formula 1600 x e^(-0.001386 x IRS) |
 | **ProtectionCert** | Your proof of insurance. A soulbound NFT that says you are covered. | ERC-721 NFT minted to the buyer's wallet with coverage amount, issuer, dates, and premium |
 | **SubrogationNFT** | A digital receipt proving CoverFi paid out a claim, used by the Foundation for legal recovery | ERC-721 NFT minted to the Foundation containing the complete default evidence package |
-| **Gas fee** | A small network fee paid to process your blockchain transaction | The tBNB cost of executing a smart contract function on BNB Chain |
+| **Gas fee** | A small network fee paid to process your blockchain transaction | The HSK cost of executing a smart contract function on HashKey Chain |
 | **ERC-3643** | A standard for regulated security tokens that includes identity checks | The token standard ensuring only verified (KYC'd) holders can hold or receive tokens |
 | **Redemption Gate** | A temporary freeze on pool withdrawals during a crisis | Pool mechanism that blocks all withdrawals when an issuer enters MONITORING status |
 | **Coverage Ratio** | How much of the pool is committed to covering policies | (Total Insured Amount / Pool TVL) x 100 -- higher means more risk for underwriters |
 | **Observation Period** | A waiting period after an issuer registers before they become fully active | 14-60 day period (depending on track) during which the issuer must receive attestor verifications |
 | **Fast Track** | An expedited registration path for issuers with well-established attestors | 14-day observation period vs 60 days for standard track |
-| **BAS** | BNB Attestation Service -- a blockchain-based identity verification system | On-chain attestation registry used to verify legal entity status of issuers |
+| **BAS** | Attestation Service -- a blockchain-based identity verification system | On-chain attestation registry used to verify legal entity status of issuers |
 | **NAV** | Net Asset Value -- the fair market value of the assets behind a token | Used as one of the 5 IRS dimensions to measure how closely the token price tracks its underlying value |
 | **Epoch** | A time period used for calculating and distributing yield | The interval at which premium income is allocated to pool participants |
 | **Wind-Down** | The process of an issuer gracefully exiting the protocol | Issuer initiates closure, coverage expires, bond is returned minus protocol fees |
@@ -982,10 +982,10 @@ A: It is an NFT that cannot be transferred. Once minted to your wallet, it stays
 A: Yes, if a default occurs and the losses are large enough. However, the waterfall protects you: the issuer's bond is consumed first, then the junior tranche, and only then the senior tranche. Senior LPs are the most protected.
 
 **Q: What network do I need to be on?**
-A: BSC Testnet (Chain ID 97). If you are on the wrong network, a warning banner appears with a one-click "Switch Network" button.
+A: HashKey Chain Testnet (Chain ID 133). If you are on the wrong network, a warning banner appears with a one-click "Switch Network" button.
 
 **Q: What does the theme toggle do?**
 A: It switches between light mode (warm cream backgrounds) and dark mode (dark gray/black backgrounds). Your preference is saved in localStorage and persists across pages and browser sessions.
 
 **Q: Where can I see my transactions on the blockchain?**
-A: Click the "View all on BNBScan" link in the Your Transactions card, or click any transaction hash in the events feed. These open the BSC Testnet block explorer in a new tab.
+A: Click the "View all on HashKey Explorer" link in the Your Transactions card, or click any transaction hash in the events feed. These open the HashKey Chain Testnet block explorer in a new tab.

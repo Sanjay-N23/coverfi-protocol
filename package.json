@@ -11,6 +11,8 @@
     "deploy:local": "hardhat run scripts/deploy.ts",
     "deploy:testnet": "hardhat run scripts/deploy.ts --network bscTestnet",
     "deploy:mainnet": "hardhat run scripts/deploy.ts --network bscMainnet",
+    "deploy:hashkey": "hardhat run scripts/deploy.ts --network hashkeyTestnet",
+    "demo:hashkey": "hardhat run scripts/demo-testnet.ts --network hashkeyTestnet",
     "verify:testnet": "hardhat run scripts/verify.ts --network bscTestnet",
     "demo:testnet": "hardhat run scripts/demo-testnet.ts --network bscTestnet",
     "gas": "REPORT_GAS=true hardhat test"

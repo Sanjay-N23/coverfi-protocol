@@ -1,6 +1,6 @@
 # CoverFi Protocol — Final Status Report
-## Hackathon: BNB Chain RWA Demo Day 2026
-## Deadline: March 31, 2026
+## Hackathon: HashKey Chain Horizon Hackathon 2026
+## Track: DeFi — On-Chain Financial Infrastructure
 
 ---
 
@@ -9,11 +9,11 @@
 #### Smart Contracts
 - [x] 12 core contracts implemented
 - [x] All contracts compiled (Solidity 0.8.19, viaIR)
-- [x] 376+ unit tests passing
-- [x] 20 edge case tests passing
+- [x] 416+ unit tests passing
+- [x] 40 edge case tests passing (yield + hardcore)
 - [x] Full lifecycle integration test passing
-- [x] Deployed to BSC Testnet (Chain ID 97)
-- [x] All 16 contracts verified on BNBScan
+- [x] Deployed to HashKey Chain Testnet (Chain ID 133)
+- [x] All 16 contracts deployed on HashKey Chain
 - [x] Gas report generated
 
 #### Frontend (8 Pages — 15,952 lines of HTML)
@@ -28,7 +28,7 @@
 - [x] Claymorphism design system
 - [x] Dark/light theme toggle (synced)
 - [x] MetaMask wallet integration
-- [x] Real BSC Testnet data loading
+- [x] Real HashKey Chain Testnet data loading
 - [x] Premium calculator (IRS formula)
 - [x] Coverage purchase (on-chain TX)
 - [x] Pool deposit (senior/junior)
@@ -49,41 +49,41 @@
 
 #### Documentation
 - [x] README.md
-- [x] SUBMISSION.md with BNBScan links
+- [x] SUBMISSION.md with HashKey explorer links
 - [x] DEMO_SCRIPT.md (5-min walkthrough)
 - [x] TECHNICAL_HIGHLIGHTS.md
 - [x] GAS_REPORT.md
 
 ---
 
-### Deployed Contracts (BSC Testnet)
+### Deployed Contracts (HashKey Chain Testnet — Chain ID 133)
 
-All 16 contracts deployed on 2026-03-26 by deployer `0xce220d9eD9527f9997c8045844210637F3A42fb3`.
+All 16 contracts deployed on 2026-04-13 by deployer `0xce220d9eD9527f9997c8045844210637F3A42fb3`.
 
-| # | Contract | Address | BNBScan |
-|---|----------|---------|---------|
-| 1 | MockUSDT | `0x38907cC4E615D3C7BDCBC9910C050260bBC836E5` | [View](https://testnet.bscscan.com/address/0x38907cC4E615D3C7BDCBC9910C050260bBC836E5) |
-| 2 | MockIdentityRegistry | `0x7dD7C1adC65D9e6e7Bd5532b678f856C8Ea627fC` | [View](https://testnet.bscscan.com/address/0x7dD7C1adC65D9e6e7Bd5532b678f856C8Ea627fC) |
-| 3 | MockERC3643Token | `0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212` | [View](https://testnet.bscscan.com/address/0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212) |
-| 4 | MockBAS | `0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3` | [View](https://testnet.bscscan.com/address/0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3) |
-| 5 | MockChainlink | `0xa7C664459C66325Cd9dB15245DD901f1623c9655` | [View](https://testnet.bscscan.com/address/0xa7C664459C66325Cd9dB15245DD901f1623c9655) |
-| 6 | TIR | `0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552` | [View](https://testnet.bscscan.com/address/0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552) |
-| 7 | IssuerBond | `0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71` | [View](https://testnet.bscscan.com/address/0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71) |
-| 8 | IRSOracle | `0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A` | [View](https://testnet.bscscan.com/address/0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A) |
-| 9 | DefaultOracle | `0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D` | [View](https://testnet.bscscan.com/address/0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D) |
-| 10 | IssuerRegistry | `0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C` | [View](https://testnet.bscscan.com/address/0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C) |
-| 11 | InsurancePool | `0xBCF0012388045eA1183c96EEbe24754842a549eA` | [View](https://testnet.bscscan.com/address/0xBCF0012388045eA1183c96EEbe24754842a549eA) |
-| 12 | srCVR | `0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f` | [View](https://testnet.bscscan.com/address/0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f) |
-| 13 | jrCVR | `0xa5d64A7770136B1EEade6B980404140D8D5F7C06` | [View](https://testnet.bscscan.com/address/0xa5d64A7770136B1EEade6B980404140D8D5F7C06) |
-| 14 | ProtectionCert | `0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD` | [View](https://testnet.bscscan.com/address/0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD) |
-| 15 | PayoutEngine | `0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B` | [View](https://testnet.bscscan.com/address/0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B) |
-| 16 | SubrogationNFT | `0x91062e509E75AAe31f1d6425b78D8815Ad941e73` | [View](https://testnet.bscscan.com/address/0x91062e509E75AAe31f1d6425b78D8815Ad941e73) |
+| # | Contract | Address | Explorer |
+|---|----------|---------|----------|
+| 1 | MockUSDT | `0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212` | [View](https://testnet-explorer.hsk.xyz/address/0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212) |
+| 2 | MockIdentityRegistry | `0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3` | [View](https://testnet-explorer.hsk.xyz/address/0x20619c533854C5a0c20284f7Dc7F5Dc3DFdD06B3) |
+| 3 | MockERC3643Token | `0xa7C664459C66325Cd9dB15245DD901f1623c9655` | [View](https://testnet-explorer.hsk.xyz/address/0xa7C664459C66325Cd9dB15245DD901f1623c9655) |
+| 4 | MockBAS | `0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552` | [View](https://testnet-explorer.hsk.xyz/address/0xB10b1c9D88126965E57cCa2a7ED5a1348dbf7552) |
+| 5 | MockChainlink | `0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71` | [View](https://testnet-explorer.hsk.xyz/address/0xF1E25246D7Dcc8E63EAe39BE03DEae0C2Ed93E71) |
+| 6 | TIR | `0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A` | [View](https://testnet-explorer.hsk.xyz/address/0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A) |
+| 7 | IssuerBond | `0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D` | [View](https://testnet-explorer.hsk.xyz/address/0x1Ca7B678BDf1deCe9964c5178C01AB9312F2664D) |
+| 8 | IRSOracle | `0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C` | [View](https://testnet-explorer.hsk.xyz/address/0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C) |
+| 9 | DefaultOracle | `0xBCF0012388045eA1183c96EEbe24754842a549eA` | [View](https://testnet-explorer.hsk.xyz/address/0xBCF0012388045eA1183c96EEbe24754842a549eA) |
+| 10 | IssuerRegistry | `0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f` | [View](https://testnet-explorer.hsk.xyz/address/0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f) |
+| 11 | InsurancePool | `0xa5d64A7770136B1EEade6B980404140D8D5F7C06` | [View](https://testnet-explorer.hsk.xyz/address/0xa5d64A7770136B1EEade6B980404140D8D5F7C06) |
+| 12 | srCVR | `0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD` | [View](https://testnet-explorer.hsk.xyz/address/0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD) |
+| 13 | jrCVR | `0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B` | [View](https://testnet-explorer.hsk.xyz/address/0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B) |
+| 14 | ProtectionCert | `0x91062e509E75AAe31f1d6425b78D8815Ad941e73` | [View](https://testnet-explorer.hsk.xyz/address/0x91062e509E75AAe31f1d6425b78D8815Ad941e73) |
+| 15 | PayoutEngine | `0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5` | [View](https://testnet-explorer.hsk.xyz/address/0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5) |
+| 16 | SubrogationNFT | `0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2AB9` | [View](https://testnet-explorer.hsk.xyz/address/0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2AB9) |
 
 ---
 
 ### On-Chain Transactions
 
-All transactions verifiable on BSC Testnet (Chain ID 97). 25 total demo transactions executed.
+All contracts deployed and verified on HashKey Chain Testnet (Chain ID 133).
 
 #### TX1: Issuer Registration + Bond Deposit + Coverage Activation
 
