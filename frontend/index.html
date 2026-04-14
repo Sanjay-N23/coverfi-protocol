@@ -933,7 +933,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
     <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F0B90B"/><stop offset="100%" stop-color="#FFD443"/>
+      <stop offset="0%" stop-color="#DAA520"/><stop offset="100%" stop-color="#F5C842"/>
+    </linearGradient>
+    <linearGradient id="diamondGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#DAA520"/><stop offset="100%" stop-color="#C8960C"/>
     </linearGradient>
     <linearGradient id="coverageGrad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#E8760A"/><stop offset="100%" stop-color="#FF9533"/>
@@ -965,10 +968,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="CoverFi home">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M16 2L4 9v14l12 7 12-7V9L16 2z" fill="url(#logoGrad)" opacity="0.9"/>
-        <path d="M16 6l-8 4.6v9.2L16 24.4l8-4.6v-9.2L16 6z" fill="currentColor" opacity="0.15"/>
-        <path d="M16 10l-4 2.3v4.6l4 2.3 4-2.3v-4.6L16 10z" fill="url(#logoGrad)"/>
+      <svg width="38" height="32" viewBox="0 0 48 40" fill="none" aria-hidden="true">
+        <!-- Left hexagon (gray outline) -->
+        <polygon points="14,6 22,6 26,13 22,20 14,20 10,13" fill="none" stroke="#8B95A5" stroke-width="1.5"/>
+        <!-- Right hexagon (teal outline) -->
+        <polygon points="22,6 30,6 34,13 30,20 22,20 18,13" fill="none" stroke="#2EC4B6" stroke-width="1.5"/>
+        <!-- Gold diamond (center, overlapping both hexagons) -->
+        <polygon points="22,4 27,13 22,22 17,13" fill="url(#diamondGrad)"/>
+        <!-- Diamond center dot -->
+        <circle cx="22" cy="13" r="1.2" fill="white"/>
       </svg>
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
@@ -1366,10 +1374,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   <div class="footer-inner stagger">
     <div class="footer-brand reveal">
       <a href="#hero" class="nav-logo" style="margin-bottom:0.5rem">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-          <path d="M16 2L4 9v14l12 7 12-7V9L16 2z" fill="url(#logoGrad)" opacity="0.9"/>
-          <path d="M16 6l-8 4.6v9.2L16 24.4l8-4.6v-9.2L16 6z" fill="currentColor" opacity="0.15"/>
-          <path d="M16 10l-4 2.3v4.6l4 2.3 4-2.3v-4.6L16 10z" fill="url(#logoGrad)"/>
+        <svg width="34" height="28" viewBox="0 0 48 40" fill="none">
+          <polygon points="14,6 22,6 26,13 22,20 14,20 10,13" fill="none" stroke="#8B95A5" stroke-width="1.5"/>
+          <polygon points="22,6 30,6 34,13 30,20 22,20 18,13" fill="none" stroke="#2EC4B6" stroke-width="1.5"/>
+          <polygon points="22,4 27,13 22,22 17,13" fill="url(#diamondGrad)"/>
+          <circle cx="22" cy="13" r="1.2" fill="white"/>
         </svg>
         <span class="nav-logo-text" style="font-size:1.125rem">Cover<span class="accent">Fi</span></span>
       </a>
