@@ -1,12 +1,12 @@
 # CoverFi Protocol — Complete Technical Proposal v5
-## The First On-Chain CDS Equivalent for ERC-3643 RWA Tokens on BNB Chain
+## The First On-Chain CDS Equivalent for ERC-3643 RWA Tokens on HashKey Chain
 
 ---
 
 > **Document Classification:** Complete Technical Proposal — Claude Code Build Reference  
 > **Version:** 5.0 (Final — Post All Adversarial Scrutiny, All Fixes Applied)  
 > **Date:** March 25, 2026  
-> **Hackathon:** RWA Demo Day — DoraHacks / BNB Chain / HK Web3 Festival 2026  
+> **Hackathon:** Horizon Hackathon — DoraHacks / HashKey Chain / HK Web3 Festival 2026  
 > **Submission Deadline:** March 31, 2026  
 > **Demo Day:** April 8, 2026  
 > **Agent Build:** 20-Agent Hierarchy · 6 Groups · Master Supervisor · Full Verification Pass  
@@ -67,7 +67,7 @@ PART VII — DEPLOYMENT
   Section 34  hardhat.config.ts — Complete
   Section 35  Deployment Script — All 12 Contracts
   Section 36  Permission Wiring Script
-  Section 37  BNBScan Verification
+  Section 37  HashKey Explorer Verification
   Section 38  Mock Setup for Demo
 
 PART VIII — TESTING
@@ -105,9 +105,9 @@ APPENDIX
 
 | Field | Detail |
 |---|---|
-| Event | RWA Demo Day — Project Recruitment |
+| Event | Horizon Hackathon — Project Recruitment |
 | Platform | DoraHacks (dorahacks.io/hackathon/rwademoday/detail) |
-| Theme | Real World Assets (RWA) on BNB Chain |
+| Theme | Real World Assets (RWA) on HashKey Chain |
 | Submission Deadline | **March 31, 2026 — HARD DEADLINE** |
 | Expert Review Period | April 1–2, 2026 |
 | Demo Day | **April 8, 2026** |
@@ -117,19 +117,19 @@ APPENDIX
 
 | Prize | Amount | Condition |
 |---|---|---|
-| First Prize | $5,000 USD cash | BNB Chain deployment **mandatory** |
-| Second Prize | $3,000 USD cash | BNB Chain deployment **mandatory** |
-| Third Prize (×2) | $1,000 USD each | BNB Chain deployment **mandatory** |
+| First Prize | $5,000 USD cash | HashKey Chain deployment **mandatory** |
+| Second Prize | $3,000 USD cash | HashKey Chain deployment **mandatory** |
+| Third Prize (×2) | $1,000 USD each | HashKey Chain deployment **mandatory** |
 | ICC Incubation | ~$100,000 value | Top projects |
-| BNB RWA Incentive Program | TVL grants + ecosystem | Post-win application |
+| HashKey RWA Incentive Program | TVL grants + ecosystem | Post-win application |
 
-> ⚠️ **Critical:** The hackathon page states: *"Prizes are awarded upon successful deployment on BNB Chain."* A working BNBScan transaction is not optional — it is the prize condition.
+> ⚠️ **Critical:** The hackathon page states: *"Prizes are awarded upon successful deployment on HashKey Chain."* A working HashKey Explorer transaction is not optional — it is the prize condition.
 
 ### 1.3 Eligibility Requirements — All Three Must Be Met
 
 1. **RWA-focused** — Project directly addresses Real World Asset tokenization or infrastructure ✅
 2. **Early stage** — No governance token issued; fundraising not completed ✅ (CVRFI NOT issued)
-3. **BNB Chain deployment** — Functional smart contracts deployed on BNB Chain ✅ (required)
+3. **HashKey Chain deployment** — Functional smart contracts deployed on HashKey Chain ✅ (required)
 
 ### 1.4 Judge Profiles and What They Care About
 
@@ -137,7 +137,7 @@ APPENDIX
 |---|---|---|
 | HashKey Capital | Tier-1 Asian VC, former TradFi professionals | CDS parallel, institutional credit depth, revenue model |
 | Fenbushi Capital | Asia's oldest blockchain VC, infrastructure thesis | Infrastructure primitive, composability, no token dependency |
-| waterdripfund | Asia-focused Web3 early stage | Market size, founder conviction, BNB Chain ecosystem fit |
+| waterdripfund | Asia-focused Web3 early stage | Market size, founder conviction, HashKey Chain ecosystem fit |
 | CGV FOF | Multi-stage crypto fund of funds | Portfolio construction, risk management, defensibility |
 | RWAConnect | Specialized RWA accelerator | Actual gap in RWA infrastructure, issuer relationships, compliance |
 
@@ -266,9 +266,9 @@ MARKET SIZE STACK:
 | Jan 2026 | $12B | rwa.xyz March 2026 confirmed |
 | 2030 projection | $16 trillion | Boston Consulting Group estimate |
 
-### 3.3 BNB Chain RWA Ecosystem
+### 3.3 HashKey Chain RWA Ecosystem
 
-Active RWA issuers on BNB Chain today (all are potential CoverFi customers):
+Active RWA issuers on HashKey Chain today (all are potential CoverFi customers):
 
 | Issuer | Asset Type | Approximate TVL |
 |---|---|---|
@@ -278,7 +278,7 @@ Active RWA issuers on BNB Chain today (all are potential CoverFi customers):
 | OpenEden | Treasury bills | ~$45M |
 | Avalon Finance | Yield-bearing RWA | ~$80M |
 
-**BNB Chain RWA Incentive Program** (launched May 2025): Offers liquidity support, growth funding, compliance resources, and technical guidance to qualifying RWA projects — confirmed active via BNB Chain blog.
+**HashKey Chain RWA Incentive Program** (launched May 2025): Offers liquidity support, growth funding, compliance resources, and technical guidance to qualifying RWA projects — confirmed active via HashKey Chain blog.
 
 ---
 
@@ -290,7 +290,7 @@ Active RWA issuers on BNB Chain today (all are potential CoverFi customers):
 
 ### 4.1 One-Sentence Definition
 
-CoverFi is the first on-chain permissionless risk-sharing protocol that protects RWA token holders against issuer default risk — combining mandatory issuer-bonded first-loss capital, continuous behavioral credit scoring (IRS), compliance-native ERC-3643 payout mechanics, and a deterministic on-chain solvency stress oracle — deployed natively on BNB Chain.
+CoverFi is the first on-chain permissionless risk-sharing protocol that protects RWA token holders against issuer default risk — combining mandatory issuer-bonded first-loss capital, continuous behavioral credit scoring (IRS), compliance-native ERC-3643 payout mechanics, and a deterministic on-chain solvency stress oracle — deployed natively on HashKey Chain.
 
 ### 4.2 The TradFi Parallel
 
@@ -578,7 +578,7 @@ Issuer submits wind-down (all investors fully repaid):
 ```
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                       COVERFI PROTOCOL v5 — COMPLETE SYSTEM                 ║
-║                       BNB Smart Chain (EVM) · Chain ID: 56                  ║
+║                       HashKey Chain (EVM) · Chain ID: 133                  ║
 ╠══════════════════════════════════════════════════════════════════════════════╣
 ║                                                                              ║
 ║  ┌─────────────────────────────────────────────────────────────────────┐    ║
@@ -693,9 +693,9 @@ Issuer submits wind-down (all investors fully repaid):
 ║  │  └─────────────────┘   └─────────────────┘   └──────────────────┘  │    ║
 ║  └─────────────────────────────────────────────────────────────────────┘    ║
 ║                                                                              ║
-║  EXTERNAL DEPENDENCIES (all production-deployed on BNB Chain):              ║
+║  EXTERNAL DEPENDENCIES (all production-deployed on HashKey Chain):              ║
 ║  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────────┐ ║
-║  │ BAS (BNB     │  │ Chainlink    │  │ ABDKMath     │  │ ERC-3643       │ ║
+║  │ BAS (Attestation     │  │ Chainlink    │  │ ABDKMath     │  │ ERC-3643       │ ║
 ║  │ Attestation  │  │ Proof of     │  │ 64x64        │  │ T-REX (Tokeny) │ ║
 ║  │ Service)     │  │ Reserve      │  │              │  │                │ ║
 ║  │              │  │              │  │ exp() for    │  │ isVerified()   │ ║
@@ -874,10 +874,10 @@ Derivation:
   Conservative safety: cap at 4 × total_bond
   
 Example:
-  3 attestors × 5 BNB each @ $600/BNB = $9,000 total bonded
+  3 attestors × 5% Bond each @ market price = $9,000 total bonded
   Max pool TVL = 4 × $9,000 = $36,000
   
-  For $500K pool: each attestor must bond $500,000 / (4 × 3) = $41,667 = ~69 BNB
+  For $500K pool: each attestor must bond $500,000 / (4 × 3) = $41,667 = equivalent USDT
 ```
 
 **Default Confirmation Logic:**
@@ -1385,14 +1385,14 @@ After any score update:
 EXTERNAL DEPENDENCY MAP:
 
 ┌─────────────────────────────────────────────────────────────────────┐
-│ Dependency              │ Use in CoverFi      │ BNB Chain Status     │
+│ Dependency              │ Use in CoverFi      │ HashKey Chain Status     │
 │─────────────────────────│─────────────────────│──────────────────────│
-│ BAS (BNB Attestation    │ All TIR default     │ ✅ Production         │
-│ Service)               │ attestations        │ BNB Chain RWA blog   │
+│ BAS (Attestation Attestation    │ All TIR default     │ ✅ Production         │
+│ Service)               │ attestations        │ HashKey Chain RWA blog   │
 │                         │ Issuer registration │ confirmed partner    │
 │─────────────────────────│─────────────────────│──────────────────────│
 │ Chainlink Proof of      │ IRS collateral      │ ✅ Production         │
-│ Reserve                 │ health dimension    │ Live on BSC          │
+│ Reserve                 │ health dimension    │ Live on HashKey          │
 │─────────────────────────│─────────────────────│──────────────────────│
 │ ABDKMath64x64           │ Exponential premium │ ✅ Library deployed   │
 │                         │ formula calculation │ Used: Frax, Synthetix│
@@ -1405,7 +1405,7 @@ EXTERNAL DEPENDENCY MAP:
 │ v4.9+                   │ ERC-5192, Pausable  │ Industry standard    │
 │                         │ ReentrancyGuard     │                      │
 │─────────────────────────│─────────────────────│──────────────────────│
-│ BNB Testnet USDT        │ Demo premium        │ ✅ Testnet deployed   │
+│ HashKey Testnet USDT        │ Demo premium        │ ✅ Testnet deployed   │
 │ 0x337610d27c682E347C    │ payments, payouts   │ addr verified active │
 │─────────────────────────│─────────────────────│──────────────────────│
 │ Keeper Bot (self-hosted)│ TWAS cache update   │ 🔧 Build required    │
@@ -2013,10 +2013,10 @@ pragma solidity ^0.8.19;
 /**
  * @title TIR — Trusted Issuer Registry
  * @notice Network of bonded professional attestors who confirm default events.
- *         Uses BAS (BNB Attestation Service) for all attestation submissions.
+ *         Uses BAS (Attestation Service) for all attestation submissions.
  *         Three attestor categories, 2-of-3 distinct categories for confirmation.
  * @dev Layer 3 of CoverFi Protocol v5
- *      BAS integration: BNB Chain's native attestation layer (confirmed partner)
+ *      BAS integration: HashKey Chain's native attestation layer (confirmed partner)
  *      Patent area: Reputation-weighted consensus (BWAC) — Area 2 innovation
  */
 interface ITIR {
@@ -2091,13 +2091,13 @@ interface ITIR {
      * @param attestorType CUSTODIAN, LEGAL_REP, or AUDITOR
      *
      * Requirements:
-     *   - msg.value (BNB bond) must meet minimum for chosen type
+     *   - msg.value (USDT bond) must meet minimum for chosen type
      *   - msg.sender must not already be registered
      *
      * Bond requirements (minimum):
-     *   CUSTODIAN:  5 BNB (adjusts based on pools they cover)
-     *   LEGAL_REP:  5 BNB
-     *   AUDITOR:    5 BNB
+     *   CUSTODIAN:  5% Bond (adjusts based on pools they cover)
+     *   LEGAL_REP:  5% Bond
+     *   AUDITOR:    5% Bond
      *
      * Actual required bond scales with pool TVL they cover:
      *   Required bond per attestor = pool TVL / 4 / 3 attestors
@@ -3492,7 +3492,7 @@ TIR BOND SIZING FORMULA:
     
   Example for $500K target pool:
     Required total bond = $500,000 / 4 = $125,000
-    Per attestor minimum = $125,000 / 3 = $41,667 ≈ 70 BNB @ $600/BNB
+    Per attestor minimum = $125,000 / 3 = $41,667 ≈ 70 BNB @ market price
     
   VERIFIED:
     2 colluders gain: $250,000 (half of pool)
@@ -3599,8 +3599,8 @@ COMPARABLES:
 ### 28.3 Worked Financial Example — Full Pool
 
 ```
-WORKED EXAMPLE: INV-BNB-MSME-001
-(Indian MSME invoice tokenization on BNB Chain)
+WORKED EXAMPLE: INV-HSK-MSME-001
+(Indian MSME invoice tokenization on HashKey Chain)
 
   Token market cap:        $500,000 USDT
   IRS at activation:       600 (Standard Track graduation)
@@ -3965,7 +3965,7 @@ RECOMMENDED STRATEGY:
 ATTORNEY RECOMMENDATION:
   Singapore: Amica Law (blockchain IP specialist)
   India: Remfry & Sagar (fintech patents) or K&S Partners
-  For BNB Chain ecosystem: Consult Baker McKenzie Singapore (advised BSC)
+  For HashKey Chain ecosystem: Consult Baker McKenzie Singapore (advised HashKey)
 ```
 
 ---
@@ -4041,27 +4041,27 @@ npx hardhat init
 ## Section 33: Network Configuration
 
 ```
-BNB TESTNET (BSC Testnet):
-  Network Name:      BSC Testnet
-  RPC URL:           https://data-seed-prebsc-1-s1.binance.org:8545
+HASHKEY TESTNET (HashKey Chain Testnet):
+  Network Name:      HashKey Chain Testnet
+  RPC URL:           https://testnet.hsk.xyz
   Chain ID:          97
-  Currency Symbol:   tBNB
-  Block Explorer:    https://testnet.bscscan.com
+  Currency Symbol:   HSK
+  Block Explorer:    https://testnet.testnet-explorer.hsk.xyz
   Block Time:        ~3 seconds
-  Faucet:            https://testnet.bnbchain.org/faucet-smart
-  tBNB per request:  0.1–0.5 tBNB
-  Required for deploy: ~0.05–0.08 tBNB (12 contracts)
+  Faucet:            https://hashkeychain.net/faucet
+  HSK per request:  0.1–0.5 HSK
+  Required for deploy: ~0.05–0.08 HSK (12 contracts)
   USDT (testnet):    0x337610d27c682E347C9cD60BD4b3b107C9d34dDd
 
-BNB MAINNET:
-  Network Name:      BSC Mainnet
-  RPC URL:           https://bsc-dataseed.binance.org/
+HASHKEY MAINNET:
+  Network Name:      HashKey Mainnet
+  RPC URL:           https://mainnet.hsk.xyz
   Chain ID:          56
-  Currency Symbol:   BNB
-  Block Explorer:    https://bscscan.com
+  Currency Symbol:   HSK
+  Block Explorer:    https://testnet-explorer.hsk.xyz
   Block Time:        ~3 seconds
   USDT (mainnet):    0x55d398326f99059fF775485246999027B3197955
-  Min BNB for deploy: ~0.3–0.5 BNB (~$180–$300 at $600/BNB)
+  Min HSK for deploy: ~0.3–0.5% Bond (~$180–$300 at market price)
 ```
 
 ---
@@ -4101,7 +4101,7 @@ const config: HardhatUserConfig = {
 
     // BNB Testnet — use for demo
     bscTestnet: {
-      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      url: "https://testnet.hsk.xyz",
       chainId: 97,
       gasPrice: 10000000000, // 10 gwei
       accounts: [DEPLOYER_KEY],
@@ -4110,7 +4110,7 @@ const config: HardhatUserConfig = {
 
     // BNB Mainnet — required for prize
     bscMainnet: {
-      url: "https://bsc-dataseed.binance.org/",
+      url: "https://mainnet.hsk.xyz",
       chainId: 56,
       gasPrice: 3000000000, // 3 gwei
       accounts: [DEPLOYER_KEY],
@@ -4128,8 +4128,8 @@ const config: HardhatUserConfig = {
         network: "bscTestnet",
         chainId: 97,
         urls: {
-          apiURL: "https://api-testnet.bscscan.com/api",
-          browserURL: "https://testnet.bscscan.com",
+          apiURL: "https://api-testnet.testnet-explorer.hsk.xyz/api",
+          browserURL: "https://testnet.testnet-explorer.hsk.xyz",
         },
       },
     ],
@@ -4186,8 +4186,8 @@ async function main(): Promise<void> {
 
   // ─── ADDRESSES ─────────────────────────────────────────────────────────────
   const USDT = isTestnet
-    ? "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"   // BSC Testnet USDT
-    : "0x55d398326f99059fF775485246999027B3197955";   // BSC Mainnet USDT
+    ? "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"   // HashKey Chain Testnet USDT
+    : "0x55d398326f99059fF775485246999027B3197955";   // HashKey Mainnet USDT
 
   const FOUNDATION = process.env.COVERFI_FOUNDATION!;
   if (!FOUNDATION) throw new Error("COVERFI_FOUNDATION not set in .env");
@@ -4341,8 +4341,8 @@ async function main(): Promise<void> {
 
   // ─── FINAL SUMMARY ──────────────────────────────────────────────────────────
   const explorerBase = isTestnet
-    ? "https://testnet.bscscan.com/address"
-    : "https://bscscan.com/address";
+    ? "https://testnet.testnet-explorer.hsk.xyz/address"
+    : "https://testnet-explorer.hsk.xyz/address";
 
   console.log("\n════════════════════════════════════════════");
   console.log("  ✅ DEPLOYMENT COMPLETE");
@@ -4390,7 +4390,7 @@ async function setupDemo(): Promise<void> {
 
   // ─── STEP 1: Register TIR Attestors ──────────────────────────────────────
   console.log("\n📋 Step 1: Registering TIR attestors...");
-  const bondAmount = ethers.parseEther("5"); // 5 BNB each
+  const bondAmount = ethers.parseEther("5"); // 5% Bond each
 
   await TIR.connect(custodian).registerAttestor(0, { value: bondAmount }); // CUSTODIAN
   await TIR.connect(legalRep).registerAttestor(1, { value: bondAmount });   // LEGAL_REP
@@ -4437,7 +4437,7 @@ async function setupDemo(): Promise<void> {
   // Activate coverage (skip time in demo — use deployer override)
   await IssuerRegistry.connect(deployer).forceActivateForDemo(MockToken.target);
   console.log("   ✓ Coverage activated — IRS: 600 | Status: ACTIVE");
-  console.log("   📊 BNBScan Transaction 1: COMPLETE");
+  console.log("   📊 HashKey Explorer Transaction 1: COMPLETE");
 
   // ─── STEP 4: Pool Setup and Coverage Purchase (DEMO Transaction 2) ────────
   console.log("\n💰 Step 4: Pool setup + coverage purchase (DEMO Transaction 2)...");
@@ -4460,7 +4460,7 @@ async function setupDemo(): Promise<void> {
   await PayoutEngine.connect(investor1).purchaseCoverage(MockToken.target, 100);
   console.log("   ✓ Investor1 purchased Protection Certificate");
   console.log("   ✓ ProCert metadata: coveredAmount=100, estimatedPayout=100%");
-  console.log("   📊 BNBScan Transaction 2: COMPLETE");
+  console.log("   📊 HashKey Explorer Transaction 2: COMPLETE");
 
   // ─── STEP 5: Default Lifecycle (DEMO Transaction 3) ──────────────────────
   console.log("\n⚡ Step 5: Default lifecycle (DEMO Transaction 3)...");
@@ -4489,9 +4489,9 @@ async function setupDemo(): Promise<void> {
   console.log("   ✓ USDT transferred to Investor1");
   console.log("   ✓ SubrogationNFT minted to Foundation");
   console.log("   ✓ IRS → 0 | Issuer → BLACKLISTED");
-  console.log("   📊 BNBScan Transaction 3: COMPLETE");
+  console.log("   📊 HashKey Explorer Transaction 3: COMPLETE");
 
-  console.log("\n🎉 DEMO SETUP COMPLETE — All 3 transactions on BNBScan!");
+  console.log("\n🎉 DEMO SETUP COMPLETE — All 3 transactions on HashKey Explorer!");
 }
 
 setupDemo().catch(console.error);
@@ -4499,7 +4499,7 @@ setupDemo().catch(console.error);
 
 ---
 
-## Section 37: BNBScan Verification
+## Section 37: HashKey Explorer Verification
 
 ```bash
 # After deployment, verify each contract:
@@ -4519,8 +4519,8 @@ npx hardhat verify --network bscTestnet \
 
 # Continue for all 12 contracts...
 
-# Method 2: Manual via BNBScan UI
-# 1. Go to: https://testnet.bscscan.com/address/<CONTRACT_ADDRESS>
+# Method 2: Manual via HashKey Explorer UI
+# 1. Go to: https://testnet.testnet-explorer.hsk.xyz/address/<CONTRACT_ADDRESS>
 # 2. Click "Contract" tab
 # 3. Click "Verify and Publish"
 # 4. Fill: Contract Name, Compiler v0.8.19, Optimization: Yes/200
@@ -4998,9 +4998,9 @@ describe("Full Protocol Lifecycle Integration Test", function () {
 PRE-DEMO CHECKLIST (complete 48h before April 8):
 
   ENVIRONMENT:
-  ☐ Deployer wallet has ≥0.1 BNB on BSC Testnet
-  ☐ All 12 contracts deployed successfully to BSC Testnet
-  ☐ All 12 contracts verified on BNBScan (green checkmark)
+  ☐ Deployer wallet has ≥0.1 BNB on HashKey Chain Testnet
+  ☐ All 12 contracts deployed successfully to HashKey Chain Testnet
+  ☐ All 12 contracts verified on HashKey Explorer (green checkmark)
   ☐ All contract addresses saved in deployments/bscTestnet.json
   ☐ Mock USDT faucet tested — deployer, issuer, investor, underwriter all have balance
 
@@ -5008,12 +5008,12 @@ PRE-DEMO CHECKLIST (complete 48h before April 8):
   ☐ TIR: 3 attestors registered (custodian, legalRep, auditor)
   ☐ MockBAS: 3 test attestation UIDs created
   ☐ IssuerRegistry.register() called → status = OBSERVATION
-  ☐ IRS = 400 confirmed on BNBScan event logs
+  ☐ IRS = 400 confirmed on HashKey Explorer event logs
   ☐ IssuerBond.deposit() called → bond confirmed
   ☐ 3 attestation calls → attestationCount = 3
   ☐ forceActivateForDemo() called → status = ACTIVE
   ☐ IRS = 600 confirmed
-  ☐ BNBScan link to transaction works and shows event logs
+  ☐ HashKey Explorer link to transaction works and shows event logs
 
   TRANSACTION 2 TEST (Pool + Coverage):
   ☐ InsurancePool.depositSenior() called → srCVR minted
@@ -5021,7 +5021,7 @@ PRE-DEMO CHECKLIST (complete 48h before April 8):
   ☐ PayoutEngine.purchaseCoverage() called → ProCert NFT minted
   ☐ ProCert metadata shows estimatedPayoutPct
   ☐ IRSOracle.getCoverageRatio() returns value > 0
-  ☐ BNBScan link works
+  ☐ HashKey Explorer link works
 
   TRANSACTION 3 TEST (Default + Payout):
   ☐ 3 TIR attestations submitted (custodian, legalRep, auditor)
@@ -5030,16 +5030,16 @@ PRE-DEMO CHECKLIST (complete 48h before April 8):
   ☐ USDT transferred to investor (check balance)
   ☐ SubrogationNFT minted to Foundation address
   ☐ IRS = 0 confirmed
-  ☐ BNBScan link works
+  ☐ HashKey Explorer link works
   ☐ All 3 transaction hashes saved for demo day
 
   DASHBOARD:
   ☐ Frontend (if built) shows live IRS score
   ☐ Frontend shows coverage ratio
-  ☐ Frontend shows 3 BNBScan links prominently
+  ☐ Frontend shows 3 HashKey Explorer links prominently
 
   BACKUP:
-  ☐ All 3 BNBScan links saved in a text file
+  ☐ All 3 HashKey Explorer links saved in a text file
   ☐ Screenshots of all 3 verified contracts taken
   ☐ Screenshot of payout transaction taken (shows USDT transfer)
   ☐ Backup deployment wallet funded (in case primary issues)
@@ -5071,7 +5071,7 @@ What to say while showing this:
    Their IRS starts at 600 — good tier, 6.91% annual premium.
    Everything from here is automatic."
    
-BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_1
+HashKey Explorer URL: https://testnet.testnet-explorer.hsk.xyz/tx/0xTX_HASH_1
 ```
 
 ### Transaction 2 — Underwriter Deposits, Investor Buys Coverage
@@ -5092,7 +5092,7 @@ What to say while showing this:
    they get 30 cents per dollar back automatically.
    The real-time coverage ratio is live on-chain: anyone can query it."
    
-BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_2
+HashKey Explorer URL: https://testnet.testnet-explorer.hsk.xyz/tx/0xTX_HASH_2
 ```
 
 ### Transaction 3 — Default Confirmed, Payout Executed, SubrogationNFT Minted
@@ -5116,7 +5116,7 @@ What to say while showing this:
    SubrogationNFT minted to CoverFi Foundation — we now pursue legal recovery.
    This is the $8 trillion CDS market, on-chain, in one transaction."
    
-BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_3
+HashKey Explorer URL: https://testnet.testnet-explorer.hsk.xyz/tx/0xTX_HASH_3
 ```
 
 ---
@@ -5139,7 +5139,7 @@ BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_3
 
 ### 43.3 The Demo (60 seconds)
 
-> "We built this on BNB Chain. Three transactions, all verifiable on BNBScan right now.
+> "We built this on HashKey Chain. Three transactions, all verifiable on HashKey Explorer right now.
 >
 > Transaction 1: [point to screen] Issuer registers, posts $25K USDT bond, IRS activates at 600.
 >
@@ -5149,7 +5149,7 @@ BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_3
 
 ### 43.4 The Business (30 seconds)
 
-> "Revenue is straightforward. 5% protocol fee on premiums. At $50M insured — 0.7% of current on-chain RWA market — that's $175K per year. At $200M it's $800K. We're targeting Matrixdock, Brickken, InvestaX on BNB Chain — all have institutional custodians already in our TIR framework.
+> "Revenue is straightforward. 5% protocol fee on premiums. At $50M insured — 0.7% of current on-chain RWA market — that's $175K per year. At $200M it's $800K. We're targeting Matrixdock, Brickken, InvestaX on HashKey Chain — all have institutional custodians already in our TIR framework.
 >
 > We have 49 patent-pending innovations across behavioral credit scoring, contagion modeling, and on-chain actuarial stress testing. The core protocol is infrastructure — not a dApp. We license the IRS oracle to any DeFi protocol that wants live RWA credit signals."
 
@@ -5169,17 +5169,17 @@ BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_3
 ### Q2: "How do you bootstrap the underwriter pool?"
 
 **Answer:**
-> "Three mechanisms working together. First, premium rates are high early — a new issuer at IRS 600 pays 6.9% APR. For underwriters, that's strong yield on a 30-day lockup product. Second, the mandatory issuer bond means the first $25K of any default is covered by the issuer's own capital — underwriters aren't the first line of defense. Third, we're targeting BNB Chain's RWA Incentive Program for TVL grants in the first 6 months. The program specifically supports RWA infrastructure — which we are."
+> "Three mechanisms working together. First, premium rates are high early — a new issuer at IRS 600 pays 6.9% APR. For underwriters, that's strong yield on a 30-day lockup product. Second, the mandatory issuer bond means the first $25K of any default is covered by the issuer's own capital — underwriters aren't the first line of defense. Third, we're targeting HashKey Chain's RWA Incentive Program for TVL grants in the first 6 months. The program specifically supports RWA infrastructure — which we are."
 
 ### Q3: "What stops the 3 TIR attestors from colluding to trigger a false default?"
 
 **Answer:**
 > "The bond sizing math makes collusion unprofitable by design. For a $500K pool, each attestor must bond $41,667. If two collude to trigger a false default, they gain $250K — half the pool. But they lose their bonds ($83K total) plus a 2× penalty ($166K), totaling $249K in losses. They make $1 — which doesn't account for criminal liability in their jurisdiction, permanent blacklisting from TIR, and destruction of their professional reputation. The economic attack vector is essentially closed. The legal attack vector is handled by the attestors being named, licensed professionals with legal accountability."
 
-### Q4: "The RWA market is dominated by Ethereum. Why BNB Chain?"
+### Q4: "The RWA market is dominated by Ethereum. Why HashKey Chain?"
 
 **Answer:**
-> "Three reasons. First, BNB Chain's transaction fees make continuous IRS score updates economically viable — at $0.01 per update versus $5+ on Ethereum, hourly oracle updates become practical infrastructure. Second, the BNB RWA Incentive Program provides direct ecosystem support — we've confirmed this program is active. Third, BAS — the BNB Attestation Service — is our core attestation layer and is natively deployed on BNB Chain. The architecture is BNB-native, not a port."
+> "Three reasons. First, HashKey Chain's transaction fees make continuous IRS score updates economically viable — at $0.01 per update versus $5+ on Ethereum, hourly oracle updates become practical infrastructure. Second, the HashKey RWA Incentive Program provides direct ecosystem support — we've confirmed this program is active. Third, BAS — the Attestation Service — is our core attestation layer and is natively deployed on HashKey Chain. The architecture is BNB-native, not a port."
 
 ### Q5: "What's your legal position? Is this insurance?"
 
@@ -5197,10 +5197,10 @@ BNBScan URL: https://testnet.bscscan.com/tx/0xTX_HASH_3
 ```
 PHASE 0 — HACKATHON MVP (Now → March 31, 2026)
 ──────────────────────────────────────────────────────────────────────────────
-Goal:    3 working BNBScan transactions on BSC Testnet
+Goal:    3 working HashKey Explorer transactions on HashKey Chain Testnet
 
 Deliverables:
-  ✓ 12 contracts deployed and verified on BSC Testnet
+  ✓ 12 contracts deployed and verified on HashKey Chain Testnet
   ✓ Demo setup script creates complete lifecycle in 3 transactions
   ✓ All contract interfaces documented
   ✓ DoraHacks submission form completed
@@ -5219,7 +5219,7 @@ Deliverables:
   ☐ BNB Testnet with real issuer participation (1 confirmed issuer target)
   ☐ Real BAS attestations (not mock) from actual custodians
   ☐ Real Chainlink PoR integration for 1 issuer
-  ☐ External security audit (Hacken or PeckShield — aligned with BNB Chain)
+  ☐ External security audit (Hacken or PeckShield — aligned with HashKey Chain)
   ☐ IRS Dashboard frontend (Next.js) showing live scores
   ☐ BNB Greenfield integration for issuer metadata (asset details)
   ☐ Keeper bot deployed for TWAS cache updates
@@ -5236,7 +5236,7 @@ PHASE 2 — MAINNET LAUNCH (August 2026 → December 2026)
 Goal:    $5M TVL, 3 active issuers, protocol revenue positive
 
 Deliverables:
-  ☐ BSC Mainnet deployment (post-audit)
+  ☐ HashKey Mainnet deployment (post-audit)
   ☐ First 3 issuers activated (targeting: Matrixdock, OpenEden, 1 MSME platform)
   ☐ $3M+ underwriter deposits (target: institutional LP partnerships)
   ☐ IRS oracle API (subscription tier for DeFi protocols)
@@ -5254,7 +5254,7 @@ PHASE 3 — ECOSYSTEM EXPANSION (2027)
 Goal:    $50M insured, IRS oracle as standalone licensed product
 
 Deliverables:
-  ☐ 10+ active issuers across BNB Chain ecosystem
+  ☐ 10+ active issuers across HashKey Chain ecosystem
   ☐ Multi-chain expansion (Ethereum L2s, Avalanche)
   ☐ IRS oracle licensing to 3+ DeFi protocols (Aave Horizon, Venus)
   ☐ Subrogation Foundation legally incorporated (Singapore)
@@ -5341,9 +5341,9 @@ Risk 7: Regulatory action (insurance regulation)
     - Foundation incorporated in jurisdiction with clear DeFi regs
   Residual Risk: LOW-MEDIUM (regulatory environment evolving)
 
-Risk 8: BNB Chain underperformance (technical)
+Risk 8: HashKey Chain underperformance (technical)
   Severity:  LOW — can bridge to Ethereum L2 later
-  Likelihood: LOW — BNB Chain is production-grade infrastructure
+  Likelihood: LOW — HashKey Chain is production-grade infrastructure
   Mitigation:
     - Architecture is EVM-compatible (chain-agnostic contracts)
     - Multi-chain deployment possible post-launch
@@ -5451,7 +5451,7 @@ FORMULA REFERENCE:
 ## Appendix B: Gas Cost Estimates
 
 ```
-GAS ESTIMATES (BSC Mainnet, at 3 gwei, $600 BNB):
+GAS ESTIMATES (HashKey Mainnet, at 3 gwei, $600 BNB):
 
 Contract Deployment:
   TIR:              ~1.2M gas = ~$2.16
@@ -5511,9 +5511,9 @@ Oracle Operations:
   "usdt": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
   "foundation": "0x_YOUR_FOUNDATION_ADDRESS",
   "bnbscan": {
-    "tx1_register": "https://testnet.bscscan.com/tx/0xTX1",
-    "tx2_coverage":  "https://testnet.bscscan.com/tx/0xTX2",
-    "tx3_default":   "https://testnet.bscscan.com/tx/0xTX3"
+    "tx1_register": "https://testnet.testnet-explorer.hsk.xyz/tx/0xTX1",
+    "tx2_coverage":  "https://testnet.testnet-explorer.hsk.xyz/tx/0xTX2",
+    "tx3_default":   "https://testnet.testnet-explorer.hsk.xyz/tx/0xTX3"
   }
 }
 ```
@@ -5561,10 +5561,10 @@ BUSINESS LOGIC:
   ☐ Payout order: bond → junior → senior
 
 DEPLOYMENT:
-  ☐ All contracts verified on BNBScan
+  ☐ All contracts verified on HashKey Explorer
   ☐ All permissions wired correctly
   ☐ Deployment addresses saved in deployments/bscTestnet.json
-  ☐ 3 demo transactions confirmed with BNBScan links
+  ☐ 3 demo transactions confirmed with HashKey Explorer links
 ```
 
 ---
@@ -5576,7 +5576,7 @@ TERM              DEFINITION
 ──────────────────────────────────────────────────────────────────────────────
 IRS               Issuer Reputation Score — behavioral credit score (0–1000)
 TIR               Trusted Issuer Registry — bonded professional attestor network
-BAS               BNB Attestation Service — BNB Chain's native attestation layer
+BAS               Attestation Service — HashKey Chain's native attestation layer
 EWS               Early Warning System — fires on 50pt IRS drop in 24h
 srCVR             Senior Coverage Receipt — ERC-20 yield-bearing token (Compound cToken model)
 jrCVR             Junior Coverage Receipt — ERC-20 first-loss risk token
@@ -5593,7 +5593,7 @@ cToken Model      Compound Finance v2 mechanism for yield-bearing tokens via exc
 CDS               Credit Default Swap — $8T TradFi derivative that CoverFi parallels
 SPV               Special Purpose Vehicle — legal entity holding underlying RWA assets
 PoR               Proof of Reserve — Chainlink product verifying on-chain collateral backing
-BNBScan           BNB Chain's block explorer (equivalent to Etherscan)
+HashKey Explorer           HashKey Chain's block explorer (equivalent to Etherscan)
 OBSERVATION       First issuer lifecycle state — 14 or 60 day onboarding period
 MONITORING        Issuer under suspicion — pool gated, TIR assessing
 DEFAULTED         Default confirmed — payout executed, subrogation NFT minted
@@ -5624,7 +5624,7 @@ AGENT GROUP SUMMARY:
   Group 2 (A4–A7): All 12 contract interfaces + state machines ✓
   Group 3 (A8–A10): IRS engine, economics, tokenomics ✓
   Group 4 (A11–A13): Patent claims, tier table, filing roadmap ✓
-  Group 5 (A14–A16): Deployment scripts, BNBScan, demo ✓
+  Group 5 (A14–A16): Deployment scripts, HashKey Explorer, demo ✓
   Group 6 (A17–A20): Testing, verification, assembly ✓
 
 CRITICAL TECHNICAL DECISIONS CAPTURED:
@@ -5643,9 +5643,9 @@ FOR CLAUDE CODE — START HERE:
   1. Read Section 12 (deployment order) first
   2. Implement contracts in order: TIR → IssuerBond → IRSOracle → DefaultOracle 
      → IssuerRegistry → InsurancePool → srCVR/jrCVR/ProtectionCert → PayoutEngine → SubrogationNFT
-  3. Run deploy.ts against BSC Testnet
-  4. Run demo-setup.ts to generate 3 BNBScan transactions
-  5. Verify all contracts on BNBScan
+  3. Run deploy.ts against HashKey Chain Testnet
+  4. Run demo-setup.ts to generate 3 HashKey Explorer transactions
+  5. Verify all contracts on HashKey Explorer
   6. Save 3 transaction hashes for demo day April 8
 ```
 

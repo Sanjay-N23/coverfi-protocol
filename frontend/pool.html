@@ -713,7 +713,7 @@ code, pre { font-family: var(--font-mono); }
 <!-- Network Warning Banner -->
 <div class="network-warning" id="networkWarning" style="display:none;" role="alert">
   <span aria-hidden="true">&#9888;&#65039;</span>
-  <span>Wrong network detected. Please switch to BSC Testnet to use CoverFi.</span>
+  <span>Wrong network detected. Please switch to HashKey Chain Testnet to use CoverFi.</span>
   <button class="btn-switch-network" onclick="switchToBSCTestnet()">Switch Network</button>
 </div>
 
@@ -755,7 +755,7 @@ code, pre { font-family: var(--font-mono); }
     </div>
 
     <div class="nav-actions">
-      <div class="badge-testnet"><span class="dot"></span> BSC Testnet</div>
+      <div class="badge-testnet"><span class="dot"></span> HashKey Testnet</div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1270,14 +1270,16 @@ code, pre { font-family: var(--font-mono); }
 
 // Contract Addresses
 const CONTRACTS = {
-  InsurancePool: '0xBCF0012388045eA1183c96EEbe24754842a549eA',
-  srCVR:         '0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f',
-  jrCVR:         '0xa5d64A7770136B1EEade6B980404140D8D5F7C06',
-  MockUSDT:      '0x38907cC4E615D3C7BDCBC9910C050260bBC836E5'
+  InsurancePool: '0xa5d64A7770136B1EEade6B980404140D8D5F7C06',
+  srCVR:         '0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD',
+  jrCVR:         '0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B',
+  MockUSDT:      '0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212',
+  MockERC3643Token: '0xa7C664459C66325Cd9dB15245DD901f1623c9655'
 };
+const DEMO_ISSUER_TOKEN = CONTRACTS.MockERC3643Token;
 
-const BSC_TESTNET_CHAIN_ID = '0x61'; // 97
-const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545';
+const BSC_TESTNET_CHAIN_ID = '0x85'; // 133
+const RPC_URL = 'https://testnet.hsk.xyz';
 
 let provider = null;
 let signer = null;
@@ -1287,8 +1289,9 @@ let srCVRContract = null;
 let jrCVRContract = null;
 let usdtContract = null;
 
-// Simulated exchange rate (on-chain this would be calculated)
-let seniorExchangeRate = 1.05;
+// Exchange rates fetched from on-chain contracts
+let seniorExchangeRate = 1.0;
+let juniorRate = 1.0;
 
 // ---------- THEME ----------
 function toggleTheme() {
@@ -1365,6 +1368,7 @@ async function setupProvider(account) {
 
   // Load data
   await loadPoolData();
+  await fetchExchangeRates();
   await loadUserPosition();
 
   showToast('Wallet connected: ' + short, 'success');
@@ -1383,13 +1387,53 @@ async function switchToBSCTestnet() {
         method: 'wallet_addEthereumChain',
         params: [{
           chainId: BSC_TESTNET_CHAIN_ID,
-          chainName: 'BSC Testnet',
-          nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
+          chainName: 'HashKey Chain Testnet',
+          nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
           rpcUrls: [RPC_URL],
-          blockExplorerUrls: ['https://testnet.bscscan.com']
+          blockExplorerUrls: ['https://testnet-explorer.hsk.xyz']
         }]
       });
     }
+  }
+}
+
+// ---------- FETCH EXCHANGE RATES ----------
+async function fetchExchangeRates() {
+  if (!srCVRContract || !jrCVRContract) return;
+  try {
+    var results = await Promise.allSettled([
+      srCVRContract.getCurrentExchangeRate(),
+      jrCVRContract.getPoolUnderlying(DEMO_ISSUER_TOKEN),
+      jrCVRContract.poolSupply(DEMO_ISSUER_TOKEN),
+      jrCVRContract.currentEpoch()
+    ]);
+
+    if (results[0].status === 'fulfilled') {
+      seniorExchangeRate = parseFloat(ethers.formatUnits(results[0].value, 18));
+      // No floor — show real rate even post-liquidation (< 1.0 means loss)
+    }
+
+    if (results[1].status === 'fulfilled' && results[2].status === 'fulfilled') {
+      var jrUnderlying = results[1].value;
+      var jrSupply = results[2].value;
+      if (jrSupply > 0n) {
+        juniorRate = parseFloat(ethers.formatUnits(jrUnderlying, 18)) /
+                     parseFloat(ethers.formatUnits(jrSupply, 18));
+      }
+    }
+
+    if (results[3].status === 'fulfilled') {
+      var epoch = results[3].value;
+      try {
+        var yieldVal = await jrCVRContract.epochYield(epoch);
+        var yieldNum = parseFloat(ethers.formatUnits(yieldVal, 18));
+        if (yieldNum > 0) {
+          document.getElementById('jrEpochYield').textContent = '$' + formatNumber(yieldNum.toFixed(2));
+        }
+      } catch (e) { /* silent */ }
+    }
+  } catch (err) {
+    console.warn('Exchange rate fetch failed, using defaults:', err);
   }
 }
 
@@ -1397,10 +1441,9 @@ async function switchToBSCTestnet() {
 async function loadPoolData() {
   try {
     // Use a dummy issuer token address for demo; in production this would be selectable
-    const dummyIssuer = '0x0000000000000000000000000000000000000001';
     let poolState;
     try {
-      poolState = await poolContract.getPoolState(dummyIssuer);
+      poolState = await poolContract.getPoolState(DEMO_ISSUER_TOKEN);
     } catch {
       // Fallback: use mock data
       poolState = null;
@@ -1490,17 +1533,20 @@ async function loadUserPosition() {
     const jrBalNum = parseFloat(ethers.formatUnits(jrBal, 18));
 
     const srValueNum = srBalNum * seniorExchangeRate;
-    const jrValueNum = jrBalNum; // Junior is 1:1
+    const jrValueNum = jrBalNum * juniorRate;
 
     document.getElementById('srBalance').textContent = formatNumber(srBalNum) + ' srCVR';
     document.getElementById('srValue').textContent = '$' + formatNumber(srValueNum) + ' USDT';
     document.getElementById('srExRate').textContent = seniorExchangeRate.toFixed(2) + ' USDT/srCVR';
 
     document.getElementById('jrBalance').textContent = formatNumber(jrBalNum) + ' jrCVR';
-    document.getElementById('jrValue').textContent = '$' + formatNumber(jrValueNum) + ' USDT';
+    document.getElementById('jrValue').textContent = '$' + formatNumber(jrValueNum.toFixed(2)) + ' USDT' +
+      (juniorRate > 1.0 ? ' (+' + ((juniorRate - 1.0) * 100).toFixed(1) + '%)' : '');
 
     const totalPos = srValueNum + jrValueNum;
-    const totalYield = (srBalNum * (seniorExchangeRate - 1)); // Simplified yield calc
+    const srYield = srBalNum * (seniorExchangeRate - 1.0);
+    const jrYield = jrBalNum * (juniorRate - 1.0);
+    const totalYield = srYield + jrYield;
     document.getElementById('totalPosition').textContent = '$' + formatNumber(totalPos);
     document.getElementById('totalYield').textContent = '$' + formatNumber(totalYield);
 
@@ -1538,14 +1584,40 @@ async function depositSenior() {
   }
   const btn = document.getElementById('btnDepositSenior');
   btn.disabled = true;
-  btn.textContent = 'Approving...';
+  btn.textContent = 'Checking ratio...';
 
   try {
     const amount = ethers.parseUnits(amt, 18);
 
+    // Check junior ratio before attempting deposit (25% minimum enforced by contract)
+    try {
+      const poolState = await poolContract.getPoolState(DEMO_ISSUER_TOKEN);
+      const srTVL = parseFloat(ethers.formatUnits(poolState.seniorTVL, 18));
+      const jrTVL = parseFloat(ethers.formatUnits(poolState.juniorTVL, 18));
+      const depositNum = parseFloat(amt);
+      const newTotal = srTVL + jrTVL + depositNum;
+      const newJrRatio = newTotal > 0 ? (jrTVL / newTotal) * 100 : 0;
+      if (newJrRatio < 25 && jrTVL > 0) {
+        showToast('Junior ratio would drop below 25%. Deposit junior tranche first.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Approve & Deposit Senior';
+        return;
+      }
+      if (jrTVL === 0) {
+        showToast('No junior deposits yet. Please deposit to junior tranche first (25% min ratio required).', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Approve & Deposit Senior';
+        return;
+      }
+    } catch (ratioErr) {
+      // If ratio check fails, proceed and let contract handle it
+      console.warn('Ratio pre-check failed:', ratioErr);
+    }
+
     // Check & approve USDT
+    btn.textContent = 'Approving...';
     const allowance = await usdtContract.allowance(userAddress, CONTRACTS.InsurancePool);
-    if (allowance.lt(amount)) {
+    if (allowance < amount) {
       const approveTx = await usdtContract.approve(CONTRACTS.InsurancePool, amount);
       showToast('Approving USDT...', 'success');
       await approveTx.wait();
@@ -1553,13 +1625,13 @@ async function depositSenior() {
 
     // Deposit
     btn.textContent = 'Depositing...';
-    const dummyIssuer = '0x0000000000000000000000000000000000000001';
-    const tx = await poolContract.depositSenior(dummyIssuer, amount);
+    const tx = await poolContract.depositSenior(DEMO_ISSUER_TOKEN, amount);
     showToast('Senior deposit submitted!', 'success');
     await tx.wait();
     showToast('Senior deposit confirmed!', 'success');
 
     await loadPoolData();
+    await fetchExchangeRates();
     await loadUserPosition();
   } catch (e) {
     showToast('Deposit failed: ' + (e.reason || e.message), 'error');
@@ -1583,20 +1655,20 @@ async function depositJunior() {
     const amount = ethers.parseUnits(amt, 18);
 
     const allowance = await usdtContract.allowance(userAddress, CONTRACTS.InsurancePool);
-    if (allowance.lt(amount)) {
+    if (allowance < amount) {
       const approveTx = await usdtContract.approve(CONTRACTS.InsurancePool, amount);
       showToast('Approving USDT...', 'success');
       await approveTx.wait();
     }
 
     btn.textContent = 'Depositing...';
-    const dummyIssuer = '0x0000000000000000000000000000000000000001';
-    const tx = await poolContract.depositJunior(dummyIssuer, amount);
+    const tx = await poolContract.depositJunior(DEMO_ISSUER_TOKEN, amount);
     showToast('Junior deposit submitted!', 'success');
     await tx.wait();
     showToast('Junior deposit confirmed!', 'success');
 
     await loadPoolData();
+    await fetchExchangeRates();
     await loadUserPosition();
   } catch (e) {
     showToast('Deposit failed: ' + (e.reason || e.message), 'error');
@@ -1613,7 +1685,7 @@ function updateRedemptionPreview() {
 
   const isSenior = tranche === 'senior';
   const tokenName = isSenior ? 'srCVR' : 'jrCVR';
-  const rate = isSenior ? seniorExchangeRate : 1.0;
+  const rate = isSenior ? seniorExchangeRate : juniorRate;
   const available = isSenior ? userSrBalance : userJrBalance;
 
   document.getElementById('withdrawTokenName').textContent = tokenName;
@@ -1638,13 +1710,12 @@ async function requestWithdrawal() {
 
   try {
     const amount = ethers.parseUnits(amt, 18);
-    const dummyIssuer = '0x0000000000000000000000000000000000000001';
     let tx;
 
     if (tranche === 'senior') {
-      tx = await poolContract.initiateWithdrawalSenior(dummyIssuer, amount);
+      tx = await poolContract.initiateWithdrawalSenior(DEMO_ISSUER_TOKEN, amount);
     } else {
-      tx = await poolContract.initiateWithdrawalJunior(dummyIssuer, amount);
+      tx = await poolContract.initiateWithdrawalJunior(DEMO_ISSUER_TOKEN, amount);
     }
 
     showToast('Withdrawal request submitted!', 'success');
@@ -1652,6 +1723,7 @@ async function requestWithdrawal() {
     showToast('Withdrawal request confirmed!', 'success');
 
     await loadPoolData();
+    await fetchExchangeRates();
     await loadUserPosition();
   } catch (e) {
     showToast('Withdrawal failed: ' + (e.reason || e.message), 'error');

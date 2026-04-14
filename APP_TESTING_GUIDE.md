@@ -6,14 +6,14 @@
 ### Prerequisites
 - Browser (Chrome recommended)
 - MetaMask extension installed
-- BSC Testnet added to MetaMask (Chain ID: 97, RPC: `https://data-seed-prebsc-1-s1.binance.org:8545`)
-- Some tBNB in wallet for gas fees (get from [BNB Testnet Faucet](https://testnet.bnbchain.org/faucet-smart))
+- HashKey Chain Testnet added to MetaMask (Chain ID: 133, RPC: `https://testnet.hsk.xyz`)
+- Some HSK in wallet for gas fees (get from [HashKey Testnet Faucet](https://hashkeychain.net/faucet))
 - Start the server:
   ```
   cd D:\COVERFI && npx http-server frontend -p 8082 -c-1
   ```
 - Deployer wallet address used in demo: `0xce220d9eD9527f9997c8045844210637F3A42fb3`
-- All contract addresses are in `D:\COVERFI\deployments\bscTestnet.json`
+- All contract addresses are in `D:\COVERFI\deployments\hashkeyTestnet.json`
 
 ---
 
@@ -52,8 +52,8 @@
 - **12** (Smart Contracts) — "Fully auditable on-chain"
 - **356** (Tests Passing) — "100% coverage"
 - **5** (Risk Dimensions) — "Behavioral credit scoring"
-- **25** (On-Chain Transactions) — "Live on BSC Testnet"
-**Expected:** "Built for the BNB Chain Hackathon 2026" badge visible below.
+- **25** (On-Chain Transactions) — "Live on HashKey Chain Testnet"
+**Expected:** "Built for the HashKey Chain Hackathon 2026" badge visible below.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 1.6: Scroll Reveal Animations
@@ -108,7 +108,7 @@ Each item has an icon and description text.
 **Steps:** Click "Dashboard" under the Protocol column
 **Expected:** Navigates to `dashboard.html`
 **Steps:** Click "Smart Contracts" under the Developers column
-**Expected:** Opens BNBScan in a new tab at: `https://testnet.bscscan.com/address/0xce220d9eD9527f9997c8045844210637F3A42fb3` showing the deployer address with all transactions.
+**Expected:** Opens HashKey Explorer in a new tab at: `https://testnet.testnet-explorer.hsk.xyz/address/0xce220d9eD9527f9997c8045844210637F3A42fb3` showing the deployer address with all transactions.
 **Steps:** Check other footer links:
 - "Issuers" links to `dashboard.html#issuers`
 - "Insurance Pool" links to `dashboard.html#pool`
@@ -156,8 +156,8 @@ Each item has an icon and description text.
 - Coverage Written: **$45,000**
 - Utilization: **36%**
 - APY: **4.2%**
-**Expected:** Gold banner below nav reads: "Connect wallet to see live BSC Testnet data" with a "Connect" button inside the banner.
-**Expected:** "BSC TESTNET" badge visible in nav bar with a pulsing gold dot.
+**Expected:** Gold banner below nav reads: "Connect wallet to see live HashKey Chain Testnet data" with a "Connect" button inside the banner.
+**Expected:** "HASHKEY TESTNET" badge visible in nav bar with a pulsing gold dot.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 2.2: Theme Toggle (Dashboard)
@@ -213,16 +213,16 @@ A gold-filled polygon shows the current data distribution. Mock values: NAV=150,
 **Expected:** Table shows 3 issuers:
 | Issuer | Type | Status | IRS | Bond | Attestors |
 |--------|------|--------|-----|------|-----------|
-| AsiaReit | Real Estate | ACTIVE | 720 | 5.0 BNB | 3/3 |
-| TradeFlow | Trade Finance | MONITORING | 580 | 5.0 BNB | 2/3 |
-| UrbanBridge | Infrastructure | ACTIVE | 650 | 5.0 BNB | 3/3 |
+| AsiaReit | Real Estate | ACTIVE | 720 | 5% Bond | 3/3 |
+| TradeFlow | Trade Finance | MONITORING | 580 | 5% Bond | 2/3 |
+| UrbanBridge | Infrastructure | ACTIVE | 650 | 5% Bond | 3/3 |
 **Expected:** Each issuer has a colored circle avatar with initials (AR=orange, TF=blue, UB=purple). Status badges use color coding (ACTIVE=green, MONITORING=yellow).
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 2.8: Events Feed (Mock Data)
 **Steps:** Look at the "Protocol Events" card (id="events")
 **Expected:** Multiple events listed with colored indicator dots, event descriptions, and relative timestamps ("2 min ago", "8 min ago", etc.). Events include entries like:
-- "AsiaReit registered as issuer. Bond: 5 BNB locked."
+- "AsiaReit registered as issuer. Bond: 5% Bond locked."
 - "LP Deposit — 12,500 USDT added to Senior tranche."
 - "IRS Updated — TradeFlow score recalculated to 580."
 - "Coverage Purchased — 15,000 USDT on AsiaReit @ 696 bps."
@@ -293,12 +293,12 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Steps:** Approve the connection in MetaMask
 **Expected:**
 - Button changes to show a green connected state with truncated wallet address (e.g., "0xce22...2fb3")
-- Banner text changes to: a green pulsing dot + "LIVE" badge + "Connected to BSC Testnet — showing real on-chain data"
+- Banner text changes to: a green pulsing dot + "LIVE" badge + "Connected to HashKey Chain Testnet — showing real on-chain data"
 - Notification bell shows a "Wallet connected" notification
 - Dashboard enters a loading/skeleton state briefly (~1.2s minimum) then populates with live data
 **Check:** [ ] Pass / [ ] Fail
 
-### Test 3.2: Live Data Loads from BSC Testnet
+### Test 3.2: Live Data Loads from HashKey Chain Testnet
 **Steps:** After connecting, observe the dashboard data refresh
 **Expected:** All metric cards, issuer table, pool stats, and IRS scores update with real on-chain values read from deployed contracts. Values may differ from mock data depending on current contract state.
 **Expected (if demo transactions were run):**
@@ -309,16 +309,16 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 3.3: Wrong Network Detection
-**Steps:** In MetaMask, switch to Ethereum Mainnet (or any network other than BSC Testnet, Chain ID 97)
-**Expected:** A red/warning banner appears at the top of the dashboard: "Wrong network detected. Please switch to BSC Testnet to use CoverFi." with a "Switch Network" button.
+**Steps:** In MetaMask, switch to Ethereum Mainnet (or any network other than HashKey Chain Testnet, Chain ID 133)
+**Expected:** A red/warning banner appears at the top of the dashboard: "Wrong network detected. Please switch to HashKey Chain Testnet to use CoverFi." with a "Switch Network" button.
 **Steps:** Click the "Switch Network" button
-**Expected:** MetaMask prompts to switch to BSC Testnet. After switching, the warning banner disappears and live data reloads.
-**Steps:** (Alternative) Manually switch back to BSC Testnet in MetaMask
+**Expected:** MetaMask prompts to switch to HashKey Chain Testnet. After switching, the warning banner disappears and live data reloads.
+**Steps:** (Alternative) Manually switch back to HashKey Chain Testnet in MetaMask
 **Expected:** Warning disappears automatically, dashboard refreshes.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 3.4: Purchase Coverage (ON-CHAIN TRANSACTION)
-**Steps:** Ensure wallet is connected and on BSC Testnet
+**Steps:** Ensure wallet is connected and on HashKey Chain Testnet
 **Steps:** In the "Get Covered" card, select an issuer from the dropdown (e.g., AsiaReit)
 **Steps:** Enter a coverage amount (e.g., **100**)
 **Steps:** Select a duration from the duration dropdown
@@ -333,9 +333,9 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Expected:**
 1. First MetaMask popup: USDT approval transaction (approve spending)
 2. Second MetaMask popup: actual purchase transaction
-3. After confirmation (~3s on BSC Testnet): toast notification appears: "Coverage purchased! TX: 0xabcd..."
-4. Transaction appears in "Your Transactions" section with a clickable BNBScan link
-5. tBNB balance decreases slightly (gas fees)
+3. After confirmation (~3s on HashKey Chain Testnet): toast notification appears: "Coverage purchased! TX: 0xabcd..."
+4. Transaction appears in "Your Transactions" section with a clickable HashKey Explorer link
+5. HSK balance decreases slightly (gas fees)
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 3.5: Deposit to Senior Tranche (ON-CHAIN TRANSACTION)
@@ -371,13 +371,13 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Expected:** A dropdown menu appears showing:
 - Full wallet address with a green dot indicator
 - "Copy Address" option with clipboard icon
-- "View on BNBScan" option with external link icon
+- "View on HashKey Explorer" option with external link icon
 - Divider line
 - "Disconnect" option in red/danger color
 **Steps:** Click "Copy Address"
 **Expected:** Wallet address is copied to clipboard. A brief "Copied!" feedback text appears next to the option.
-**Steps:** Click "View on BNBScan"
-**Expected:** Opens a new browser tab at `https://testnet.bscscan.com/address/[your-address]` showing your wallet's transactions and balances.
+**Steps:** Click "View on HashKey Explorer"
+**Expected:** Opens a new browser tab at `https://testnet.testnet-explorer.hsk.xyz/address/[your-address]` showing your wallet's transactions and balances.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 3.8: Disconnect Wallet
@@ -385,7 +385,7 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Expected:**
 - Dashboard reverts to mock data view
 - Button changes back to gold "Connect Wallet" state
-- Banner reverts to "Connect wallet to see live BSC Testnet data"
+- Banner reverts to "Connect wallet to see live HashKey Chain Testnet data"
 - Live data indicators disappear
 **Check:** [ ] Pass / [ ] Fail
 
@@ -393,7 +393,7 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Steps:** After making one or more on-chain transactions, refresh the page (F5)
 **Expected:** Your transaction history is still displayed in the "Your Transactions" card. Data is saved in localStorage under key `coverfi-tx-history`.
 **Steps:** Connect wallet again after refresh
-**Expected:** Previous transactions remain listed with clickable BNBScan links (format: `https://testnet.bscscan.com/tx/[hash]`). Each entry shows: transaction type icon, action name, details, truncated TX hash, and status.
+**Expected:** Previous transactions remain listed with clickable HashKey Explorer links (format: `https://testnet.testnet-explorer.hsk.xyz/tx/[hash]`). Each entry shows: transaction type icon, action name, details, truncated TX hash, and status.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 3.10: Toast Notifications
@@ -462,15 +462,15 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 
 ---
 
-## PART 5: Smart Contract Verification on BNBScan
+## PART 5: Smart Contract Verification on HashKey Explorer
 
 ### Test 5.1: Verify Deployer Transactions
-**Steps:** Go to https://testnet.bscscan.com/address/0xce220d9eD9527f9997c8045844210637F3A42fb3
+**Steps:** Go to https://testnet.testnet-explorer.hsk.xyz/address/0xce220d9eD9527f9997c8045844210637F3A42fb3
 **Expected:** Shows 25+ transactions from the deployer. Transaction methods include: contract creation, Register, Approve, Deposit (Senior + Junior), Purchase Coverage, Execute Payout, Force Confirm Default, and various setup calls.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 5.2: Verify Key Demo Transactions
-**Steps:** Check the following transaction hashes on BNBScan:
+**Steps:** Check the following transaction hashes on HashKey Explorer:
 - **Registration TX:** `0x76654f6954651e6139ec6ffdb51edd5d67000a7e4be8ebc5ec1683a21bba8001`
 - **Senior Deposit TX:** `0x983541ce383611f3d1bca92519bf2fb686cee4aa386dd839578adc252530b7f9`
 - **Junior Deposit TX:** `0x9aaafc0b7c6927d0ae20578b20a2d57c9a045ddf495429e0cdd66619dcdc5c9b`
@@ -481,7 +481,7 @@ Arrows connect the layers. An "Investor Protected" badge appears at the bottom.
 **Check:** [ ] Pass / [ ] Fail
 
 ### Test 5.3: Verify Deployed Contracts
-**Steps:** Visit BNBScan pages for each contract address from `deployments/bscTestnet.json`:
+**Steps:** Visit HashKey Explorer pages for each contract address from `deployments/hashkeyTestnet.json`:
 - MockUSDT: `0x38907cC4E615D3C7BDCBC9910C050260bBC836E5`
 - IssuerRegistry: `0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C`
 - IRSOracle: `0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A`
@@ -551,7 +551,7 @@ cd D:\COVERFI && npx hardhat compile
 | Part 2 | 2.1 - 2.14 | Dashboard without wallet — mock data, charts, interactions |
 | Part 3 | 3.1 - 3.12 | Dashboard with wallet — live data, on-chain transactions |
 | Part 4 | 4.1 - 4.5 | Cross-page features — theme sync, deep links, responsive |
-| Part 5 | 5.1 - 5.4 | Smart contract verification on BNBScan |
+| Part 5 | 5.1 - 5.4 | Smart contract verification on HashKey Explorer |
 | Part 6 | 6.1 - 6.3 | Local development — tests, demo script, compilation |
 
 **Total: 49 test cases**
@@ -562,9 +562,9 @@ cd D:\COVERFI && npx hardhat compile
 
 | Issue | Solution |
 |-------|----------|
-| MetaMask not connecting | Refresh page. Ensure BSC Testnet is selected (Chain ID 97). Check that MetaMask is unlocked. |
-| Dashboard shows mock data after connecting | Check you are on BSC Testnet, not another network. Look for the "Wrong network" banner. |
-| Transaction stuck/pending | BSC Testnet can be slow. Wait 15-30 seconds. Check BNBScan for TX status. Try increasing gas in MetaMask. |
+| MetaMask not connecting | Refresh page. Ensure HashKey Chain Testnet is selected (Chain ID 133). Check that MetaMask is unlocked. |
+| Dashboard shows mock data after connecting | Check you are on HashKey Chain Testnet, not another network. Look for the "Wrong network" banner. |
+| Transaction stuck/pending | HashKey Chain Testnet can be slow. Wait 15-30 seconds. Check HashKey Explorer for TX status. Try increasing gas in MetaMask. |
 | Theme not persisting | Clear localStorage and try again. Check browser privacy settings are not blocking localStorage. |
 | Page not loading at all | Verify the server is running: `npx http-server frontend -p 8082 -c-1`. Check browser console (F12) for errors. |
 | Count-up animations not triggering | Scroll the stats section fully into view. Check that "Reduce motion" is not enabled in OS settings. |

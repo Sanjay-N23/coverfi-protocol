@@ -34,6 +34,11 @@ const config: HardhatUserConfig = {
       gasPrice: 3000000000,
       accounts: DEPLOYER_PRIVATE_KEY !== "0x" + "0".repeat(64) ? [DEPLOYER_PRIVATE_KEY] : [],
     },
+    hashkeyTestnet: {
+      url: "https://testnet.hsk.xyz",
+      chainId: 133,
+      accounts: DEPLOYER_PRIVATE_KEY !== "0x" + "0".repeat(64) ? [DEPLOYER_PRIVATE_KEY] : [],
+    },
   },
   etherscan: {
     apiKey: BSCSCAN_API_KEY,

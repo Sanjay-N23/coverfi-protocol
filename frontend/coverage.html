@@ -875,7 +875,7 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
     </div>
 
     <div class="nav-actions">
-      <div class="badge-testnet"><span class="dot"></span> BSC Testnet</div>
+      <div class="badge-testnet"><span class="dot"></span> HashKey Testnet</div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
         <svg class="icon-sun" width="18" aria-hidden="true" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" width="18" aria-hidden="true" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -897,7 +897,7 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
           </button>
           <a class="wallet-dropdown-item" id="bscscanLink" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            View on BscScan
+            View on Explorer
           </a>
           <div class="wallet-dropdown-divider"></div>
           <button class="wallet-dropdown-item danger" onclick="disconnectWallet()">
@@ -1089,13 +1089,13 @@ function toggleTheme() { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); }
 
 // ---- Contract Addresses ----
 var CONTRACTS = {
-  ProtectionCert: '0x2Aad26de595752d7D6FCc2f4C79F1Bf15B60E1CD',
-  PayoutEngine:   '0xD01e871c97746FC6a3f4B406aA60BE1Fb7FAcf6B',
-  IssuerRegistry: '0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C',
-  IRSOracle:      '0xa4ECEB47F80a32D7176C23e4993cDa4d2337Fc3A'
+  ProtectionCert: '0x91062e509E75AAe31f1d6425b78D8815Ad941e73',
+  PayoutEngine:   '0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5',
+  IssuerRegistry: '0xc07859b25FC869F0a81fae86b9B5bEa868D08A9f',
+  IRSOracle:      '0x8D4C37f45883aAEEd20d2CC1020e6Ab193D3A50C'
 };
 
-var BSC_TESTNET = { chainId: '0x61', chainName: 'BSC Testnet', rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545', explorer: 'https://testnet.bscscan.com' };
+var BSC_TESTNET = { chainId: '0x85', chainName: 'HashKey Chain Testnet', rpcUrl: 'https://testnet.hsk.xyz', explorer: 'https://testnet-explorer.hsk.xyz' };
 
 // ---- State ----
 var provider = null;
