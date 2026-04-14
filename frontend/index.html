@@ -265,10 +265,11 @@ code, pre { font-family: var(--font-mono); }
   display: flex; align-items: center; justify-content: space-between;
   height: var(--nav-height);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+.nav-logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; --logo-hex: #2D3436; --logo-dot: white; }
 .nav-logo svg { width: 32px; height: 32px; }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--gold); }
+[data-theme="dark"] .nav-logo { --logo-hex: rgba(255,255,255,0.5); --logo-dot: white; }
 .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
 .nav-links a, .nav-feature-link {
   color: #636E72; font-size: 0.9375rem; font-weight: 600; text-decoration: none;
@@ -974,15 +975,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="CoverFi home">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <!-- Left hexagon (slate) -->
-        <polygon points="10,5 16,5 19,10 16,15 10,15 7,10" fill="rgba(99,110,114,0.06)" stroke="#8B95A5" stroke-width="1.2"/>
-        <!-- Right hexagon (teal) -->
-        <polygon points="16,5 22,5 25,10 22,15 16,15 13,10" fill="rgba(0,184,148,0.06)" stroke="#00B894" stroke-width="1.2"/>
-        <!-- Gold diamond (center) -->
-        <polygon points="16,3 20,10 16,17 12,10" fill="url(#diamondGrad)"/>
-        <!-- Highlight dot -->
-        <circle cx="16" cy="9.5" r="1" fill="white" opacity="0.85"/>
+      <svg class="coverfi-logo-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <polygon class="logo-hex-left" points="10,5 16,5 19,10 16,15 10,15 7,10" fill="none" stroke="var(--logo-hex, #2D3436)" stroke-width="1.4"/>
+        <polygon class="logo-hex-right" points="16,5 22,5 25,10 22,15 16,15 13,10" fill="none" stroke="var(--logo-hex, #2D3436)" stroke-width="1.4"/>
+        <polygon points="16,3 20,10 16,17 12,10" fill="var(--gold)"/>
+        <circle cx="16" cy="9.5" r="1" fill="var(--logo-dot, white)" opacity="0.85"/>
       </svg>
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
@@ -1380,10 +1377,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   <div class="footer-inner stagger">
     <div class="footer-brand reveal">
       <a href="#hero" class="nav-logo" style="margin-bottom:0.5rem">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-          <polygon points="10,5 16,5 19,10 16,15 10,15 7,10" fill="rgba(99,110,114,0.06)" stroke="#8B95A5" stroke-width="1.2"/>
-          <polygon points="16,5 22,5 25,10 22,15 16,15 13,10" fill="rgba(0,184,148,0.06)" stroke="#00B894" stroke-width="1.2"/>
-          <polygon points="16,3 20,10 16,17 12,10" fill="url(#diamondGrad)"/>
+        <svg class="coverfi-logo-svg" width="28" height="28" viewBox="0 0 32 32" fill="none">
+          <polygon points="10,5 16,5 19,10 16,15 10,15 7,10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/>
+          <polygon points="16,5 22,5 25,10 22,15 16,15 13,10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/>
+          <polygon points="16,3 20,10 16,17 12,10" fill="var(--gold)"/>
           <circle cx="16" cy="9.5" r="1" fill="white" opacity="0.85"/>
         </svg>
         <span class="nav-logo-text" style="font-size:1.125rem">Cover<span class="accent">Fi</span></span>
