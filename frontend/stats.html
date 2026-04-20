@@ -541,7 +541,7 @@ td.contract-addr a {
 [data-theme="dark"] .irs-avg { border-top-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
 [data-theme="dark"] .irs-avg-value { color: #ffffff; }
 
-[data-theme="dark"] .curve-svg .axis-label { fill: rgba(255,255,255,0.5); }
+[data-theme="dark"] .curve-svg .axis-label { fill: rgba(255,255,255,0.75); }
 [data-theme="dark"] .curve-svg .axis-line { stroke: rgba(255,255,255,0.1); }
 [data-theme="dark"] .curve-svg .grid-line { stroke: rgba(255,255,255,0.05); }
 [data-theme="dark"] .curve-svg .curve-path { stroke: #FF8A80; }
@@ -619,6 +619,7 @@ td.contract-addr a {
       <a href="issuers.html" class="dash-nav-link">Issuers</a>
       <a href="pool.html" class="dash-nav-link">Pool</a>
       <a href="coverage.html" class="dash-nav-link">Coverage</a>
+      <a href="subrogation.html" class="dash-nav-link">Subrogation</a>
     </div>
 
     <div class="nav-actions">
@@ -1179,8 +1180,8 @@ async function loadAllData() {
       var coverageRatioBPS = Number(poolState.coverageRatioBPS);
       var totalTVL = seniorTVL + juniorTVL;
 
-      document.getElementById('metricTVL').textContent = fmt(totalTVL);
-      document.getElementById('metricCoverage').textContent = fmt(totalInsured);
+      document.getElementById('metricTVL').textContent = fmt(totalTVL) + ' USDT';
+      document.getElementById('metricCoverage').textContent = fmt(totalInsured) + ' USDT';
       document.getElementById('metricRatio').textContent = (coverageRatioBPS / 100).toFixed(1) + '%';
 
       var utilization = totalTVL > 0 ? (totalInsured / totalTVL * 100) : 0;
@@ -1225,8 +1226,8 @@ async function loadAllData() {
     renderPremiumCurve(issuerDots);
 
     // Premiums and payouts — use mock since we can't easily aggregate from events
-    document.getElementById('metricPremiums').textContent = fmt(MOCK_DATA.totalPremiums);
-    document.getElementById('metricPayouts').textContent = fmt(MOCK_DATA.totalPayouts);
+    document.getElementById('metricPremiums').textContent = fmt(MOCK_DATA.totalPremiums) + ' USDT';
+    document.getElementById('metricPayouts').textContent = fmt(MOCK_DATA.totalPayouts) + ' USDT';
 
     // Try to query recent events from chain
     var chainEvents = [];
@@ -1302,8 +1303,8 @@ async function loadAllData() {
     // Use full mock data
     document.getElementById('metricTVL').textContent = fmt(MOCK_DATA.tvl);
     document.getElementById('metricCoverage').textContent = fmt(MOCK_DATA.totalCoverage);
-    document.getElementById('metricPremiums').textContent = fmt(MOCK_DATA.totalPremiums);
-    document.getElementById('metricPayouts').textContent = fmt(MOCK_DATA.totalPayouts);
+    document.getElementById('metricPremiums').textContent = fmt(MOCK_DATA.totalPremiums) + ' USDT';
+    document.getElementById('metricPayouts').textContent = fmt(MOCK_DATA.totalPayouts) + ' USDT';
     document.getElementById('metricRatio').textContent = (MOCK_DATA.coverageRatioBPS / 100).toFixed(1) + '%';
     document.getElementById('metricIssuers').textContent = MOCK_DATA.activeIssuers;
 
