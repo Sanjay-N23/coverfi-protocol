@@ -124,7 +124,7 @@ code, pre { font-family: var(--font-mono); }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--gold); }
 
-.dash-nav-links { display: flex; align-items: center; gap: 0.25rem; position: absolute; left: 50%; transform: translateX(-50%); }
+.dash-nav-links { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
 .dash-nav-link {
   padding: 0.4rem 0.75rem; border: none; background: none; border-radius: 0;
   font-size: 0.8125rem; font-weight: 600; color: #636E72;
@@ -1058,41 +1058,79 @@ code, pre { font-family: var(--font-mono); }
             Redemption gate is currently active. Withdrawals may be delayed or restricted.
           </div>
 
-          <div style="max-width: 500px;">
-            <div class="form-group">
-              <label class="form-label">Select Tranche</label>
-              <select class="form-select" id="withdrawTranche" onchange="updateRedemptionPreview()">
-                <option value="senior">Senior Tranche (srCVR)</option>
-                <option value="junior">Junior Tranche (jrCVR)</option>
-              </select>
+          <!-- Two-column layout: form left, info panel right -->
+          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+
+            <!-- Left: withdrawal form -->
+            <div style="flex: 1 1 340px; min-width: 280px;">
+              <div class="form-group">
+                <label class="form-label">Select Tranche</label>
+                <select class="form-select" id="withdrawTranche" onchange="updateRedemptionPreview()">
+                  <option value="senior">Senior Tranche (srCVR)</option>
+                  <option value="junior">Junior Tranche (jrCVR)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Amount to Withdraw</label>
+                <input type="number" class="form-input" id="withdrawAmt" placeholder="0.00" min="0" step="0.01" oninput="updateRedemptionPreview()">
+                <div class="form-hint">
+                  Available: <strong id="withdrawAvailable">0.00</strong> <span id="withdrawTokenName">srCVR</span>
+                </div>
+              </div>
+
+              <div class="redemption-display" id="redemptionPreview">
+                <div class="redemption-row">
+                  <span class="redemption-label">Token Amount</span>
+                  <span class="redemption-value" id="redemptionTokens">0.00 srCVR</span>
+                </div>
+                <div class="redemption-row">
+                  <span class="redemption-label">Exchange Rate</span>
+                  <span class="redemption-value" id="redemptionRate">1.00 USDT/srCVR</span>
+                </div>
+                <div class="redemption-row" style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 0.5rem; margin-top: 0.25rem;">
+                  <span class="redemption-label" style="font-weight: 700;">Redemption Value</span>
+                  <span class="redemption-value" id="redemptionValue" style="color: var(--color-success); font-weight: 800; font-size: 1rem;">$0.00 USDT</span>
+                </div>
+              </div>
+
+              <button class="btn-full btn-outline" id="btnWithdraw" onclick="requestWithdrawal()" disabled>
+                Request Withdrawal
+              </button>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Amount to Withdraw</label>
-              <input type="number" class="form-input" id="withdrawAmt" placeholder="0.00" min="0" step="0.01" oninput="updateRedemptionPreview()">
-              <div class="form-hint">
-                Available: <strong id="withdrawAvailable">0.00</strong> <span id="withdrawTokenName">srCVR</span>
+            <!-- Right: withdrawal info panel (expands as more content is added) -->
+            <div style="flex: 1 1 260px; min-width: 220px; display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: var(--gold-dim); border-radius: var(--radius-md); padding: 1.25rem;">
+                <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 0.75rem;">How Withdrawals Work</div>
+                <div style="display: flex; flex-direction: column; gap: 0.625rem;">
+                  <div style="display: flex; gap: 0.625rem; align-items: flex-start;">
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: var(--color-pool); color: #fff; font-size: 0.625rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">1</span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">Enter token amount and confirm the redemption value.</span>
+                  </div>
+                  <div style="display: flex; gap: 0.625rem; align-items: flex-start;">
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: var(--color-pool); color: #fff; font-size: 0.625rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">2</span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">Request is queued on-chain. Senior withdrawals are processed first.</span>
+                  </div>
+                  <div style="display: flex; gap: 0.625rem; align-items: flex-start;">
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: var(--color-pool); color: #fff; font-size: 0.625rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">3</span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">USDT is transferred to your wallet once liquidity is available.</span>
+                  </div>
+                </div>
+              </div>
+              <div style="background: var(--bg-card-hover); border-radius: var(--radius-md); padding: 1.25rem; border: 1px solid var(--border-color);">
+                <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 0.75rem;">Current Exchange Rates</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid var(--border-color);">
+                  <span style="font-size: 0.8125rem; color: var(--text-secondary);">srCVR → USDT</span>
+                  <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-success);" id="infoRateSenior">1.67 USDT</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0;">
+                  <span style="font-size: 0.8125rem; color: var(--text-secondary);">jrCVR → USDT</span>
+                  <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-success);" id="infoRateJunior">1.00 USDT</span>
+                </div>
               </div>
             </div>
 
-            <div class="redemption-display" id="redemptionPreview">
-              <div class="redemption-row">
-                <span class="redemption-label">Token Amount</span>
-                <span class="redemption-value" id="redemptionTokens">0.00 srCVR</span>
-              </div>
-              <div class="redemption-row">
-                <span class="redemption-label">Exchange Rate</span>
-                <span class="redemption-value" id="redemptionRate">1.00 USDT/srCVR</span>
-              </div>
-              <div class="redemption-row" style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 0.5rem; margin-top: 0.25rem;">
-                <span class="redemption-label" style="font-weight: 700;">Redemption Value</span>
-                <span class="redemption-value" id="redemptionValue" style="color: var(--color-success); font-weight: 800; font-size: 1rem;">$0.00 USDT</span>
-              </div>
-            </div>
-
-            <button class="btn-full btn-outline" id="btnWithdraw" onclick="requestWithdrawal()" disabled>
-              Request Withdrawal
-            </button>
           </div>
         </div>
       </div>
