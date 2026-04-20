@@ -15,7 +15,9 @@
     "demo:hashkey": "hardhat run scripts/demo-testnet.ts --network hashkeyTestnet",
     "verify:testnet": "hardhat run scripts/verify.ts --network bscTestnet",
     "demo:testnet": "hardhat run scripts/demo-testnet.ts --network bscTestnet",
-    "gas": "REPORT_GAS=true hardhat test"
+    "gas": "REPORT_GAS=true hardhat test",
+    "test:subrogation": "hardhat test test/unit/SubrogationNFT.test.ts",
+    "test:frontend": "node test/frontend/subrogation.helpers.test.js"
   },
   "keywords": [],
   "author": "",
