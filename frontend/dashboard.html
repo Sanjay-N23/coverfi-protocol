@@ -132,7 +132,7 @@ code, pre { font-family: var(--font-mono); }
 
 .dash-nav-links { display: flex; align-items: center; gap: 0.25rem; position: absolute; left: 50%; transform: translateX(-50%); }
 .dash-nav-link {
-  padding: 0.5rem 1rem; border: none; background: none; border-radius: 0;
+  padding: 0.4rem 0.75rem; border: none; background: none; border-radius: 0;
   font-size: 0.8125rem; font-weight: 600; color: #636E72;
   text-decoration: none; transition: color 0.2s;
 }
@@ -4975,7 +4975,7 @@ function parseContractError(err) {
   if (msg.includes('insufficient balance') || msg.includes('transfer amount exceeds balance')) {
     return "You don't have enough USDT";
   }
-  if (msg.includes('already purchased') || msg.includes('already covered')) {
+  if (msg.includes('already purchased') || msg.includes('already covered') || msg.includes('already insured')) {
     return 'You already have coverage for this issuer';
   }
   if (msg.includes('insufficient allowance')) {
@@ -5172,10 +5172,19 @@ async function executePurchase() {
     var tokenAddress = DEMO_ISSUER_TOKEN;
     var amountWei = ethers.parseUnits(amount, 18);
 
+    // Pre-check: avoid burning gas if already insured
+    var signer = await ethersProvider.getSigner();
+    var userAddress = await signer.getAddress();
+    var payoutEngineCheck = new ethers.Contract(CONTRACTS.PayoutEngine, COVERFI_ABIS.PayoutEngine, signer);
+    var alreadyInsured = await payoutEngineCheck.isInsured(tokenAddress, userAddress);
+    if (alreadyInsured) {
+      showToast('You already have active coverage for this issuer', 'error');
+      return;
+    }
+
     btn.disabled = true;
     btn.textContent = 'Approving USDT...';
 
-    var signer = await ethersProvider.getSigner();
     var usdt = new ethers.Contract(CONTRACTS.MockUSDT, ['function approve(address,uint256) returns (bool)'], signer);
     var approveTx = await usdt.approve(CONTRACTS.PayoutEngine, amountWei);
     await approveTx.wait();
