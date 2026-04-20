@@ -126,14 +126,14 @@ code, pre { font-family: var(--font-mono); }
 }
 .dash-nav-inner {
   max-width: 1600px; width: 100%; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   position: relative;
 }
 .nav-logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; --logo-diamond: var(--accent-green); }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
 .nav-logo .accent { color: var(--accent-green); }
 
-.dash-nav-links { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
+.dash-nav-links { display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
 .dash-nav-link {
   padding: 0.4rem 0.75rem; border: none; background: none; border-radius: 0;
   font-size: 0.8125rem; font-weight: 600; color: #636E72;
@@ -142,7 +142,7 @@ code, pre { font-family: var(--font-mono); }
 .dash-nav-link:hover { color: #F0B90B; }
 .dash-nav-link.active { color: #F0B90B; }
 
-.nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end; }
 .badge-testnet {
   display: inline-flex; align-items: center; gap: 0.35rem;
   padding: 0.3rem 0.85rem; border-radius: var(--radius-pill);
