@@ -1453,7 +1453,7 @@ async function loadPoolData() {
       const seniorTVL = parseFloat(ethers.formatUnits(poolState.seniorTVL, 18));
       const juniorTVL = parseFloat(ethers.formatUnits(poolState.juniorTVL, 18));
       const totalInsured = parseFloat(ethers.formatUnits(poolState.totalInsuredAmount, 18));
-      const coverageBPS = poolState.coverageRatioBPS.toNumber();
+      const coverageBPS = Number(poolState.coverageRatioBPS);
       const gateActive = poolState.redemptionGateActive;
       const isActive = poolState.isActive;
 

@@ -942,7 +942,7 @@ function getReadProvider() {
 }
 
 function getSubrogationContract(signerOrProvider) {
-  return new ethers.Contract(SUBROGATION_NFT_ADDR, CONTRACT_ABIS.SubrogationNFT, signerOrProvider);
+  return new ethers.Contract(SUBROGATION_NFT_ADDR, COVERFI_ABIS.SubrogationNFT, signerOrProvider);
 }
 
 // ---- Wallet ----
@@ -1000,9 +1000,9 @@ async function loadClaims() {
     var contract = getSubrogationContract(readProvider);
 
     var nextTokenId = await contract.nextTokenId();
-    var totalMinted = Number(nextTokenId);
+    var totalMinted = Number(nextTokenId) - 1; // nextTokenId starts at 1, so minted = nextTokenId - 1
 
-    if (totalMinted === 0) {
+    if (totalMinted <= 0) {
       loadingEl.style.display = 'none';
       emptyEl.style.display = 'block';
       updateMetrics(0, BigInt(0), 0, 0);
@@ -1014,7 +1014,7 @@ async function loadClaims() {
     var activeClaims = 0;
     var completedClaims = 0;
 
-    for (var i = 0; i < totalMinted; i++) {
+    for (var i = 1; i <= totalMinted; i++) { // token IDs start at 1
       try {
         var data = await contract.getClaimData(i);
         var claim = {
