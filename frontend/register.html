@@ -1224,7 +1224,7 @@ async function populateStep2() {
     try {
       var usdt = new ethers.Contract(CONTRACTS.MockUSDT, ERC20_ABI, provider);
       var balance = await usdt.balanceOf(userAddress);
-      var balFormatted = ethers.formatUnits(balance, 6);
+      var balFormatted = ethers.formatUnits(balance, 18);
       document.getElementById('calcBalance').textContent = '$' + parseFloat(balFormatted).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
     } catch(e) {
       document.getElementById('calcBalance').textContent = 'Error loading';
