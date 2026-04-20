@@ -1,7 +1,6 @@
 # CoverFi — Demo Day Explorer Cheat Sheet
 
-> Run `npx hardhat run scripts/seed-default-demo.ts --network hashkeyTestnet`
-> to generate real TX hashes. Replace `<TX1>` and `<TX2>` below with the printed output.
+> GhostIssuer default executed on April 20, 2026. All TX hashes are live on HashKey Testnet.
 
 ---
 
@@ -20,7 +19,7 @@
 
 ### TX1 — Attestor Consensus (TIR.forceConfirmDefault)
 ```
-https://testnet-explorer.hsk.xyz/tx/<TX1>
+https://testnet-explorer.hsk.xyz/tx/0xe8ec0a2966278590661ea248d270748f6f06be43260bf9b4ec1a42a2753dd86e
 ```
 **What to point at:** The `DefaultConfirmed` or `TIRConfirmed` event in the Logs tab.
 **Pitch line:** *"Two-of-three attestors reached consensus — custodian, legal rep, and auditor all signed. That confirmation is immutable."*
@@ -29,7 +28,7 @@ https://testnet-explorer.hsk.xyz/tx/<TX1>
 
 ### TX2 — Waterfall Execution (PayoutEngine.executePayout)
 ```
-https://testnet-explorer.hsk.xyz/tx/<TX2>
+https://testnet-explorer.hsk.xyz/tx/0xe938fa9a13d7d9583475f923478e0d0dc4b34642c34658f668534d9c46426d22
 ```
 **What to point at:** The Logs tab — walk through 4 events in order:
 1. `BondLiquidated` — issuer's 5% bond hit first
@@ -60,9 +59,8 @@ https://testnet-explorer.hsk.xyz/address/0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2
 
 ### GhostIssuer Token (defaulted state)
 ```
-https://testnet-explorer.hsk.xyz/address/<GHOST_TOKEN_ADDRESS>
+https://testnet-explorer.hsk.xyz/address/0x824F04a2a48CFA070C732121315534b97661f420
 ```
-Replace `<GHOST_TOKEN_ADDRESS>` with the address printed by the script.
 
 ---
 
