@@ -262,9 +262,11 @@ code, pre { font-family: var(--font-mono); }
 }
 .nav-inner {
   max-width: var(--container-max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   height: var(--nav-height);
 }
+.nav-links { justify-self: center; }
+.nav-inner > .nav-actions { justify-self: end; }
 .nav-logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; --logo-hex: #2D3436; --logo-dot: white; }
 .nav-logo svg { width: 36px; height: 36px; }
 .nav-logo-text { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em; }
@@ -989,6 +991,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       <li><a href="issuers.html" class="nav-feature-link">Issuers</a></li>
       <li><a href="pool.html" class="nav-feature-link">Pool</a></li>
       <li><a href="coverage.html" class="nav-feature-link">Coverage</a></li>
+      <li><a href="subrogation.html" class="nav-feature-link">Subrogation</a></li>
     </ul>
 
     <div class="nav-actions">
