@@ -924,12 +924,10 @@ var SUBROGATION_NFT_ADDR = '0xbBe8A2840E151cC8BF2B156e5d61a532eFCe2AB9';
 var PAYOUT_ENGINE_ADDR = '0x44944cB598A750Df4C4Bf9A7D3FdDDf7575F88F5';
 
 var DEFAULT_TYPES = [
-  'GENERAL_DEFAULT',
-  'MISAPPROPRIATION',
-  'FRAUD',
-  'INSOLVENCY',
-  'BREACH_OF_TERMS',
-  'REGULATORY_ACTION'
+  'PAYMENT_DELAY',
+  'GHOST_ISSUER',
+  'COLLATERAL_SHORTFALL',
+  'MISAPPROPRIATION'
 ];
 
 var provider = null;
@@ -1085,7 +1083,7 @@ function renderClaims(claims) {
 
     html += '  <div class="claim-row">';
     html += '    <span class="claim-row-label">Issuer Token</span>';
-    html += '    <span class="claim-row-value mono-sm">' + shortenAddr(c.issuerToken) + '</span>';
+    html += '    <a class="claim-row-value mono-sm" href="https://testnet-explorer.hsk.xyz/address/' + c.issuerToken + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">' + shortenAddr(c.issuerToken) + '</a>';
     html += '  </div>';
 
     html += '  <div class="claim-row">';
