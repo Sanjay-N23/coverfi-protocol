@@ -1482,7 +1482,7 @@ function animateCount(el, target, prefix, suffix) {
   suffix = suffix || '';
   if (REDUCED) { el.textContent = prefix + target.toLocaleString() + suffix; return; }
   let current = 0;
-  const increment = target / 60;
+  const increment = Math.max(target / 60, 1);
   const timer = setInterval(() => {
     current += increment;
     if (current >= target) { current = target; clearInterval(timer); }
@@ -1502,7 +1502,7 @@ const statCountObserver = new IntersectionObserver((entries) => {
       statCountObserver.unobserve(el);
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.2 });
 
 document.querySelectorAll('.stat-value[data-count]').forEach(el => {
   statCountObserver.observe(el);

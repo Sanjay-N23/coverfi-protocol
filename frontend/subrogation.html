@@ -1013,9 +1013,9 @@ async function connectWallet() {
 function formatUSDT(wei) {
   try {
     var val = parseFloat(ethers.formatUnits(wei, 18));
-    return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' USDT';
+    return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   } catch (e) {
-    return '$0 USDT';
+    return '$0.00';
   }
 }
 

@@ -1631,7 +1631,7 @@ function resetCoverageUI() {
 
 // ---- Utility Functions ----
 function formatNumber(n) {
-  return n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function formatDate(d) {
@@ -1641,7 +1641,7 @@ function formatDate(d) {
 
 function formatDateShort(d) {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return months[d.getMonth()] + ' ' + d.getDate() + ', ' + String(d.getFullYear()).slice(-2);
+  return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 }
 
 function showToast(message, type) {
