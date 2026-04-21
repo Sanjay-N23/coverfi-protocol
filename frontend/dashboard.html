@@ -140,6 +140,8 @@ code, pre { font-family: var(--font-mono); }
 .dash-nav-link.active { color: #F0B90B; }
 
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end; }
+.nav-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 0.5rem; align-items: center; justify-content: center; border-radius: 0.375rem; }
+.nav-toggle:hover { color: var(--gold); background: rgba(0,0,0,0.04); }
 .badge-testnet {
   display: inline-flex; align-items: center; gap: 0.35rem;
   padding: 0.25rem 0.6rem; border-radius: var(--radius-pill);
@@ -820,6 +822,17 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 /* --- Small tablet (max-width: 768px) --- */
 @media (max-width: 768px) {
   .dash-nav-links { display: none; }
+  .dash-nav-links.open {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: #ffffff;
+    padding: 1rem; gap: 0.25rem;
+    border-bottom: 1px solid var(--border-color, rgba(0,0,0,0.08));
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); z-index: 1000;
+  }
+  .dash-nav-links.open .dash-nav-link { padding: 0.65rem 0.75rem; font-size: 0.95rem; border-radius: 0.375rem; }
+  .dash-nav-links.open .dash-nav-link:hover { background: rgba(240,185,11,0.08); }
+  .nav-toggle { display: flex; }
   .dash-container { padding: 1rem; gap: 1rem; }
   .metrics-bar, .dash-row-metrics { grid-template-columns: 1fr 1fr; gap: 0.625rem; }
   .metric-card-hero { grid-column: 1 / -1; }
@@ -1164,6 +1177,10 @@ body.is-offline .dash-container { opacity: 0.7; pointer-events: auto; }
 
 /* Nav - dark mode */
 [data-theme="dark"] .dash-nav { background: rgba(15,17,24,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+[data-theme="dark"] .nav-toggle { color: #ffffff; }
+[data-theme="dark"] .nav-toggle:hover { background: rgba(255,255,255,0.06); }
+[data-theme="dark"] .dash-nav-links.open { background: #0F1118; border-bottom-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .dash-nav-links.open .dash-nav-link:hover { background: rgba(240,185,11,0.12); }
 [data-theme="dark"] .dash-nav .nav-logo-text { color: #ffffff; }
 [data-theme="dark"] .dash-nav-link { color: rgba(255,255,255,0.7); }
 [data-theme="dark"] .dash-nav-link:hover { color: #F0B90B; }
@@ -2136,6 +2153,59 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* ---------- TOOLTIP SYSTEM ---------- */
+.tip { cursor: help; position: relative; border-bottom: 1px dashed rgba(0,0,0,0.3); display: inline; }
+.tip::before {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  background: #2D3436; color: #fff; padding: 0.375rem 0.75rem;
+  border-radius: 8px; font-size: 0.72rem; font-weight: 400;
+  pointer-events: none; font-family: var(--font-main);
+  opacity: 0; visibility: hidden; transition: opacity 0.15s, visibility 0.15s;
+  z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.25); max-width: 240px; white-space: normal; text-align: center;
+}
+.tip:hover::before { opacity: 1; visibility: visible; }
+[data-theme="dark"] .tip { border-bottom-color: rgba(255,255,255,0.35); }
+[data-theme="dark"] .tip::before { background: #f0f0f0; color: #2D3436; }
+
+/* ---------- ONBOARDING CARD ---------- */
+.onboard-card {
+  background: linear-gradient(135deg, rgba(240,185,11,0.06), rgba(240,185,11,0.02));
+  border: 1.5px solid rgba(240,185,11,0.22); border-radius: var(--radius-card);
+  padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.onboard-card.hidden { display: none; }
+.onboard-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.onboard-badge { display: inline-block; background: rgba(240,185,11,0.15); color: #8a6800; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: 999px; border: 1px solid rgba(240,185,11,0.25); text-transform: uppercase; white-space: nowrap; }
+.onboard-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+.onboard-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+.onboard-step { background: #fff; border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 0.4rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-clay-sm); position: relative; }
+.step-num { position: absolute; top: 0.625rem; right: 0.625rem; width: 20px; height: 20px; background: rgba(240,185,11,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6875rem; font-weight: 800; color: #8a6800; }
+.step-icon { font-size: 1.2rem; }
+.step-body strong { font-size: 0.8125rem; font-weight: 700; color: var(--text-primary); display: block; }
+.step-body p { font-size: 0.72rem; color: var(--text-secondary); margin: 0.2rem 0 0.5rem; line-height: 1.45; }
+.step-cta { display: inline-flex; align-items: center; font-size: 0.75rem; font-weight: 600; color: var(--gold); background: rgba(240,185,11,0.1); border: 1px solid rgba(240,185,11,0.25); border-radius: 999px; padding: 0.3rem 0.75rem; cursor: pointer; transition: all 0.2s; text-decoration: none; align-self: flex-start; }
+.step-cta:hover { background: rgba(240,185,11,0.2); color: var(--gold); }
+@media (max-width: 900px) { .onboard-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .onboard-steps { grid-template-columns: 1fr; } }
+[data-theme="dark"] .onboard-card { background: rgba(240,185,11,0.04); border-color: rgba(240,185,11,0.15); }
+[data-theme="dark"] .onboard-step { background: #1e2329; border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .onboard-badge { color: #FFD443; }
+[data-theme="dark"] .step-num { background: rgba(240,185,11,0.15); color: #FFD443; }
+
+/* ---------- PURCHASE STEP INDICATOR ---------- */
+.purchase-steps { display: none; gap: 0.75rem; align-items: center; margin: 0.75rem 0 0; padding: 0.75rem 1rem; background: rgba(240,185,11,0.06); border: 1px solid rgba(240,185,11,0.18); border-radius: 10px; }
+.purchase-steps.visible { display: flex; }
+.pstep { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-secondary); }
+.pstep.active { color: #8a6800; font-weight: 700; }
+.pstep.done { color: var(--color-success); }
+.pstep-dot { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; flex-shrink: 0; }
+.pstep.active .pstep-dot { background: rgba(240,185,11,0.25); animation: pulse-gold 1.2s ease-in-out infinite; }
+.pstep.done .pstep-dot { background: rgba(0,184,148,0.2); }
+.pstep-divider { flex: 1; height: 1px; background: var(--border-color); min-width: 20px; }
+[data-theme="dark"] .purchase-steps { background: rgba(240,185,11,0.06); border-color: rgba(240,185,11,0.12); }
+[data-theme="dark"] .pstep.active { color: #FFD443; }
+
   </style>
 </head>
 <body>
@@ -2201,7 +2271,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
 
-    <div class="dash-nav-links">
+    <div class="dash-nav-links" id="dashNavLinks">
       <a href="dashboard.html" class="dash-nav-link active">Dashboard</a>
       <a href="issuers.html" class="dash-nav-link">Issuers</a>
       <a href="pool.html" class="dash-nav-link">Pool</a>
@@ -2211,6 +2281,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     </div>
 
     <div class="nav-actions">
+      <button class="nav-toggle" id="dashNavToggle" onclick="toggleDashNav()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="dashNavLinks">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
       <div class="badge-testnet"><span class="dot"></span> HashKey Chain Testnet</div>
       <div class="role-dropdown" id="roleDropdown" style="display:none;">
         <button class="role-dropdown-btn" id="roleDropdownBtn" onclick="toggleRoleDropdown()" aria-haspopup="true" aria-expanded="false">
@@ -2295,6 +2368,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
   <span id="bannerText">Live HashKey Chain Testnet — Connect wallet to transact</span>
   <button class="banner-btn" id="bannerBtn" onclick="connectWallet()">Connect Wallet</button>
+</div>
+<!-- ---- ONBOARDING STEPS ---- -->
+<div class="onboard-card" id="onboardSteps">
+  <div class="onboard-header">
+    <span class="onboard-badge">Start Here</span>
+    <h3 class="onboard-title">New to CoverFi? 4 steps to on-chain credit protection.</h3>
+  </div>
+  <div class="onboard-steps">
+    <div class="onboard-step"><div class="step-num">1</div><div class="step-icon">&#x1F517;</div><div class="step-body"><strong>Connect Wallet</strong><p>MetaMask + HashKey Chain Testnet (Chain ID 133).</p></div><button onclick="connectWallet()" class="step-cta">Connect &rarr;</button></div>
+    <div class="onboard-step"><div class="step-num">2</div><div class="step-icon">&#x1F3E6;</div><div class="step-body"><strong>Browse Issuers</strong><p>KYC-verified RWA issuers with <span class="tip" data-tip="Issuer Risk Score (0-1000). Higher = safer, lower premium.">IRS</span> risk scores.</p></div><a href="issuers.html" class="step-cta">Explore &rarr;</a></div>
+    <div class="onboard-step"><div class="step-num">3</div><div class="step-icon">&#x1F6E1;&#xFE0F;</div><div class="step-body"><strong>Buy Coverage</strong><p>Pay a premium, get a <span class="tip" data-tip="Soulbound NFT confirming your coverage position.">ProtectionCert</span> NFT.</p></div><a href="coverage.html" class="step-cta">Get covered &rarr;</a></div>
+    <div class="onboard-step"><div class="step-num">4</div><div class="step-icon">&#x1F4CA;</div><div class="step-body"><strong>Monitor &amp; Earn</strong><p>LP the pool with <span class="tip" data-tip="Senior Coverage Token - first-loss LP, ~$1.67 redemption.">srCVR</span>/<span class="tip" data-tip="Junior Coverage Token - higher-risk LP, $1.00 redemption.">jrCVR</span>.</p></div><a href="stats.html" class="step-cta">View stats &rarr;</a></div>
+  </div>
 </div>
 
 <!-- ---- ROW 1: METRICS BAR ---- -->
@@ -2907,6 +2993,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       <button class="btn-purchase needs-wallet" id="btnPurchase" onclick="handlePurchase()">
         Connect Wallet First
       </button>
+      <div class="purchase-steps" id="purchaseSteps">
+        <div class="pstep" id="pstep1"><div class="pstep-dot">1</div><span>Approve USDT</span></div>
+        <div class="pstep-divider"></div>
+        <div class="pstep" id="pstep2"><div class="pstep-dot">2</div><span>Purchase Coverage</span></div>
+      </div>
     </div></div>
   </div>
 
@@ -3090,6 +3181,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 <script src="contract-abis.js"></script>
 <script>
+// ---- Mobile nav toggle ----
+function toggleDashNav() {
+  var links = document.getElementById('dashNavLinks');
+  var btn = document.getElementById('dashNavToggle');
+  if (!links || !btn) return;
+  var isOpen = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+document.addEventListener('click', function(e) {
+  var links = document.getElementById('dashNavLinks');
+  var btn = document.getElementById('dashNavToggle');
+  if (!links || !btn || !links.classList.contains('open')) return;
+  if (e.target.closest('.dash-nav-link')) {
+    links.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    return;
+  }
+  if (!links.contains(e.target) && !btn.contains(e.target)) {
+    links.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+});
+
 // ---- Theme toggle ----
 function getTheme() { return localStorage.getItem('coverfi-theme') || 'light'; }
 function setTheme(theme) {
@@ -3822,6 +3936,7 @@ function updateWalletUI() {
   }
   updatePurchaseButton();
   updateBanner();
+  var onb=document.getElementById('onboardSteps'); if(onb) onb.classList.toggle('hidden',walletConnected&&!!walletAddress);
 }
 
 // Listen for network/account changes
@@ -5265,11 +5380,13 @@ async function executePurchase() {
     var approveTx = await usdt.approve(CONTRACTS.PayoutEngine, amountWei);
     await approveTx.wait();
 
+    if(ps){s1.classList.remove('active');s1.classList.add('done');s2.classList.add('active');}
     btn.textContent = 'Purchasing Coverage...';
     var payoutEngine = new ethers.Contract(CONTRACTS.PayoutEngine, COVERFI_ABIS.PayoutEngine, signer);
     var purchaseTx = await payoutEngine.purchaseCoverage(tokenAddress, amountWei, { gasLimit: 500000 });
     var receipt = await purchaseTx.wait();
 
+    if(ps){s2.classList.remove('active');s2.classList.add('done');setTimeout(function(){ps.classList.remove('visible');s1.classList.remove('done');s2.classList.remove('done');},3000);}
     showToast('Coverage purchased! TX: ' + receipt.hash.slice(0, 10) + '...', 'success');
     // Track transaction
     var issuerName = document.getElementById('issuerSelect').options[document.getElementById('issuerSelect').selectedIndex].textContent.split(' (')[0];

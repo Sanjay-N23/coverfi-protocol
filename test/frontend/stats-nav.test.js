@@ -63,7 +63,7 @@ APP_PAGES.forEach((file, i) => {
   test(`A1.${i + 1}`, `${file} contains Stats link inside .dash-nav-links`, () => {
     const html = read(file);
     // Find the dash-nav-links block and check Stats link is inside
-    const navBlockMatch = html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/);
+    const navBlockMatch = html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/);
     assert.ok(navBlockMatch, 'dash-nav-links block not found');
     assert.ok(/href="stats\.html"/.test(navBlockMatch[1]),
       'Stats link (href="stats.html") not found inside dash-nav-links');
@@ -85,7 +85,7 @@ section('Category A2 — HTML integrity & regression protection');
   test(`A2.1.${i + 1}`, `${file}: exactly ONE href="stats.html" in nav block`, () => {
     const html = read(file);
     // Extract nav block only
-    const navBlock = (html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/) ||
+    const navBlock = (html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/) ||
                       html.match(/<ul class="nav-links"[^>]*>([\s\S]*?)<\/ul>/) || [])[1] || '';
     const matches = (navBlock.match(/href="stats\.html"/g) || []).length;
     assert.strictEqual(matches, 1,
@@ -115,7 +115,7 @@ test('A2.3', 'All Stats <a> tags are properly closed', () => {
 test('A2.5', 'No stray \\n or literal escape sequences in nav blocks', () => {
   APP_PAGES.forEach(file => {
     const html = read(file);
-    const navBlock = (html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/) || [])[1] || '';
+    const navBlock = (html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '';
     // Check no literal backslash-n sequences (as opposed to real newlines)
     assert.ok(!/\\n/.test(navBlock),
       `${file}: literal "\\n" found in nav (sed artifact)`);
@@ -198,7 +198,7 @@ APP_PAGES.filter(f => f !== 'stats.html').forEach((file, i) => {
 
 test('C2.4', 'stats.html: ONLY Stats has active class (not Dashboard/Issuers/etc)', () => {
   const html = read('stats.html');
-  const navBlock = (html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/) || [])[1] || '';
+  const navBlock = (html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '';
   const activeLinks = (navBlock.match(/class="[^"]*\bactive\b[^"]*"/g) || []).length;
   assert.strictEqual(activeLinks, 1,
     `Expected exactly 1 active link on stats.html, found ${activeLinks}`);
@@ -243,32 +243,28 @@ test('I1.5', 'Subrogation link routes correctly from all 7 pages', () => {
   });
 });
 
-test('I3.1', 'register.html nav unchanged (still no Stats — expected out of scope)', () => {
+test('I3.1', 'register.html has full 6-link nav (now intentionally in scope)', () => {
   const html = read('register.html');
-  // Stats should NOT have been added to register.html
-  const navMatch = html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/);
-  if (navMatch) {
-    assert.ok(!/href="stats\.html"/.test(navMatch[1]),
-      'register.html unexpectedly has Stats link (should be out of scope)');
-  }
+  const navMatch = html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/);
+  assert.ok(navMatch, 'dash-nav-links block not found in register.html');
+  assert.ok(/href="stats\.html"/.test(navMatch[1]), 'register.html missing Stats link');
+  assert.ok(/href="subrogation\.html"/.test(navMatch[1]), 'register.html missing Subrogation link');
 });
 
-test('I3.2', 'attestor.html nav unchanged (still no Stats — expected)', () => {
+test('I3.2', 'attestor.html has full 6-link nav (now intentionally in scope)', () => {
   const html = read('attestor.html');
-  const navMatch = html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/);
-  if (navMatch) {
-    assert.ok(!/href="stats\.html"/.test(navMatch[1]),
-      'attestor.html unexpectedly has Stats link');
-  }
+  const navMatch = html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/);
+  assert.ok(navMatch, 'dash-nav-links block not found in attestor.html');
+  assert.ok(/href="stats\.html"/.test(navMatch[1]), 'attestor.html missing Stats link');
+  assert.ok(/href="subrogation\.html"/.test(navMatch[1]), 'attestor.html missing Subrogation link');
 });
 
-test('I3.3', 'issuer-dashboard.html nav unchanged (still no Stats — expected)', () => {
+test('I3.3', 'issuer-dashboard.html has full 6-link nav (now intentionally in scope)', () => {
   const html = read('issuer-dashboard.html');
-  const navMatch = html.match(/<div class="dash-nav-links">([\s\S]*?)<\/div>/);
-  if (navMatch) {
-    assert.ok(!/href="stats\.html"/.test(navMatch[1]),
-      'issuer-dashboard.html unexpectedly has Stats link');
-  }
+  const navMatch = html.match(/<div class="dash-nav-links"[^>]*>([\s\S]*?)<\/div>/);
+  assert.ok(navMatch, 'dash-nav-links block not found in issuer-dashboard.html');
+  assert.ok(/href="stats\.html"/.test(navMatch[1]), 'issuer-dashboard.html missing Stats link');
+  assert.ok(/href="subrogation\.html"/.test(navMatch[1]), 'issuer-dashboard.html missing Subrogation link');
 });
 
 test('I2.1 (proxy)', 'executePurchase isInsured pre-check still present in dashboard.html', () => {

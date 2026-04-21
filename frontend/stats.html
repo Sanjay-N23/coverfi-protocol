@@ -139,6 +139,8 @@ code, pre { font-family: var(--font-mono); }
 .dash-nav-link.active { color: #F0B90B; }
 
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end; }
+.nav-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 0.5rem; align-items: center; justify-content: center; border-radius: 0.375rem; }
+.nav-toggle:hover { color: var(--gold); background: rgba(0,0,0,0.04); }
 .badge-testnet {
   display: inline-flex; align-items: center; gap: 0.35rem;
   padding: 0.25rem 0.6rem; border-radius: var(--radius-pill);
@@ -306,10 +308,10 @@ code, pre { font-family: var(--font-mono); }
 
 /* ---------- GRID ROWS ---------- */
 .dash-row-2col {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: stretch;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; align-items: start;
 }
 .dash-row-equal {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: stretch;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start;
 }
 .dash-row-full {
   display: grid; grid-template-columns: 1fr;
@@ -492,6 +494,17 @@ td.contract-addr a {
 @media (max-width: 600px) {
   .hero-metrics { grid-template-columns: 1fr; }
   .dash-nav-links { display: none; }
+  .dash-nav-links.open {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: #ffffff;
+    padding: 1rem; gap: 0.25rem;
+    border-bottom: 1px solid var(--border-color, rgba(0,0,0,0.08));
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); z-index: 1000;
+  }
+  .dash-nav-links.open .dash-nav-link { padding: 0.65rem 0.75rem; font-size: 0.95rem; border-radius: 0.375rem; }
+  .dash-nav-links.open .dash-nav-link:hover { background: rgba(240,185,11,0.08); }
+  .nav-toggle { display: flex; }
   .page-header h1 { font-size: 1.5rem; }
   .theme-toggle { width: 34px; height: 34px; }
 }
@@ -541,9 +554,9 @@ td.contract-addr a {
 [data-theme="dark"] .irs-avg { border-top-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
 [data-theme="dark"] .irs-avg-value { color: #ffffff; }
 
-[data-theme="dark"] .curve-svg .axis-label { fill: rgba(255,255,255,0.75); }
-[data-theme="dark"] .curve-svg .axis-line { stroke: rgba(255,255,255,0.1); }
-[data-theme="dark"] .curve-svg .grid-line { stroke: rgba(255,255,255,0.05); }
+[data-theme="dark"] .curve-svg .axis-label { fill: rgba(255,255,255,0.8); }
+[data-theme="dark"] .curve-svg .axis-line { stroke: rgba(255,255,255,0.3); }
+[data-theme="dark"] .curve-svg .grid-line { stroke: rgba(255,255,255,0.12); }
 [data-theme="dark"] .curve-svg .curve-path { stroke: #FF8A80; }
 [data-theme="dark"] .curve-svg .dot-label { fill: rgba(255,255,255,0.7); }
 
@@ -568,7 +581,29 @@ td.contract-addr a {
 
 /* ---------- INTERACTIVE STATES ---------- */
 .theme-toggle, .refresh-link { cursor: pointer; }
-  </style>
+  
+/* ---------- TOOLTIP SYSTEM ---------- */
+.tip { cursor: help; position: relative; border-bottom: 1px dashed rgba(0,0,0,0.3); display: inline; }
+.tip::before {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  background: #2D3436; color: #fff; padding: 0.375rem 0.75rem;
+  border-radius: 8px; font-size: 0.72rem;
+  pointer-events: none; font-family: var(--font-main);
+  opacity: 0; visibility: hidden; transition: opacity 0.15s, visibility 0.15s;
+  z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.25); max-width: 220px; white-space: normal; text-align: center;
+}
+.tip:hover::before { opacity: 1; visibility: visible; }
+[data-theme="dark"] .tip { border-bottom-color: rgba(255,255,255,0.35); }
+[data-theme="dark"] .tip::before { background: #f0f0f0; color: #2D3436; }
+
+/* --- TOOLTIP SYSTEM ---*/
+.tip{cursor:help;position:relative;border-bottom:1px dashed rgba(0,0,0,0.3);display:inline;}
+.tip::before{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#2D3436;color:#fff;padding:0.375rem 0.75rem;border-radius:8px;font-size:0.72rem;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 0.15s,visibility 0.15s;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.25);max-width:220px;white-space:normal;text-align:center;}
+.tip:hover::before{opacity:1;visibility:visible;}
+[data-theme="dark"] .tip{border-bottom-color:rgba(255,255,255,0.35);}
+[data-theme="dark"] .tip::before{background:#f0f0f0;color:#2D3436;}
+</style>
 </head>
 <body>
 
@@ -614,7 +649,7 @@ td.contract-addr a {
       <span class="nav-logo-text">Cover<span class="accent">Fi</span></span>
     </a>
 
-    <div class="dash-nav-links">
+    <div class="dash-nav-links" id="dashNavLinks">
       <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
       <a href="issuers.html" class="dash-nav-link">Issuers</a>
       <a href="pool.html" class="dash-nav-link">Pool</a>
@@ -624,6 +659,9 @@ td.contract-addr a {
     </div>
 
     <div class="nav-actions">
+      <button class="nav-toggle" id="dashNavToggle" onclick="toggleDashNav()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="dashNavLinks">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
       <div class="badge-testnet"><span class="dot"></span> HashKey Testnet</div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
         <svg class="icon-sun" width="18" aria-hidden="true" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -882,6 +920,26 @@ td.contract-addr a {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 <script src="contract-abis.js"></script>
 <script>
+// ---- Mobile nav toggle ----
+function toggleDashNav() {
+  var links = document.getElementById('dashNavLinks');
+  var btn = document.getElementById('dashNavToggle');
+  if (!links || !btn) return;
+  var isOpen = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+document.addEventListener('click', function(e) {
+  var links = document.getElementById('dashNavLinks');
+  var btn = document.getElementById('dashNavToggle');
+  if (!links || !btn || !links.classList.contains('open')) return;
+  if (e.target.closest && e.target.closest('.dash-nav-link')) {
+    links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); return;
+  }
+  if (!links.contains(e.target) && !btn.contains(e.target)) {
+    links.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+  }
+});
+
 // ---- Theme ----
 function getTheme() { return localStorage.getItem('coverfi-theme') || 'light'; }
 function setTheme(theme) {
@@ -938,6 +996,17 @@ function timeAgo(ts) {
 }
 
 // ---- Build Contracts Table ----
+var CONTRACT_TIPS = {
+  srCVR: 'Senior Coverage Token — first-loss LP position, ~$1.67 USDT redemption.',
+  jrCVR: 'Junior Coverage Token — higher-risk LP tranche, $1.00 USDT redemption.',
+  SubrogationNFT: 'NFT minted to the Foundation after payout, representing legal subrogation rights.',
+  ProtectionCert: 'Soulbound NFT representing a buyer\'s coverage position. Non-transferable.',
+  TIR: 'Trustee Identity Registry — manages 2-of-3 attestor vote for default confirmation.',
+  IssuerRegistry: 'On-chain KYC registry of verified RWA token issuers.',
+  PayoutEngine: 'Core contract: handles coverage purchase, default detection, and payout distribution.',
+  InsurancePool: 'Liquidity pool holding Senior and Junior tranche USDT for coverage payouts.'
+};
+
 function renderContractsTable() {
   var tbody = document.getElementById('contractsBody');
   var html = '';
@@ -946,7 +1015,7 @@ function renderContractsTable() {
     var name = names[i];
     var addr = CONTRACTS[name];
     html += '<tr>' +
-      '<td class="contract-name">' + name + '</td>' +
+      '<td class="contract-name">' + (CONTRACT_TIPS[name] ? '<span class="tip" data-tip="' + CONTRACT_TIPS[name] + '">' + name + '</span>' : name) + '</td>' +
       '<td class="contract-addr"><a href="' + BSCSCAN_BASE + '/address/' + addr + '" target="_blank" rel="noopener">' +
         shortAddr(addr) +
         ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
@@ -968,9 +1037,9 @@ function renderPremiumCurve(issuerDots) {
   var maxBPS = 1600;
 
   var isDark = getTheme() === 'dark';
-  var axisColor = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)';
-  var gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-  var labelColor = isDark ? 'rgba(255,255,255,0.5)' : '#5f6b70';
+  var axisColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)';
+  var gridColor = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.07)';
+  var labelColor = isDark ? 'rgba(255,255,255,0.8)' : '#5f6b70';
   var curveColor = isDark ? '#FFD443' : '#F0B90B';
   var dotLabelColor = isDark ? 'rgba(255,255,255,0.7)' : '#2D3436';
 
@@ -1017,17 +1086,25 @@ function renderPremiumCurve(issuerDots) {
   var baseY = H - padB;
   html += '<polygon points="' + points.join(' ') + ' ' + lastX + ',' + baseY + ' ' + padL + ',' + baseY + '" fill="' + curveColor + '" opacity="0.08"/>';
 
-  // Issuer dots
+  // Issuer dots — smart label placement to avoid overlap
   if (issuerDots && issuerDots.length > 0) {
-    for (var d = 0; d < issuerDots.length; d++) {
-      var dot = issuerDots[d];
+    var sorted = issuerDots.slice().sort(function(a, b) { return a.irs - b.irs; });
+    var labelAbove = true;
+    for (var d = 0; d < sorted.length; d++) {
+      var dot = sorted[d];
       var dx = padL + (dot.irs / maxIRS) * chartW;
       var dbps = 1600 * Math.exp(-0.001386 * dot.irs);
       var dy = padT + (1 - dbps / maxBPS) * chartH;
       var dotColor = dot.irs > 700 ? '#00B894' : (dot.irs >= 400 ? '#F0B90B' : '#EF4444');
+      if (d > 0) {
+        var prevDx = padL + (sorted[d - 1].irs / maxIRS) * chartW;
+        labelAbove = Math.abs(dx - prevDx) < 70 ? !labelAbove : true;
+      }
+      var nameY = labelAbove ? (dy - 14).toFixed(1) : (dy + 22).toFixed(1);
+      var bpsY  = labelAbove ? (dy - 5).toFixed(1)  : (dy + 31).toFixed(1);
       html += '<circle cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + (dy - 12).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + (dy - 3).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
+      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + nameY + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
+      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + bpsY  + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
     }
   }
 

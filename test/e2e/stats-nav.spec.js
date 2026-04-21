@@ -12,6 +12,15 @@
 
 const { test, expect } = require('@playwright/test');
 
+/** Open the hamburger nav if we're on a narrow viewport (≤768px). */
+async function openNavIfMobile(page) {
+  const toggle = page.locator('button.nav-toggle');
+  if (await toggle.isVisible()) {
+    await toggle.click();
+    await page.waitForTimeout(150); // allow transition
+  }
+}
+
 const APP_PAGES = [
   'dashboard.html',
   'issuers.html',
@@ -64,36 +73,42 @@ test.describe('B — Navigation & Routing', () => {
 
   test('B4 Click Stats from dashboard routes to stats.html', async ({ page }) => {
     await page.goto('dashboard.html');
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
 
   test('B5 Click Stats from issuers routes to stats.html', async ({ page }) => {
     await page.goto('issuers.html');
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
 
   test('B6 Click Stats from pool routes to stats.html', async ({ page }) => {
     await page.goto('pool.html');
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
 
   test('B7 Click Stats from coverage routes to stats.html', async ({ page }) => {
     await page.goto('coverage.html');
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
 
   test('B8 Click Stats from subrogation routes to stats.html', async ({ page }) => {
     await page.goto('subrogation.html');
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
 
   test('B9 Click Stats from home (index) routes to stats.html', async ({ page }) => {
     await page.goto(HOME);
+    await openNavIfMobile(page);
     await page.locator('a.nav-feature-link[href="stats.html"]').click();
     await expect(page).toHaveURL(/stats\.html$/);
   });
@@ -109,6 +124,7 @@ test.describe('B — Navigation & Routing', () => {
     await page.goto('stats.html');
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
+    await openNavIfMobile(page);
     await page.locator('a.dash-nav-link[href="stats.html"]').first().click();
     await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveURL(/stats\.html$/);
@@ -117,6 +133,7 @@ test.describe('B — Navigation & Routing', () => {
 
   test('B12 Nav links are all clickable (no display:none / pointer-events:none)', async ({ page }) => {
     await page.goto('dashboard.html');
+    await openNavIfMobile(page);
     const count = await page.locator('a.dash-nav-link').count();
     for (let i = 0; i < count; i++) {
       await expect(page.locator('a.dash-nav-link').nth(i)).toBeVisible();
@@ -135,9 +152,14 @@ test.describe('D — Visual Layout', () => {
   });
 
   test('D2 Nav links are horizontally centered in viewport (dashboard)', async ({ page }) => {
+    const viewport = page.viewportSize();
+    // On narrow viewports, links are in a full-width dropdown — centering check is desktop-only.
+    if (viewport && viewport.width <= 768) {
+      test.skip();
+      return;
+    }
     await page.goto('dashboard.html');
     const box = await page.locator('.dash-nav-links').boundingBox();
-    const viewport = page.viewportSize();
     expect(box).not.toBeNull();
     const linkCenter = box.x + box.width / 2;
     const viewportCenter = viewport.width / 2;
