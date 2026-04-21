@@ -1087,34 +1087,38 @@ function renderPremiumCurve(issuerDots) {
   var baseY = H - padB;
   html += '<polygon points="' + points.join(' ') + ' ' + lastX + ',' + baseY + ' ' + padL + ',' + baseY + '" fill="' + curveColor + '" opacity="0.08"/>';
 
-  // Issuer dots — smart label placement to avoid overlap
+  // Issuer dots — cluster-aware label placement
   if (issuerDots && issuerDots.length > 0) {
     var sorted = issuerDots.slice().sort(function(a, b) { return a.irs - b.irs; });
-    var placedLabels = [];
-    for (var d = 0; d < sorted.length; d++) {
-      var dot = sorted[d];
+    var dotData = sorted.map(function(dot) {
       var dx = padL + (dot.irs / maxIRS) * chartW;
       var dbps = 1600 * Math.exp(-0.001386 * dot.irs);
       var dy = padT + (1 - dbps / maxBPS) * chartH;
-      var dotColor = dot.irs > 700 ? '#00B894' : (dot.irs >= 400 ? '#F0B90B' : '#EF4444');
-      var nearby = placedLabels.filter(function(p) { return Math.abs(p.dx - dx) < 65; });
-      var labelAbove, lx;
-      if (nearby.length === 0) {
-        labelAbove = true; lx = dx;
-      } else if (nearby.length === 1) {
-        labelAbove = !nearby[0].above;
-        lx = dx + (nearby[0].lx <= dx ? 18 : -18);
+      return { dot: dot, dx: dx, dy: dy, dbps: dbps };
+    });
+    for (var d = 0; d < dotData.length; d++) {
+      var cur = dotData[d];
+      var prev = d > 0 ? dotData[d - 1] : null;
+      var next = d < dotData.length - 1 ? dotData[d + 1] : null;
+      var dotColor = cur.dot.irs > 700 ? '#00B894' : (cur.dot.irs >= 400 ? '#F0B90B' : '#EF4444');
+      var tooClosePrev = prev && Math.abs(cur.dx - prev.dx) < 80;
+      var tooCloseNext = next && Math.abs(next.dx - cur.dx) < 80;
+      var anchor, lx, labelAbove;
+      if (tooClosePrev) {
+        // rightmost of a close pair → hang label to the right, below dot
+        anchor = 'start'; lx = cur.dx + 10; labelAbove = false;
+      } else if (tooCloseNext) {
+        // leftmost of a close pair → hang label to the left, above dot
+        anchor = 'end'; lx = cur.dx - 10; labelAbove = true;
       } else {
-        labelAbove = nearby.length % 2 === 0;
-        lx = dx + 22;
+        anchor = 'middle'; lx = cur.dx; labelAbove = true;
       }
-      lx = Math.min(Math.max(lx, padL + 20), W - padR - 20);
-      var nameY = labelAbove ? (dy - 14).toFixed(1) : (dy + 22).toFixed(1);
-      var bpsY  = labelAbove ? (dy - 4).toFixed(1)  : (dy + 31).toFixed(1);
-      html += '<circle cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
-      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + nameY + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
-      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + bpsY  + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
-      placedLabels.push({ dx: dx, dy: dy, above: labelAbove, lx: lx });
+      lx = Math.min(Math.max(lx, padL + 10), W - padR - 10);
+      var nameY = labelAbove ? (cur.dy - 14).toFixed(1) : (cur.dy + 22).toFixed(1);
+      var bpsY  = labelAbove ? (cur.dy - 4).toFixed(1)  : (cur.dy + 31).toFixed(1);
+      html += '<circle cx="' + cur.dx.toFixed(1) + '" cy="' + cur.dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
+      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + nameY + '" text-anchor="' + anchor + '" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + cur.dot.name + '</text>';
+      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + bpsY  + '" text-anchor="' + anchor + '" fill="' + dotLabelColor + '" font-size="8">' + Math.round(cur.dbps) + ' bps</text>';
     }
   }
 
