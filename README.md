@@ -258,22 +258,17 @@ sequenceDiagram
 
 ## 🧪 Test Coverage — 416 Tests, Zero Compromises
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  Test Suite                    Tests    Status                   │
-├─────────────────────────────────────────────────────────────────┤
-│  IssuerRegistry (lifecycle)      48    ✅ All passing           │
-│  IssuerBond (bonding)            32    ✅ All passing           │
-│  IRSOracle (scoring + EWS)       67    ✅ All passing           │
-│  TIR (attestation)               41    ✅ All passing           │
-│  DefaultOracle (4 types)         38    ✅ All passing           │
-│  InsurancePool (tranches)        54    ✅ All passing           │
-│  PayoutEngine (ERC-3643)         49    ✅ All passing           │
-│  SubrogationNFT (NFT + meta)     87    ✅ All passing           │
-├─────────────────────────────────────────────────────────────────┤
-│  TOTAL                          416    ✅ 416 / 416             │
-└─────────────────────────────────────────────────────────────────┘
-```
+| Test Suite | Tests | Status |
+|---|:---:|:---:|
+| IssuerRegistry (lifecycle) | 48 | ✅ Passing |
+| IssuerBond (bonding) | 32 | ✅ Passing |
+| IRSOracle (scoring + EWS) | 67 | ✅ Passing |
+| TIR (attestation) | 41 | ✅ Passing |
+| DefaultOracle (4 types) | 38 | ✅ Passing |
+| InsurancePool (tranches) | 54 | ✅ Passing |
+| PayoutEngine (ERC-3643) | 49 | ✅ Passing |
+| SubrogationNFT (NFT + meta) | 87 | ✅ Passing |
+| **TOTAL** | **416** | **✅ 416 / 416** |
 
 Tests cover: unit · integration · edge cases · access control · reentrancy · overflow · compliance gating
 
