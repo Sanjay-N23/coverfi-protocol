@@ -1,6 +1,6 @@
 # CoverFi Demo Script (5 minutes)
 
-**Target audience:** DoraHacks / BNB Chain judges, RWA Demo Day
+**Target audience:** HashKey Chain Horizon Hackathon judges, RWA Demo Day
 **Goal:** Show CoverFi is real, deployed, and solves a problem no one else has touched.
 
 ---
@@ -8,9 +8,9 @@
 ## Setup (30 seconds)
 
 - Open the CoverFi landing page in the browser
-- Have MetaMask installed and connected to BSC Testnet (Chain ID 97)
+- Have MetaMask installed and connected to HashKey Chain Testnet (Chain ID 133)
 - Have deployer wallet loaded (0xce220d...42fb3)
-- Keep BNBScan open in a second tab for live verification
+- Keep HashKeyScan open in a second tab for live verification
 
 ---
 
@@ -33,7 +33,7 @@
 
 - Click "Launch App" on the landing page
 - The dashboard opens. Connect MetaMask wallet.
-- Wait for on-chain data to load (all data is live from BSC Testnet contracts)
+- Wait for on-chain data to load (all data is live from HashKey Chain Testnet contracts)
 
 **Walk through the dashboard panels:**
 
@@ -70,13 +70,13 @@
 - Watch the premium calculation update in real-time: "696 bps on 100 tokens = premium shown"
 - Click "Purchase Coverage"
 - MetaMask popup appears — confirm the transaction
-- Wait for confirmation (~3 seconds on BSC Testnet)
+- Wait for confirmation (~3 seconds on HashKey Chain Testnet)
 - **Show the ProtectionCert NFT** that appears in the user's portfolio
 - "This is an ERC-5192 soulbound token. Non-transferable. It represents your coverage position and includes the estimated recovery ratio."
 
-### Verify on BNBScan (15 seconds)
+### Verify on HashKeyScan (15 seconds)
 
-- Click the TX hash link — opens BNBScan
+- Click the TX hash link — opens HashKeyScan
 - "Every transaction is verifiable. This is not a simulation."
 
 ---
@@ -89,7 +89,7 @@
   - "2-of-3 threshold met. DefaultOracle confirmed the credit event."
   - "PayoutEngine executed automatically. The investor received $15 USDT after ERC-3643 compliance checks — isVerified() and isFrozen() both passed."
 - Show the SubrogationNFT: "This NFT was minted to the CoverFi Foundation. It represents the legal right to pursue recovery against the defaulted issuer. The protocol's loss is not necessarily permanent."
-- Switch to BNBScan tab: "25 real transactions on BSC Testnet. All verifiable."
+- Switch to HashKeyScan tab: "25 real transactions on HashKey Chain Testnet. All verifiable."
 
 **Key TX hashes to have ready:**
 - Payout TX: `0x5381147c824b4006cd95af66434f57795578c050000b24674b06a16078d74c65`
@@ -100,7 +100,7 @@
 ## Closing (15 seconds)
 
 - Return to the dashboard. Face the judges.
-- "12 smart contracts. 376 tests. Fully deployed on BSC Testnet."
+- "12 smart contracts. 376 tests. Fully deployed on HashKey Chain Testnet."
 - "CoverFi is the first CDS equivalent for ERC-3643 RWA tokens. It is infrastructure — the missing credit protection primitive that enables institutional capital to flow into on-chain RWA markets with confidence."
 - "Thank you."
 
@@ -110,8 +110,8 @@
 
 | If this happens... | Do this... |
 |---|---|
-| MetaMask not connecting | Refresh page, check BSC Testnet is selected (Chain ID 97) |
-| Transaction stuck | Show pre-recorded TX hashes on BNBScan instead |
-| Dashboard data not loading | Switch to BNBScan tab and walk through contracts directly |
+| MetaMask not connecting | Refresh page, check HashKey Chain Testnet is selected (Chain ID 133) |
+| Transaction stuck | Show pre-recorded TX hashes on HashKeyScan instead |
+| Dashboard data not loading | Switch to HashKeyScan tab and walk through contracts directly |
 | Question about tests | "376 tests across 12 contracts, all passing. Happy to show the test suite after." |
 | Question about audits | "External audit planned for Phase 1 (April-July). Code uses OpenZeppelin base contracts and follows CEI pattern throughout." |
