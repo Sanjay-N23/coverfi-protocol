@@ -323,8 +323,10 @@ code, pre { font-family: var(--font-mono); }
 
 /* ---------- GRID ROWS ---------- */
 .dash-row-2col {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem; align-items: start;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem; align-items: stretch;
 }
+.dash-row-2col > .dash-card { height: 520px; contain: none; }
+.dash-row-2col .card-body { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; padding-bottom: 0; }
 .dash-row-equal {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: stretch;
 }
@@ -425,7 +427,7 @@ code, pre { font-family: var(--font-mono); }
 }
 
 /* ---------- EVENTS TIMELINE ---------- */
-.events-list { display: flex; flex-direction: column; gap: 0; max-height: 400px; overflow-y: auto; padding-right: 2px; }
+.events-list { display: flex; flex-direction: column; gap: 0; flex: 1; min-height: 0; overflow-y: auto; padding-right: 2px; }
 .events-list::-webkit-scrollbar { width: 4px; }
 .events-list::-webkit-scrollbar-track { background: transparent; }
 .events-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
@@ -463,7 +465,7 @@ code, pre { font-family: var(--font-mono); }
 }
 
 /* ---------- CONTRACT ADDRESSES TABLE ---------- */
-.table-wrap { overflow-x: auto; max-height: 420px; overflow-y: auto; }
+.table-wrap { overflow-x: auto; flex: 1; min-height: 0; overflow-y: auto; }
 .table-wrap::-webkit-scrollbar { width: 4px; }
 .table-wrap::-webkit-scrollbar-track { background: transparent; }
 .table-wrap::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
