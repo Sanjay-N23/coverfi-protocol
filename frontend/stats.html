@@ -1089,22 +1089,31 @@ function renderPremiumCurve(issuerDots) {
   // Issuer dots — smart label placement to avoid overlap
   if (issuerDots && issuerDots.length > 0) {
     var sorted = issuerDots.slice().sort(function(a, b) { return a.irs - b.irs; });
-    var labelAbove = true;
+    var placedLabels = [];
     for (var d = 0; d < sorted.length; d++) {
       var dot = sorted[d];
       var dx = padL + (dot.irs / maxIRS) * chartW;
       var dbps = 1600 * Math.exp(-0.001386 * dot.irs);
       var dy = padT + (1 - dbps / maxBPS) * chartH;
       var dotColor = dot.irs > 700 ? '#00B894' : (dot.irs >= 400 ? '#F0B90B' : '#EF4444');
-      if (d > 0) {
-        var prevDx = padL + (sorted[d - 1].irs / maxIRS) * chartW;
-        labelAbove = Math.abs(dx - prevDx) < 70 ? !labelAbove : true;
+      var nearby = placedLabels.filter(function(p) { return Math.abs(p.dx - dx) < 65; });
+      var labelAbove, lx;
+      if (nearby.length === 0) {
+        labelAbove = true; lx = dx;
+      } else if (nearby.length === 1) {
+        labelAbove = !nearby[0].above;
+        lx = dx + (nearby[0].lx <= dx ? 18 : -18);
+      } else {
+        labelAbove = nearby.length % 2 === 0;
+        lx = dx + 22;
       }
+      lx = Math.min(Math.max(lx, padL + 20), W - padR - 20);
       var nameY = labelAbove ? (dy - 14).toFixed(1) : (dy + 22).toFixed(1);
-      var bpsY  = labelAbove ? (dy - 5).toFixed(1)  : (dy + 31).toFixed(1);
+      var bpsY  = labelAbove ? (dy - 4).toFixed(1)  : (dy + 31).toFixed(1);
       html += '<circle cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + nameY + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + bpsY  + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
+      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + nameY + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
+      html += '<text class="dot-label" x="' + lx.toFixed(1) + '" y="' + bpsY  + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
+      placedLabels.push({ dx: dx, dy: dy, above: labelAbove, lx: lx });
     }
   }
 
@@ -1322,7 +1331,7 @@ async function loadAllData() {
         chainEvents.push({
           type: 'deposit',
           title: 'Senior Deposit',
-          desc: fmt(sev.args && sev.args[1] ? sev.args[1] : 0n) + ' deposited to Senior Tranche',
+          desc: fmt(sev.args && sev.args[2] ? sev.args[2] : 0n) + ' deposited to Senior Tranche',
           time: sblock ? timeAgo(sblock.timestamp) : 'recent',
           tx: sev.transactionHash,
           blockNum: sev.blockNumber
@@ -1337,7 +1346,7 @@ async function loadAllData() {
         chainEvents.push({
           type: 'deposit',
           title: 'Junior Deposit',
-          desc: fmt(jev.args && jev.args[1] ? jev.args[1] : 0n) + ' deposited to Junior Tranche',
+          desc: fmt(jev.args && jev.args[2] ? jev.args[2] : 0n) + ' deposited to Junior Tranche',
           time: jblock ? timeAgo(jblock.timestamp) : 'recent',
           tx: jev.transactionHash,
           blockNum: jev.blockNumber
