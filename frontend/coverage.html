@@ -836,7 +836,46 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
   .metric-icon { width: 36px; height: 36px; border-radius: 10px; }
   .cert-card-inner { margin: 0.75rem; padding: 1rem; }
 }
-  </style>
+  
+/* --- TOOLTIP SYSTEM --- */
+.tip{cursor:help;position:relative;border-bottom:1px dashed rgba(0,0,0,0.3);display:inline;}
+.tip::before{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#2D3436;color:#fff;padding:0.375rem 0.75rem;border-radius:8px;font-size:0.72rem;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 0.15s,visibility 0.15s;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.25);max-width:220px;white-space:normal;text-align:center;}
+.tip:hover::before{opacity:1;visibility:visible;}
+[data-theme="dark"] .tip{border-bottom-color:rgba(255,255,255,0.35);}
+[data-theme="dark"] .tip::before{background:#f0f0f0;color:#2D3436;}
+
+/* --- PREVIEW BANNER --- */
+.preview-banner{display:none;align-items:center;gap:0.5rem;background:rgba(240,185,11,0.08);border:1px solid rgba(240,185,11,0.22);border-radius:8px;padding:0.5rem 0.875rem;font-size:0.75rem;color:#8a6800;margin-bottom:0.75rem;}
+.preview-banner.show{display:flex;}
+[data-theme="dark"] .preview-banner{background:rgba(240,185,11,0.06);border-color:rgba(240,185,11,0.15);color:#FFD443;}
+
+/* --- PREVIEW BANNER --- */
+.preview-banner{display:none;align-items:center;gap:0.5rem;background:rgba(240,185,11,0.08);border:1px solid rgba(240,185,11,0.22);border-radius:8px;padding:0.5rem 0.875rem;font-size:0.75rem;color:#8a6800;margin-bottom:0.75rem;}
+.preview-banner.show{display:flex;}
+[data-theme="dark"] .preview-banner{background:rgba(240,185,11,0.06);border-color:rgba(240,185,11,0.15);color:#FFD443;}
+
+/* --- INLINE PURCHASE FORM --- */
+.purchase-form-grid{display:grid;gap:0.875rem;}
+.purchase-label{font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.3rem;display:block;}
+.purchase-select,.purchase-input{width:100%;padding:0.6rem 0.875rem;border:1.5px solid var(--border-color);border-radius:var(--radius-card);font-size:0.875rem;background:var(--card-bg);color:var(--text-primary);outline:none;font-family:var(--font-main);box-sizing:border-box;}
+.purchase-select:focus,.purchase-input:focus{border-color:var(--gold);}
+.purchase-premium-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0.875rem;background:rgba(240,185,11,0.06);border:1px solid rgba(240,185,11,0.15);border-radius:8px;font-size:0.8125rem;}
+.purchase-btn{width:100%;padding:0.75rem;background:var(--gold);color:#1a1d24;font-weight:700;font-size:0.875rem;border:none;border-radius:var(--radius-card);cursor:pointer;transition:all 0.2s;}
+.purchase-btn:hover{background:#e6a800;}
+.purchase-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.purchase-btn.needs-wallet{background:rgba(240,185,11,0.12);color:#8a6800;border:1.5px solid rgba(240,185,11,0.3);}
+.ipurchase-steps{display:none;gap:0.75rem;align-items:center;padding:0.625rem 0.875rem;background:rgba(240,185,11,0.06);border:1px solid rgba(240,185,11,0.15);border-radius:8px;font-size:0.75rem;}
+.ipurchase-steps.visible{display:flex;}
+.ipstep{display:flex;align-items:center;gap:0.35rem;color:var(--text-secondary);}
+.ipstep.active{color:#8a6800;font-weight:700;}
+.ipstep.done{color:var(--color-success);}
+.ipstep-dot{width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;font-size:0.6rem;flex-shrink:0;}
+.ipstep.active .ipstep-dot{background:rgba(240,185,11,0.25);}
+.ipstep.done .ipstep-dot{background:rgba(0,184,148,0.2);}
+.ipstep-div{flex:1;height:1px;background:var(--border-color);}
+[data-theme="dark"] .purchase-select,[data-theme="dark"] .purchase-input{background:#1e2329;border-color:rgba(255,255,255,0.1);}
+[data-theme="dark"] .purchase-btn.needs-wallet{color:#FFD443;}
+</style>
 </head>
 <body>
 
@@ -1003,6 +1042,7 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
     </span>
   </div>
   <div class="card-body">
+    <div class="preview-banner" id="previewBanner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Sample data&nbsp;&mdash;&nbsp;<a href="#" onclick="handleWalletClick();return false;" style="color:inherit;font-weight:700;text-decoration:underline;">connect wallet</a>&nbsp;to see your real coverage</div>
     <div class="cert-grid" id="activeCertGrid">
       <!-- Populated by JS -->
       <div class="empty-state" id="activeCoverageEmpty">
@@ -1010,7 +1050,7 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="empty-state-title">No Active Coverage</div>
-        <div class="empty-state-desc">Connect your wallet to view ProtectionCert NFTs, or purchase coverage from the dashboard.</div>
+        <div class="empty-state-desc">Connect your wallet to view <span class="tip" data-tip="Soulbound NFT representing your coverage position. Non-transferable.">ProtectionCert</span> NFTs, or purchase coverage from the dashboard.</div>
         <a href="dashboard.html#purchase" class="btn-empty-cta">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Get Coverage
@@ -1073,19 +1113,42 @@ tbody tr:hover { background: rgba(0,200,83,0.04); }
 </div>
 
 
-<!-- ---- BUY MORE COVERAGE CTA ---- -->
-<div class="cta-section reveal">
-  <h3>Get Coverage</h3>
-  <p>Purchase credit protection from verified issuers on the CoverFi protocol. Coverage is backed by the tri-layer waterfall system.</p>
-  <div class="cta-buttons">
-    <a href="dashboard.html#purchase" class="btn-cta btn-cta-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Get Coverage
-    </a>
-    <a href="issuers.html" class="btn-cta btn-cta-secondary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      Browse Issuers
-    </a>
+<!-- ---- BUY COVERAGE INLINE ---- -->
+<div class="dash-card reveal" id="purchaseFormCard">
+  <div class="card-header">
+    <h3>
+      <span class="card-icon" style="background:rgba(240,185,11,0.12);color:var(--gold);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      Buy Coverage
+    </h3>
+    <span style="font-size:0.75rem;color:var(--text-muted);">Backed by tri-layer waterfall &bull; On-chain ProtectionCert NFT</span>
+  </div>
+  <div class="card-body">
+    <div class="purchase-form-grid">
+      <div>
+        <label class="purchase-label" for="inlineIssuerSelect">Issuer</label>
+        <select class="purchase-select" id="inlineIssuerSelect" onchange="updateInlinePremium()">
+          <option value="720" data-token="0xa7C664459C66325Cd9dB15245DD901f1623c9655">AsiaReit Capital (IRS: 720)</option>
+          <option value="650" data-token="0xa7C664459C66325Cd9dB15245DD901f1623c9655">TradeFlow Finance (IRS: 650)</option>
+          <option value="580" data-token="0xa7C664459C66325Cd9dB15245DD901f1623c9655">UrbanBridge REIT (IRS: 580)</option>
+        </select>
+      </div>
+      <div>
+        <label class="purchase-label" for="inlineCoverageAmt">Coverage Amount (USDT)</label>
+        <input type="number" class="purchase-input" id="inlineCoverageAmt" placeholder="e.g. 1000" min="10" oninput="updateInlinePremium()">
+      </div>
+      <div class="purchase-premium-row" id="inlinePremiumRow" style="display:none;">
+        <span style="color:var(--text-secondary);">Annual Premium</span>
+        <strong id="inlinePremiumDisplay" style="color:var(--gold);">--</strong>
+      </div>
+      <button class="purchase-btn needs-wallet" id="btnInlinePurchase" onclick="executeInlinePurchase()">Connect Wallet First</button>
+      <div class="ipurchase-steps" id="inlinePurchaseSteps">
+        <div class="ipstep" id="iStep1"><div class="ipstep-dot">1</div><span>Approve USDT</span></div>
+        <div class="ipstep-div"></div>
+        <div class="ipstep" id="iStep2"><div class="ipstep-dot">2</div><span>Purchase Coverage</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1170,6 +1233,9 @@ async function connectWallet() {
     updateWalletUI(userAddress);
     initContracts();
     loadCoverageData();
+    var _pb = document.getElementById('previewBanner');
+    if (_pb) _pb.classList.remove('show');
+    updateInlinePurchaseBtn();
     showToast('Wallet connected successfully', 'success');
   } catch (err) {
     showToast('Wallet connection failed: ' + (err.message || err), 'error');
@@ -1202,6 +1268,7 @@ function disconnectWallet() {
   btn.classList.remove('connected');
   document.getElementById('walletDropdown').classList.remove('open');
   resetCoverageUI();
+  updateInlinePurchaseBtn();
   showToast('Wallet disconnected', 'success');
 }
 
@@ -1446,7 +1513,7 @@ function renderActiveCerts(certs) {
           '<div class="cert-row"><span class="cert-row-label">Days Remaining</span><span class="cert-row-value highlight">' + daysRemaining + '</span></div>' +
           '<div class="cert-divider"></div>' +
           '<div class="cert-row"><span class="cert-row-label">Issuer Status</span><span class="cert-row-value"><span class="dot dot-green" style="margin-right:4px;"></span> ' + issuerStatus + '</span></div>' +
-          '<div class="cert-row"><span class="cert-row-label">IRS Score</span><span class="cert-row-value">' + cert.irsScore + '</span></div>' +
+          '<div class="cert-row"><span class="cert-row-label"><span class="tip" data-tip="Issuer Risk Score (0–1000). Higher = safer issuer, lower premium rate.">IRS</span></span><span class="cert-row-value">' + cert.irsScore + '</span></div>' +
           '<div style="margin-top:0.25rem;">' +
             '<div class="irs-bar-wrap">' +
               '<div class="irs-bar-bg"><div class="irs-bar" style="width:' + irsPercent + '%;"></div></div>' +
@@ -1553,7 +1620,7 @@ function resetCoverageUI() {
     '<div class="empty-state" id="activeCoverageEmpty">' +
       '<div class="empty-state-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>' +
       '<div class="empty-state-title">No Active Coverage</div>' +
-      '<div class="empty-state-desc">Connect your wallet to view ProtectionCert NFTs, or purchase coverage from the dashboard.</div>' +
+      '<div class="empty-state-desc">Connect your wallet to view <span class="tip" data-tip="Soulbound NFT representing your coverage position. Non-transferable.">ProtectionCert</span> NFTs, or purchase coverage from the dashboard.</div>' +
       '<a href="dashboard.html#purchase" class="btn-empty-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Get Coverage</a>' +
     '</div>';
   document.getElementById('payoutStatusCard').style.display = 'none';
@@ -1644,12 +1711,90 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateWalletUI(userAddress);
         initContracts();
         loadCoverageData();
+        updateInlinePurchaseBtn();
       }
     } catch(e) {
       console.log('Auto-reconnect failed:', e.message);
     }
   }
+  if (!userAddress) {
+    loadDemoData();
+    var _pb = document.getElementById('previewBanner');
+    if (_pb) _pb.classList.add('show');
+  }
 });
+
+// ---- Inline Purchase Form ----
+var MOCK_USDT_ADDR = '0x65A3Ae0e4787856CfcDdE505015c5CC3d5560212';
+
+function updateInlinePremium() {
+  var sel = document.getElementById('inlineIssuerSelect');
+  var amtEl = document.getElementById('inlineCoverageAmt');
+  var amount = parseFloat(amtEl ? amtEl.value : 0);
+  var irs = parseInt(sel ? sel.value : 720);
+  var premiumBPS = Math.round(1600 * Math.exp(-0.001386 * irs));
+  var row = document.getElementById('inlinePremiumRow');
+  var disp = document.getElementById('inlinePremiumDisplay');
+  if (row && amount >= 10) {
+    var premiumAmt = (amount * premiumBPS / 10000).toFixed(2);
+    row.style.display = 'flex';
+    disp.textContent = '$' + premiumAmt + ' / yr (' + premiumBPS + ' bps)';
+  } else if (row) {
+    row.style.display = 'none';
+  }
+}
+
+function updateInlinePurchaseBtn() {
+  var btn = document.getElementById('btnInlinePurchase');
+  if (!btn) return;
+  if (!userAddress) {
+    btn.textContent = 'Connect Wallet First';
+    btn.classList.add('needs-wallet');
+  } else {
+    btn.textContent = 'Approve & Purchase';
+    btn.classList.remove('needs-wallet');
+  }
+}
+
+async function executeInlinePurchase() {
+  if (!userAddress) { await connectWallet(); return; }
+  var amtEl = document.getElementById('inlineCoverageAmt');
+  var amount = amtEl ? amtEl.value.trim() : '';
+  if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) < 10) {
+    showToast('Enter a coverage amount of at least 10 USDT', 'error');
+    return;
+  }
+  var sel = document.getElementById('inlineIssuerSelect');
+  var tokenAddress = sel ? sel.options[sel.selectedIndex].dataset.token : '0xa7C664459C66325Cd9dB15245DD901f1623c9655';
+  var btn = document.getElementById('btnInlinePurchase');
+  var s1 = document.getElementById('iStep1');
+  var s2 = document.getElementById('iStep2');
+  var ps = document.getElementById('inlinePurchaseSteps');
+  var origText = btn.textContent;
+  try {
+    btn.disabled = true;
+    btn.textContent = 'Approving USDT...';
+    if (ps) { ps.classList.add('visible'); if (s1) s1.classList.add('active'); }
+    var amountWei = ethers.parseUnits(amount, 18);
+    var usdt = new ethers.Contract(MOCK_USDT_ADDR, ['function approve(address,uint256) returns (bool)'], signer);
+    var approveTx = await usdt.approve(CONTRACTS.PayoutEngine, amountWei);
+    await approveTx.wait();
+    if (ps && s1 && s2) { s1.classList.remove('active'); s1.classList.add('done'); s2.classList.add('active'); }
+    btn.textContent = 'Purchasing Coverage...';
+    var pe = new ethers.Contract(CONTRACTS.PayoutEngine, COVERFI_ABIS.PayoutEngine, signer);
+    var purchaseTx = await pe.purchaseCoverage(tokenAddress, amountWei, { gasLimit: 500000 });
+    var receipt = await purchaseTx.wait();
+    if (ps && s2) { s2.classList.remove('active'); s2.classList.add('done'); setTimeout(function(){ ps.classList.remove('visible'); if(s1)s1.classList.remove('done'); s2.classList.remove('done'); }, 3000); }
+    showToast('Coverage purchased! TX: ' + receipt.hash.slice(0, 10) + '...', 'success');
+    loadCoverageData();
+  } catch (err) {
+    showToast(err.reason || err.message || 'Purchase failed', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
+}
+
 </script>
 </body>
 </html>

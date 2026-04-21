@@ -729,7 +729,14 @@ code, pre { font-family: var(--font-mono); }
   outline: none;
 }
 .form-input:focus { border-color: var(--gold); box-shadow: var(--shadow-clay-inset), 0 0 0 3px rgba(240,185,11,0.12); }
-  </style>
+  
+/* --- TOOLTIP SYSTEM --- */
+.tip{cursor:help;position:relative;border-bottom:1px dashed rgba(0,0,0,0.3);display:inline;}
+.tip::before{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#2D3436;color:#fff;padding:0.375rem 0.75rem;border-radius:8px;font-size:0.72rem;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 0.15s,visibility 0.15s;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.25);max-width:220px;white-space:normal;text-align:center;}
+.tip:hover::before{opacity:1;visibility:visible;}
+[data-theme="dark"] .tip{border-bottom-color:rgba(255,255,255,0.35);}
+[data-theme="dark"] .tip::before{background:#f0f0f0;color:#2D3436;}
+</style>
 </head>
 <body>
 
@@ -918,7 +925,7 @@ code, pre { font-family: var(--font-mono); }
                 </svg>
                 <div class="irs-gauge-value" id="irsScoreValue">--</div>
               </div>
-              <div class="irs-gauge-label">Composite IRS Score (max 1000)</div>
+              <div class="irs-gauge-label">Composite <span class="tip" data-tip="Issuer Risk Score (0–1000). Higher = safer issuer, lower premium rate.">IRS</span> Score (max 1000)</div>
             </div>
 
             <div class="irs-premium-rate" id="irsPremiumRate">
@@ -1164,11 +1171,11 @@ code, pre { font-family: var(--font-mono); }
           <div class="coverage-stats-grid">
             <div class="cov-stat">
               <div class="cov-stat-val" id="seniorTVL">$0</div>
-              <div class="cov-stat-label">Senior TVL</div>
+              <div class="cov-stat-label">Senior <span class="tip" data-tip="Total Value Locked — all USDT deposited across both pool tranches.">TVL</span></div>
             </div>
             <div class="cov-stat">
               <div class="cov-stat-val" id="juniorTVL">$0</div>
-              <div class="cov-stat-label">Junior TVL</div>
+              <div class="cov-stat-label">Junior <span class="tip" data-tip="Total Value Locked — all USDT deposited across both pool tranches.">TVL</span></div>
             </div>
             <div class="cov-stat">
               <div class="cov-stat-val" id="coverageRatio">0%</div>
