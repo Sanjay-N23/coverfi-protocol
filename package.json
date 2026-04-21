@@ -17,7 +17,8 @@
     "demo:testnet": "hardhat run scripts/demo-testnet.ts --network bscTestnet",
     "gas": "REPORT_GAS=true hardhat test",
     "test:subrogation": "hardhat test test/unit/SubrogationNFT.test.ts",
-    "test:frontend": "node test/frontend/subrogation.helpers.test.js"
+    "test:frontend": "node test/frontend/subrogation.helpers.test.js",
+    "test:stats-nav": "node test/frontend/stats-nav.test.js"
   },
   "keywords": [],
   "author": "",
