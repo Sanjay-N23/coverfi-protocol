@@ -7,3 +7,6 @@ coverage.json
 .env
 dist
 *.log
+test-results
+playwright-report
+/playwright/.cache
