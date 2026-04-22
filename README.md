@@ -29,19 +29,19 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║  $12,000,000,000+ in tokenized RWA assets live on-chain today       ║
+║  $12,000,000,000+ in tokenized RWA assets live on-chain today        ║
 ║                                                                      ║
-║  ┌─────────────────────┐    ┌──────────────────────────────────┐    ║
-║  │  Smart Contract Bug │    │  RWA Issuer Default              │    ║
-║  │  Insurance?         │    │  Insurance?                      │    ║
-║  │                     │    │                                  │    ║
-║  │  ✅ Nexus Mutual    │    │  ❌ Nobody                       │    ║
-║  │  ✅ Risk Harbor     │    │  ❌ Not Nexus                    │    ║
-║  │  ✅ Neptune Finance │    │  ❌ Not Risk Harbor              │    ║
-║  │  ✅ InsurAce        │    │  ❌ Not InsurAce                 │    ║
-║  └─────────────────────┘    └──────────────────────────────────┘    ║
-║                                           ↑                         ║
-║                               THIS IS WHAT WE SOLVE                 ║
+║  ┌─────────────────────┐    ┌──────────────────────────────────┐     ║
+║  │  Smart Contract Bug │    │  RWA Issuer Default              │     ║
+║  │  Insurance?         │    │  Insurance?                      │     ║
+║  │                     │    │                                  │     ║
+║  │  ✅ Nexus Mutual    │    │  ❌ Nobody                       │     ║
+║  │  ✅ Risk Harbor     │    │  ❌ Not Nexus                    │     ║
+║  │  ✅ Neptune Finance │    │  ❌ Not Risk Harbor              │     ║
+║  │  ✅ InsurAce        │    │  ❌ Not InsurAce                 │     ║
+║  └─────────────────────┘    └──────────────────────────────────┘     ║
+║                                           ↑                          ║
+║                               THIS IS WHAT WE SOLVE                  ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -237,20 +237,20 @@ sequenceDiagram
 
 <br/>
 
-| Layer | Contract | Purpose | Key Feature |
-|-------|----------|---------|-------------|
-| 0 | `IssuerRegistry.sol` | Issuer lifecycle FSM | 6 states: OBSERVATION → ACTIVE → MONITORING → DEFAULTED → WIND_DOWN → CLOSED |
-| 1 | `IssuerBond.sol` | First-loss capital | Holds 5% of issuer token market cap in USDT |
-| 2 | `IRSOracle.sol` | Credit scoring | IRS 0–1000, TWAS cache, Early Warning System (50pt drop triggers alert) |
-| 3 | `TIR.sol` | Attestation engine | 3 categories (CUSTODIAN, LEGAL_REP, AUDITOR), 2-of-3 multi-sig default trigger |
-| 4 | `DefaultOracle.sol` | Default confirmation | 4 event types with configurable grace periods and cure windows |
-| 5 | `InsurancePool.sol` | Liquidity management | Senior/Junior waterfall, utilization ratio, redemption gates |
-| 5 | `srCVR.sol` | Senior tranche token | Compound cToken exchange-rate model, 30-day lock, 8–12% APR |
-| 5 | `jrCVR.sol` | Junior tranche token | Fixed balance ERC-20, 14-day lock, 20–28% APR |
-| 6 | `PayoutEngine.sol` | Payout orchestration | ERC-3643 compliance checks before every transfer |
-| 6 | `ProtectionCert.sol` | Coverage certificate | ERC-5192 Soulbound NFT, burns on payout, non-transferable |
-| 7 | `SubrogationNFT.sol` | Recovery rights | ERC-721, metadata-rich, minted to Foundation post-default |
-| – | `MockUSDT.sol` | Test collateral | 18-decimal USDT mock with faucet for testnet |
+| Layer |       Contract       |        Purpose       | Key Feature |
+|-------|----------------------|----------------------|-------------|
+|   0   | `IssuerRegistry.sol` | Issuer lifecycle FSM | 6 states: OBSERVATION → ACTIVE → MONITORING → DEFAULTED → WIND_DOWN → CLOSED |
+|   1   | `IssuerBond.sol`     | First-loss capital   | Holds 5% of issuer token market cap in USDT |
+|   2   | `IRSOracle.sol`      | Credit scoring       | IRS 0–1000, TWAS cache, Early Warning System (50pt drop triggers alert) |
+|   3   | `TIR.sol`            | Attestation engine   | 3 categories (CUSTODIAN, LEGAL_REP, AUDITOR), 2-of-3 multi-sig default trigger |
+|   4   | `DefaultOracle.sol`  | Default confirmation | 4 event types with configurable grace periods and cure windows |
+|   5   | `InsurancePool.sol`  | Liquidity management | Senior/Junior waterfall, utilization ratio, redemption gates |
+|   5   | `srCVR.sol`          | Senior tranche token | Compound cToken exchange-rate model, 30-day lock, 8–12% APR |
+|   5   | `jrCVR.sol`          | Junior tranche token | Fixed balance ERC-20, 14-day lock, 20–28% APR |
+|   6   | `PayoutEngine.sol`   | Payout orchestration | ERC-3643 compliance checks before every transfer |
+|   6   | `ProtectionCert.sol` | Coverage certificate | ERC-5192 Soulbound NFT, burns on payout, non-transferable |
+|   7   | `SubrogationNFT.sol` | Recovery rights      | ERC-721, metadata-rich, minted to Foundation post-default |
+|   –   | `MockUSDT.sol`       | Test collateral      | 18-decimal USDT mock with faucet for testnet |
 
 </details>
 
