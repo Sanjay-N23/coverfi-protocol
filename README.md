@@ -105,7 +105,7 @@ Risk-tiered for every investor profile.
 </td>
 <td width="33%" align="center">
 
-### 🖼️ SubrogationNFT
+### SubrogationNFT
 **Post-Default Recovery**
 
 After payout, an ERC-721 **SubrogationNFT** is minted capturing:
