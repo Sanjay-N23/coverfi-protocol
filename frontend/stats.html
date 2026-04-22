@@ -1017,17 +1017,42 @@ function renderPremiumCurve(issuerDots) {
   var baseY = H - padB;
   html += '<polygon points="' + points.join(' ') + ' ' + lastX + ',' + baseY + ' ' + padL + ',' + baseY + '" fill="' + curveColor + '" opacity="0.08"/>';
 
-  // Issuer dots
+  // Issuer dots — with collision-aware label placement
   if (issuerDots && issuerDots.length > 0) {
-    for (var d = 0; d < issuerDots.length; d++) {
-      var dot = issuerDots[d];
+    // Precompute positions, sorted by x so we can detect neighbors
+    var positioned = issuerDots.map(function(dot) {
       var dx = padL + (dot.irs / maxIRS) * chartW;
       var dbps = 1600 * Math.exp(-0.001386 * dot.irs);
       var dy = padT + (1 - dbps / maxBPS) * chartH;
-      var dotColor = dot.irs > 700 ? '#00B894' : (dot.irs >= 400 ? '#F0B90B' : '#EF4444');
-      html += '<circle cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + (dy - 12).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + dot.name + '</text>';
-      html += '<text class="dot-label" x="' + dx.toFixed(1) + '" y="' + (dy - 3).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(dbps) + ' bps</text>';
+      return { name: dot.name, irs: dot.irs, dx: dx, dy: dy, dbps: dbps };
+    }).sort(function(a, b) { return a.dx - b.dx; });
+
+    // Decide placement: default "above" the dot; flip to "below" if the
+    // previous dot is within 70px horizontally AND was placed above.
+    var placements = [];
+    for (var p = 0; p < positioned.length; p++) {
+      var place = 'above';
+      if (p > 0) {
+        var prev = positioned[p - 1];
+        var prevPlace = placements[p - 1];
+        if (Math.abs(positioned[p].dx - prev.dx) < 70 && prevPlace === 'above') {
+          place = 'below';
+        }
+      }
+      placements.push(place);
+    }
+
+    for (var d = 0; d < positioned.length; d++) {
+      var pd = positioned[d];
+      var dotColor = pd.irs > 700 ? '#00B894' : (pd.irs >= 400 ? '#F0B90B' : '#EF4444');
+      html += '<circle cx="' + pd.dx.toFixed(1) + '" cy="' + pd.dy.toFixed(1) + '" r="6" fill="' + dotColor + '" stroke="white" stroke-width="2"/>';
+      if (placements[d] === 'above') {
+        html += '<text class="dot-label" x="' + pd.dx.toFixed(1) + '" y="' + (pd.dy - 14).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + pd.name + '</text>';
+        html += '<text class="dot-label" x="' + pd.dx.toFixed(1) + '" y="' + (pd.dy - 5).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(pd.dbps) + ' bps</text>';
+      } else {
+        html += '<text class="dot-label" x="' + pd.dx.toFixed(1) + '" y="' + (pd.dy + 17).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="9" font-weight="600">' + pd.name + '</text>';
+        html += '<text class="dot-label" x="' + pd.dx.toFixed(1) + '" y="' + (pd.dy + 26).toFixed(1) + '" text-anchor="middle" fill="' + dotLabelColor + '" font-size="8">' + Math.round(pd.dbps) + ' bps</text>';
+      }
     }
   }
 
