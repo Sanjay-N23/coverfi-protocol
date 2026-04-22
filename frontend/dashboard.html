@@ -5385,7 +5385,7 @@ async function executeJuniorDeposit(btn, amount) {
 
     btn.textContent = 'Depositing...';
     var pool = new ethers.Contract(CONTRACTS.InsurancePool, COVERFI_ABIS.InsurancePool, signer);
-    var depositTx = await pool.depositJunior(amountWei, { gasLimit: 500000 });
+    var depositTx = await pool.depositJunior(DEMO_ISSUER_TOKEN, amountWei, { gasLimit: 500000 });
     var receipt = await depositTx.wait();
 
     showToast('Junior deposit successful! TX: ' + receipt.hash.slice(0, 10) + '...', 'success');
