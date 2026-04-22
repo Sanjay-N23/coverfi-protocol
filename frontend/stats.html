@@ -1270,7 +1270,7 @@ async function loadAllData() {
         chainEvents.push({
           type: 'deposit',
           title: 'Senior Deposit',
-          desc: fmt(sev.args && sev.args[1] ? sev.args[1] : 0n) + ' deposited to Senior Tranche',
+          desc: fmt(sev.args && sev.args[2] ? sev.args[2] : 0n) + ' deposited to Senior Tranche',
           time: sblock ? timeAgo(sblock.timestamp) : 'recent',
           tx: sev.transactionHash,
           blockNum: sev.blockNumber
@@ -1285,7 +1285,7 @@ async function loadAllData() {
         chainEvents.push({
           type: 'deposit',
           title: 'Junior Deposit',
-          desc: fmt(jev.args && jev.args[1] ? jev.args[1] : 0n) + ' deposited to Junior Tranche',
+          desc: fmt(jev.args && jev.args[2] ? jev.args[2] : 0n) + ' deposited to Junior Tranche',
           time: jblock ? timeAgo(jblock.timestamp) : 'recent',
           tx: jev.transactionHash,
           blockNum: jev.blockNumber
